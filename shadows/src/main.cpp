@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "shader.h"
+
 int main() {
   // start GL context and O/S window using the GLFW helper library
   if (!glfwInit()) {
@@ -58,36 +60,29 @@ int main() {
   glBindBuffer(GL_ARRAY_BUFFER, vbo);
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 
-  const char* vertex_shader =
-      "#version 400\n"
-      "in vec3 vp;"
-      "void main() {"
-      "  gl_Position = vec4(vp, 1.0);"
-      "}";
+  Shader vertexShader(GL_VERTEX_SHADER);
+  Shader fragmentShader(GL_FRAGMENT_SHADER);
 
-  const char* fragment_shader =
-      "#version 400\n"
-      "out vec4 frag_colour;"
-      "void main() {"
-      "  frag_colour = vec4(0.5, 0.0, 0.5, 1.0);"
-      "}";
+  vertexShader.loadShaderSource("../src/shaders/VERTEX.shader");
+  fragmentShader.loadShaderSource("../src/shaders/FRAG.shader");
 
-  GLuint vs = glCreateShader(GL_VERTEX_SHADER);
-  glShaderSource(vs, 1, &vertex_shader, NULL);
-  glCompileShader(vs);
-  GLuint fs = glCreateShader(GL_FRAGMENT_SHADER);
-  glShaderSource(fs, 1, &fragment_shader, NULL);
-  glCompileShader(fs);
+  const char * vertex_shader = vertexShader.getShaderSource();
+  const char * fragment_shader = fragmentShader.getShaderSource();
+  printf("%s", vertex_shader);
+  printf("%s", fragment_shader);
+  
+  GLuint vs = vertexShader.compile();
+  GLuint fs = fragmentShader.compile();
 
-  GLuint shader_programme = glCreateProgram();
-  glAttachShader(shader_programme, fs);
-  glAttachShader(shader_programme, vs);
-  glLinkProgram(shader_programme);
+  GLuint program = glCreateProgram();
+  glAttachShader(program, fs);
+  glAttachShader(program, vs);
+  glLinkProgram(program);
 
   while(!glfwWindowShouldClose(window)) {
     // wipe the drawing surface clear
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glUseProgram(shader_programme);
+    glUseProgram(program);
     glBindVertexArray(vao);
     // draw points 0-3 from the currently bound VAO with current in-use shader
     glDrawArrays(GL_TRIANGLES, 0, 3);

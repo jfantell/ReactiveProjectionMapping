@@ -15,5 +15,5 @@ set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
 set(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINK_FLAGS}")
 
 
-add_executable(shadows src/main.cpp)
+add_executable(shadows src/main.cpp src/shader.cpp)
 target_link_libraries(shadows ${CMAKE_CURRENT_SOURCE_DIR}/lib/glew/libGLEW.2.1.0.dylib ${CMAKE_CURRENT_SOURCE_DIR}/lib/glfw3/libglfw.dylib ${CMAKE_CURRENT_SOURCE_DIR}/lib/glfw3/libglfw.3.dylib)
