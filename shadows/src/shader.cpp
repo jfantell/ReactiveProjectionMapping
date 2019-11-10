@@ -1,5 +1,6 @@
 #include "shader.h"
 #include <fstream>
+#include <vector>
 
 // Use either GL_FRAGMENT_SHADER or GL_VERTEX_SHADER
 Shader::Shader(unsigned short shadertype) {
@@ -44,6 +45,29 @@ GLuint Shader::compile() {
   const char * src = getShaderSource();
   glShaderSource(s, 1, &src, NULL);
   glCompileShader(s);
+
+  GLint isCompiled = 0;
+  glGetShaderiv(s, GL_COMPILE_STATUS, &isCompiled);
+  if(isCompiled == GL_FALSE)
+  {
+    GLint maxLength = 0;
+    glGetShaderiv(s, GL_INFO_LOG_LENGTH, &maxLength);
+
+    // The maxLength includes the NULL character
+    std::vector<GLchar> errorLog(maxLength);
+    glGetShaderInfoLog(s, maxLength, &maxLength, &errorLog[0]);
+
+    // Dump the compilation error to cerr
+    std::string shaderError;
+      shaderError += (char*) &errorLog[0];
+
+    std::cerr << "Shader Compilation Error in " << (_shaderType == GL_VERTEX_SHADER ? "vertex shader." : "fragment shader") << std::endl;
+    std::cerr << "GLSL Error:" << std::endl;
+    std::cerr << "\t" << shaderError << std::endl;
+
+    glDeleteShader(s); // Don't leak the shader.
+    exit(-1); // Exit with failure.
+  }
   return s;
 }
 
