@@ -4,6 +4,8 @@
 #include <stdlib.h>
 
 #include "shader.h"
+#include "cubedata.h"
+#include "vertexbuffer.h"
 
 int main() {
   // start GL context and O/S window using the GLFW helper library
@@ -40,25 +42,7 @@ int main() {
   glEnable(GL_DEPTH_TEST); // enable depth-testing
   glDepthFunc(GL_LESS); // depth-testing interprets a smaller value as "closer"
 
-  /* OTHER STUFF GOES HERE NEXT */
-
-  float points[] = {
-      0.0f,  0.5f,  0.0f,
-      0.5f, -0.5f,  0.0f,
-      -0.5f, -0.5f,  0.0f
-  };
-
-  GLuint vbo = 0;
-  glGenBuffers(1, &vbo);
-  glBindBuffer(GL_ARRAY_BUFFER, vbo);
-  glBufferData(GL_ARRAY_BUFFER, 9 * sizeof(float), points, GL_STATIC_DRAW);
-
-  GLuint vao = 0;
-  glGenVertexArrays(1, &vao);
-  glBindVertexArray(vao);
-  glEnableVertexAttribArray(0);
-  glBindBuffer(GL_ARRAY_BUFFER, vbo);
-  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+  /* ******** Set up shaders here ************ */
 
   Shader vertexShader(GL_VERTEX_SHADER);
   Shader fragmentShader(GL_FRAGMENT_SHADER);
@@ -66,11 +50,6 @@ int main() {
   vertexShader.loadShaderSource("../src/shaders/VERTEX.shader");
   fragmentShader.loadShaderSource("../src/shaders/FRAG.shader");
 
-  const char * vertex_shader = vertexShader.getShaderSource();
-  const char * fragment_shader = fragmentShader.getShaderSource();
-  printf("%s", vertex_shader);
-  printf("%s", fragment_shader);
-  
   GLuint vs = vertexShader.compile();
   GLuint fs = fragmentShader.compile();
 
@@ -78,14 +57,91 @@ int main() {
   glAttachShader(program, fs);
   glAttachShader(program, vs);
   glLinkProgram(program);
+  glUseProgram(program);
 
+  /* *********** End Shader code ************* */
+
+
+  float points[] = {
+      0.0f,  0.5f,  0.0f,
+      0.5f, -0.5f,  0.0f,
+      -0.5f, -0.5f,  0.0f
+  };
+
+  float colors[] = {
+      0.583f,  0.771f,  0.014f,
+      0.609f,  0.115f,  0.436f,
+      0.327f,  0.483f,  0.844f
+  };
+
+  VertexBuffer vb;
+  vb.genBuffer();
+  vb.bind();
+  // Push 3 floats for one vertex xyz
+  vb.getLayout()->push<float>(3);
+  // Push 3 floats for one vertex rgb
+  vb.getLayout()->push<float>(3);
+
+  // Push pointers in order
+  vb.pushPointer((void *) g_vertex_buffer_data);
+  vb.pushPointer((void *) g_color_buffer_data);
+  // Interleave the data according to the layout
+  vb.interleave(3*2*6);
+
+  // Do glBufferData manually for now
+  glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data) + sizeof(g_color_buffer_data), vb.getBufferPtr(), GL_STATIC_DRAW);
+
+  // Create vertex array, the vehicle from cpu land to graphics land
+  GLuint vao = 0;
+  glGenVertexArrays(1, &vao);
+  glBindVertexArray(vao);
+  glEnableVertexAttribArray(0);
+  glEnableVertexAttribArray(1);
+
+  // Render loop.
   while(!glfwWindowShouldClose(window)) {
-    // wipe the drawing surface clear
+
+    /* ******** Drawing code starts here ************ */
+
+    // Tell OpenGL to clean off the canvas.
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glUseProgram(program);
+
+    // Tell OpenGL we're using the vertex array,
+    // We're going to use it as the vehicle for buffers
+    // from application space to hardware space.
     glBindVertexArray(vao);
+
+    // Remind OpenGl of how we like our data, every single draw call.
+    glBindBuffer(GL_ARRAY_BUFFER, vb.getBufferId());
+
+    // Tell OpenGl about our floats XYZ, they come first, as specified in layout.
+    glVertexAttribPointer(0,  // Attribute ZERO (vertices)
+                          3, // 3 floats per vertex
+                          GL_FLOAT, // type is float
+                          GL_FALSE, // they are not normalized
+                          6 * sizeof(float), // stride is size of one whole vertex.
+                          NULL // No offset into the buffer
+    );
+
+    // Set up an offset because C++ is picky with pointers.
+    unsigned char offset = 3 * sizeof(float);
+
+    // Tell OpenGl about our colors RGB, they are second, as specified in the layout.
+    glVertexAttribPointer(1,  // Attribute ONE (color)
+                          3, // 3 floats per vertex
+                          GL_FLOAT, // type is float
+                          GL_FALSE, // they are not normalized
+                          6 * sizeof(float), // stride is size of one entire vertex.
+                          (GLvoid*) 12 // offset into the buffer by sizeof(float) * 3.
+    );
+
     // draw points 0-3 from the currently bound VAO with current in-use shader
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDrawArrays(GL_TRIANGLES, 0, 3*2*6);
+
+
+    /* ********* END drawing code *********** */
+
+
     // update other events like input handling
     glfwPollEvents();
     // put the stuff we've been drawing onto the display

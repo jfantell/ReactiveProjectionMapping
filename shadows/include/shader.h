@@ -10,6 +10,7 @@
 class Shader {
  public:
   Shader(const unsigned short shadertype);
+  ~Shader();
   int loadShaderSource(const std::string path);
   const unsigned short getShaderType();
   const char * getShaderSource();
@@ -18,6 +19,8 @@ class Shader {
  private:
   unsigned short _shaderType;
   char _shaderSource[MAX_SHADER_SIZE];
+  GLuint _shaderId;
+  bool _compiled = false;
 
 };
 

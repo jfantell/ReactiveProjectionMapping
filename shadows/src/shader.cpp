@@ -31,6 +31,10 @@ int Shader::loadShaderSource(const std::string path) {
   return -1;
 }
 
+Shader::~Shader() {
+  if (_compiled) glDeleteShader(_shaderId);
+}
+
 const unsigned short Shader::getShaderType() {
   return _shaderType;
 }
@@ -68,6 +72,8 @@ GLuint Shader::compile() {
     glDeleteShader(s); // Don't leak the shader.
     exit(-1); // Exit with failure.
   }
+  _shaderId = s;
+  _compiled = true;
   return s;
 }
 
