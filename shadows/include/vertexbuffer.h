@@ -11,7 +11,6 @@ class VertexBuffer {
 
   int genBuffer();
   void bind();
-  void pushPointer(void * pointer);
   void interleave(unsigned int vertexcount);
   void setBufferPtr(void * buffer);
   void * getBufferPtr();
@@ -20,7 +19,6 @@ class VertexBuffer {
   
  private:
   VertexBufferLayout _layout;
-  std::vector<void *> _pointers;
   int _bufferId;
   void * _buffer = nullptr;
 };

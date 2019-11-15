@@ -20,18 +20,14 @@ void VertexBuffer::bind() {
   glBindBuffer(GL_ARRAY_BUFFER, _bufferId);
 }
 
-void VertexBuffer::pushPointer(void * pointer) {
-  _pointers.push_back(pointer);
-}
-
 void VertexBuffer::interleave(unsigned int vertexcount) {
   unsigned char * arrayptr = (unsigned char * ) malloc(_layout.getVertexSize() * vertexcount);
-  int offsets[_pointers.size()];
+  int offsets[_layout._layout.size()];
   int arrayoffset = 0;
   int elementsize = 0;
 
   // zero the offsets
-  for (int i = 0; i < _pointers.size(); i++) offsets[i] = 0;
+  for (int i = 0; i < _layout._layout.size(); i++) offsets[i] = 0;
 
   // Loop through for every vertex, and copy the correct amount of data from each pointer.
 
@@ -42,7 +38,7 @@ void VertexBuffer::interleave(unsigned int vertexcount) {
       // Get the size of the element
       elementsize = _layout._layout[j].count * _layout.getSizeOfType(_layout._layout[j].type);
       // Copy in the correct number of bytes by count * typesize
-      memcpy(((unsigned char*) arrayptr) + arrayoffset, ((unsigned char *)_pointers[j]) + offsets[j], elementsize);
+      memcpy(((unsigned char*) arrayptr) + arrayoffset, ((unsigned char *) _layout._layout[j].dataBasePTR) + offsets[j], elementsize);
       // Update the offsets.
       offsets[j] += elementsize;
       arrayoffset += elementsize;
