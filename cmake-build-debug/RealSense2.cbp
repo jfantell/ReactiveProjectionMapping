@@ -5,7 +5,7 @@
 		<Option title="RealSense2"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\usr\;CMake Files\..\..\..\..\usr\share\;CMake Files\..\..\..\..\usr\share\OpenCV\;CMake Files\..\..\..\..\usr\local\;CMake Files\..\..\..\..\usr\local\share\;CMake Files\..\..\..\..\usr\local\share\pcl-1.9\;CMake Files\..\..\..\..\usr\local\share\pcl-1.9\Modules\;CMake Files\..\..\..\..\usr\lib\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\realsense2\;CMake Files\..\..\..\..\usr\lib\cmake\;CMake Files\..\..\..\..\usr\lib\cmake\vtk-7.1\;CMake Files\..\..\..\..\usr\lib\cmake\vtk-7.1\Modules\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\usr\;CMake Files\..\..\..\..\usr\share\;CMake Files\..\..\..\..\usr\share\OpenCV\;CMake Files\..\..\..\..\usr\local\;CMake Files\..\..\..\..\usr\local\share\;CMake Files\..\..\..\..\usr\local\share\pcl-1.9\;CMake Files\..\..\..\..\usr\local\share\pcl-1.9\Modules\;CMake Files\..\..\..\..\usr\lib\;CMake Files\..\..\..\..\usr\lib\cmake\;CMake Files\..\..\..\..\usr\lib\cmake\vtk-7.1\;CMake Files\..\..\..\..\usr\lib\cmake\vtk-7.1\Modules\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\realsense2\;"/>
 		<Build>
 			<Target title="all">
 				<Option working_dir="/home/hayley/Development/OpenGL_Starter_Code/cmake-build-debug"/>
@@ -36,6 +36,7 @@
 				<Compiler>
 					<Add option="-DvtkRenderingContext2D_AUTOINIT=1(vtkRenderingContextOpenGL2)"/>
 					<Add option="-DvtkRenderingCore_AUTOINIT=3(vtkInteractionStyle,vtkRenderingFreeType,vtkRenderingOpenGL2)"/>
+					<Add option="-Dqh_QHpointer"/>
 					<Add option="-DDISABLE_PCAP"/>
 					<Add option="-DDISABLE_PNG"/>
 					<Add option="-DDISABLE_LIBUSB_1_0"/>
@@ -70,6 +71,7 @@
 				<Compiler>
 					<Add option="-DvtkRenderingContext2D_AUTOINIT=1(vtkRenderingContextOpenGL2)"/>
 					<Add option="-DvtkRenderingCore_AUTOINIT=3(vtkInteractionStyle,vtkRenderingFreeType,vtkRenderingOpenGL2)"/>
+					<Add option="-Dqh_QHpointer"/>
 					<Add option="-DDISABLE_PCAP"/>
 					<Add option="-DDISABLE_PNG"/>
 					<Add option="-DDISABLE_LIBUSB_1_0"/>
@@ -106,6 +108,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/hayley/Development/OpenGL_Starter_Code/include/pcl_utilities.h">
+			<Option target="realsense2"/>
+		</Unit>
 		<Unit filename="/home/hayley/Development/OpenGL_Starter_Code/src/callbacks.cpp">
 			<Option target="realsense2"/>
 		</Unit>
@@ -116,9 +121,6 @@
 			<Option target="realsense2"/>
 		</Unit>
 		<Unit filename="/home/hayley/Development/OpenGL_Starter_Code/src/pcl_utilities.cpp">
-			<Option target="realsense2"/>
-		</Unit>
-		<Unit filename="/home/hayley/Development/OpenGL_Starter_Code/src/pcl_utilities.h">
 			<Option target="realsense2"/>
 		</Unit>
 		<Unit filename="/home/hayley/Development/OpenGL_Starter_Code/src/shaders.cpp">
@@ -154,20 +156,14 @@
 		<Unit filename="/home/hayley/Development/OpenGL_Starter_Code/../../../../usr/local/share/pcl-1.9/Modules/FindEigen.cmake">
 			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\share\pcl-1.9\Modules\"/>
 		</Unit>
-		<Unit filename="/home/hayley/Development/OpenGL_Starter_Code/../../../../usr/local/share/pcl-1.9/Modules/FindRSSDK2.cmake">
+		<Unit filename="/home/hayley/Development/OpenGL_Starter_Code/../../../../usr/local/share/pcl-1.9/Modules/FindFLANN.cmake">
 			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\share\pcl-1.9\Modules\"/>
 		</Unit>
-		<Unit filename="/home/hayley/Development/OpenGL_Starter_Code/../../../../usr/lib/x86_64-linux-gnu/cmake/realsense2/realsense2Config.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\realsense2\"/>
+		<Unit filename="/home/hayley/Development/OpenGL_Starter_Code/../../../../usr/local/share/pcl-1.9/Modules/FindQhull.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\share\pcl-1.9\Modules\"/>
 		</Unit>
-		<Unit filename="/home/hayley/Development/OpenGL_Starter_Code/../../../../usr/lib/x86_64-linux-gnu/cmake/realsense2/realsense2ConfigVersion.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\realsense2\"/>
-		</Unit>
-		<Unit filename="/home/hayley/Development/OpenGL_Starter_Code/../../../../usr/lib/x86_64-linux-gnu/cmake/realsense2/realsense2Targets-release.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\realsense2\"/>
-		</Unit>
-		<Unit filename="/home/hayley/Development/OpenGL_Starter_Code/../../../../usr/lib/x86_64-linux-gnu/cmake/realsense2/realsense2Targets.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\realsense2\"/>
+		<Unit filename="/home/hayley/Development/OpenGL_Starter_Code/../../../../usr/local/share/pcl-1.9/Modules/FindRSSDK2.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\share\pcl-1.9\Modules\"/>
 		</Unit>
 		<Unit filename="/home/hayley/Development/OpenGL_Starter_Code/../../../../usr/lib/cmake/vtk-7.1/UseVTK.cmake">
 			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\cmake\vtk-7.1\"/>
@@ -357,6 +353,18 @@
 		</Unit>
 		<Unit filename="/home/hayley/Development/OpenGL_Starter_Code/../../../../usr/lib/cmake/vtk-7.1/Modules/vtkzlib.cmake">
 			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\cmake\vtk-7.1\Modules\"/>
+		</Unit>
+		<Unit filename="/home/hayley/Development/OpenGL_Starter_Code/../../../../usr/lib/x86_64-linux-gnu/cmake/realsense2/realsense2Config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\realsense2\"/>
+		</Unit>
+		<Unit filename="/home/hayley/Development/OpenGL_Starter_Code/../../../../usr/lib/x86_64-linux-gnu/cmake/realsense2/realsense2ConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\realsense2\"/>
+		</Unit>
+		<Unit filename="/home/hayley/Development/OpenGL_Starter_Code/../../../../usr/lib/x86_64-linux-gnu/cmake/realsense2/realsense2Targets-release.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\realsense2\"/>
+		</Unit>
+		<Unit filename="/home/hayley/Development/OpenGL_Starter_Code/../../../../usr/lib/x86_64-linux-gnu/cmake/realsense2/realsense2Targets.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\realsense2\"/>
 		</Unit>
 	</Project>
 </CodeBlocks_project_file>

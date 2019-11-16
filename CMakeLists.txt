@@ -11,7 +11,7 @@ find_library(REALSENSE2 realsense2 REQUIRED)
 find_library(SOIL2 soil2-debug HINTS /usr/lib)
 find_library(PDAL libpdalcpp.so REQUIRED)
 find_package(OpenCV REQUIRED)
-find_package(PCL 1.3 REQUIRED COMPONENTS common io)
+find_package(PCL 1.3 REQUIRED)
 
 link_directories(${PCL_LIBRARY_DIRS})
 add_definitions(${PCL_DEFINITIONS})

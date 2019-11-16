@@ -105,6 +105,8 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/lib/x86_64-linux-gnu/cmake/realsense2/realsense2Targets-release.cmake"
   "/usr/lib/x86_64-linux-gnu/cmake/realsense2/realsense2Targets.cmake"
   "/usr/local/share/pcl-1.9/Modules/FindEigen.cmake"
+  "/usr/local/share/pcl-1.9/Modules/FindFLANN.cmake"
+  "/usr/local/share/pcl-1.9/Modules/FindQhull.cmake"
   "/usr/local/share/pcl-1.9/Modules/FindRSSDK2.cmake"
   "/usr/local/share/pcl-1.9/PCLConfig.cmake"
   "/usr/local/share/pcl-1.9/PCLConfigVersion.cmake"
