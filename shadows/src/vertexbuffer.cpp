@@ -20,6 +20,10 @@ void VertexBuffer::bind() {
   glBindBuffer(GL_ARRAY_BUFFER, _bufferId);
 }
 
+void VertexBuffer::unbind() {
+  glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
 void VertexBuffer::interleave(unsigned int vertexcount) {
   unsigned char * arrayptr = (unsigned char * ) malloc(_layout.getVertexSize() * vertexcount);
   int offsets[_layout._layout.size()];

@@ -11,6 +11,7 @@ class VertexBuffer {
 
   int genBuffer();
   void bind();
+  void unbind();
   void interleave(unsigned int vertexcount);
   void setBufferPtr(void * buffer);
   void * getBufferPtr();

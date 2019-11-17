@@ -12,12 +12,14 @@ class Mesh {
   void loadOBJ(std::string pathtofile);
   unsigned int vertexCount();
   float * getVertexArrayPTR();
+  float * getNormalArrayPTR();
   unsigned int indexCount();
   unsigned int * getIndexArrayPTR();
+  void interlaceVertexAndNormal();
   void printAttributes();
 
 
-    std::vector<glm::vec3> normals;
+  std::vector<glm::vec3> normals;
   std::vector<glm::vec3> vertices;
   std::vector<glm::vec2> uvs;
   std::vector<unsigned int> indices_vertex;
