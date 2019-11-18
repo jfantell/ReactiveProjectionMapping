@@ -38,6 +38,12 @@ void cursor_pos_callback(GLFWwindow* window, double x, double y){
         }
         windowState.last_x = x;
         windowState.last_y = y;
+        if(fabs(windowState.yaw) > 360) {
+            windowState.yaw = windowState.yaw = 0;
+        }
+        if(fabs(windowState.pitch) > 360) {
+            windowState.pitch = windowState.pitch = 0;
+        }
 }
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods){

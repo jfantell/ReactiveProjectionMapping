@@ -17,7 +17,7 @@ extern glm::mat4 pMat, vMat, mMat, mvMat; //perspective, view, mode, and model-v
 
 //Modified from https://github.com/IntelRealSense/librealsense/blob/master/examples/example.hpp
 struct window_state {
-    window_state(double yaw = -0, double pitch = -0) :  yaw(yaw), pitch(pitch), last_x(0.0), last_y(0.0),
+    window_state(double yaw = 0, double pitch = 0) :  yaw(yaw), pitch(pitch), last_x(0.0), last_y(0.0),
                                                           ml(false), offset_x(0.f), offset_y(1.f) {}
     double yaw;
     double pitch;

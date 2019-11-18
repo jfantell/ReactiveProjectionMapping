@@ -34,19 +34,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /opt/clion-2019.2.5/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /opt/clion-2019.2.4/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /opt/clion-2019.2.5/bin/cmake/linux/bin/cmake -E remove -f
+RM = /opt/clion-2019.2.4/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/hayley/Development/OpenGL_Starter_Code
+CMAKE_SOURCE_DIR = /media/hayley/RealNVME/ComputerGraphicsProject
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/hayley/Development/OpenGL_Starter_Code/cmake-build-debug
+CMAKE_BINARY_DIR = /media/hayley/RealNVME/ComputerGraphicsProject/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/realsense2.dir/depend.make
@@ -59,94 +59,94 @@ include CMakeFiles/realsense2.dir/flags.make
 
 CMakeFiles/realsense2.dir/src/callbacks.cpp.o: CMakeFiles/realsense2.dir/flags.make
 CMakeFiles/realsense2.dir/src/callbacks.cpp.o: ../src/callbacks.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Development/OpenGL_Starter_Code/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/realsense2.dir/src/callbacks.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/realsense2.dir/src/callbacks.cpp.o -c /home/hayley/Development/OpenGL_Starter_Code/src/callbacks.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/hayley/RealNVME/ComputerGraphicsProject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/realsense2.dir/src/callbacks.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/realsense2.dir/src/callbacks.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/src/callbacks.cpp
 
 CMakeFiles/realsense2.dir/src/callbacks.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/realsense2.dir/src/callbacks.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/hayley/Development/OpenGL_Starter_Code/src/callbacks.cpp > CMakeFiles/realsense2.dir/src/callbacks.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/src/callbacks.cpp > CMakeFiles/realsense2.dir/src/callbacks.cpp.i
 
 CMakeFiles/realsense2.dir/src/callbacks.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/realsense2.dir/src/callbacks.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hayley/Development/OpenGL_Starter_Code/src/callbacks.cpp -o CMakeFiles/realsense2.dir/src/callbacks.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/src/callbacks.cpp -o CMakeFiles/realsense2.dir/src/callbacks.cpp.s
 
 CMakeFiles/realsense2.dir/src/frame_processing.cpp.o: CMakeFiles/realsense2.dir/flags.make
 CMakeFiles/realsense2.dir/src/frame_processing.cpp.o: ../src/frame_processing.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Development/OpenGL_Starter_Code/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/realsense2.dir/src/frame_processing.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/realsense2.dir/src/frame_processing.cpp.o -c /home/hayley/Development/OpenGL_Starter_Code/src/frame_processing.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/hayley/RealNVME/ComputerGraphicsProject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/realsense2.dir/src/frame_processing.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/realsense2.dir/src/frame_processing.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/src/frame_processing.cpp
 
 CMakeFiles/realsense2.dir/src/frame_processing.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/realsense2.dir/src/frame_processing.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/hayley/Development/OpenGL_Starter_Code/src/frame_processing.cpp > CMakeFiles/realsense2.dir/src/frame_processing.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/src/frame_processing.cpp > CMakeFiles/realsense2.dir/src/frame_processing.cpp.i
 
 CMakeFiles/realsense2.dir/src/frame_processing.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/realsense2.dir/src/frame_processing.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hayley/Development/OpenGL_Starter_Code/src/frame_processing.cpp -o CMakeFiles/realsense2.dir/src/frame_processing.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/src/frame_processing.cpp -o CMakeFiles/realsense2.dir/src/frame_processing.cpp.s
 
 CMakeFiles/realsense2.dir/src/main.cpp.o: CMakeFiles/realsense2.dir/flags.make
 CMakeFiles/realsense2.dir/src/main.cpp.o: ../src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Development/OpenGL_Starter_Code/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/realsense2.dir/src/main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/realsense2.dir/src/main.cpp.o -c /home/hayley/Development/OpenGL_Starter_Code/src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/hayley/RealNVME/ComputerGraphicsProject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/realsense2.dir/src/main.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/realsense2.dir/src/main.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/src/main.cpp
 
 CMakeFiles/realsense2.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/realsense2.dir/src/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/hayley/Development/OpenGL_Starter_Code/src/main.cpp > CMakeFiles/realsense2.dir/src/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/src/main.cpp > CMakeFiles/realsense2.dir/src/main.cpp.i
 
 CMakeFiles/realsense2.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/realsense2.dir/src/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hayley/Development/OpenGL_Starter_Code/src/main.cpp -o CMakeFiles/realsense2.dir/src/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/src/main.cpp -o CMakeFiles/realsense2.dir/src/main.cpp.s
 
 CMakeFiles/realsense2.dir/src/pcl_utilities.cpp.o: CMakeFiles/realsense2.dir/flags.make
 CMakeFiles/realsense2.dir/src/pcl_utilities.cpp.o: ../src/pcl_utilities.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Development/OpenGL_Starter_Code/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/realsense2.dir/src/pcl_utilities.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/realsense2.dir/src/pcl_utilities.cpp.o -c /home/hayley/Development/OpenGL_Starter_Code/src/pcl_utilities.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/hayley/RealNVME/ComputerGraphicsProject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/realsense2.dir/src/pcl_utilities.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/realsense2.dir/src/pcl_utilities.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/src/pcl_utilities.cpp
 
 CMakeFiles/realsense2.dir/src/pcl_utilities.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/realsense2.dir/src/pcl_utilities.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/hayley/Development/OpenGL_Starter_Code/src/pcl_utilities.cpp > CMakeFiles/realsense2.dir/src/pcl_utilities.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/src/pcl_utilities.cpp > CMakeFiles/realsense2.dir/src/pcl_utilities.cpp.i
 
 CMakeFiles/realsense2.dir/src/pcl_utilities.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/realsense2.dir/src/pcl_utilities.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hayley/Development/OpenGL_Starter_Code/src/pcl_utilities.cpp -o CMakeFiles/realsense2.dir/src/pcl_utilities.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/src/pcl_utilities.cpp -o CMakeFiles/realsense2.dir/src/pcl_utilities.cpp.s
 
 CMakeFiles/realsense2.dir/src/shaders.cpp.o: CMakeFiles/realsense2.dir/flags.make
 CMakeFiles/realsense2.dir/src/shaders.cpp.o: ../src/shaders.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Development/OpenGL_Starter_Code/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/realsense2.dir/src/shaders.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/realsense2.dir/src/shaders.cpp.o -c /home/hayley/Development/OpenGL_Starter_Code/src/shaders.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/hayley/RealNVME/ComputerGraphicsProject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/realsense2.dir/src/shaders.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/realsense2.dir/src/shaders.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/src/shaders.cpp
 
 CMakeFiles/realsense2.dir/src/shaders.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/realsense2.dir/src/shaders.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/hayley/Development/OpenGL_Starter_Code/src/shaders.cpp > CMakeFiles/realsense2.dir/src/shaders.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/src/shaders.cpp > CMakeFiles/realsense2.dir/src/shaders.cpp.i
 
 CMakeFiles/realsense2.dir/src/shaders.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/realsense2.dir/src/shaders.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hayley/Development/OpenGL_Starter_Code/src/shaders.cpp -o CMakeFiles/realsense2.dir/src/shaders.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/src/shaders.cpp -o CMakeFiles/realsense2.dir/src/shaders.cpp.s
 
 CMakeFiles/realsense2.dir/src/transformations.cpp.o: CMakeFiles/realsense2.dir/flags.make
 CMakeFiles/realsense2.dir/src/transformations.cpp.o: ../src/transformations.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Development/OpenGL_Starter_Code/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/realsense2.dir/src/transformations.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/realsense2.dir/src/transformations.cpp.o -c /home/hayley/Development/OpenGL_Starter_Code/src/transformations.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/hayley/RealNVME/ComputerGraphicsProject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/realsense2.dir/src/transformations.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/realsense2.dir/src/transformations.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/src/transformations.cpp
 
 CMakeFiles/realsense2.dir/src/transformations.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/realsense2.dir/src/transformations.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/hayley/Development/OpenGL_Starter_Code/src/transformations.cpp > CMakeFiles/realsense2.dir/src/transformations.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/src/transformations.cpp > CMakeFiles/realsense2.dir/src/transformations.cpp.i
 
 CMakeFiles/realsense2.dir/src/transformations.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/realsense2.dir/src/transformations.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hayley/Development/OpenGL_Starter_Code/src/transformations.cpp -o CMakeFiles/realsense2.dir/src/transformations.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/src/transformations.cpp -o CMakeFiles/realsense2.dir/src/transformations.cpp.s
 
 CMakeFiles/realsense2.dir/src/utils.cpp.o: CMakeFiles/realsense2.dir/flags.make
 CMakeFiles/realsense2.dir/src/utils.cpp.o: ../src/utils.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hayley/Development/OpenGL_Starter_Code/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/realsense2.dir/src/utils.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/realsense2.dir/src/utils.cpp.o -c /home/hayley/Development/OpenGL_Starter_Code/src/utils.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/hayley/RealNVME/ComputerGraphicsProject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/realsense2.dir/src/utils.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/realsense2.dir/src/utils.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/src/utils.cpp
 
 CMakeFiles/realsense2.dir/src/utils.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/realsense2.dir/src/utils.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/hayley/Development/OpenGL_Starter_Code/src/utils.cpp > CMakeFiles/realsense2.dir/src/utils.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/src/utils.cpp > CMakeFiles/realsense2.dir/src/utils.cpp.i
 
 CMakeFiles/realsense2.dir/src/utils.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/realsense2.dir/src/utils.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hayley/Development/OpenGL_Starter_Code/src/utils.cpp -o CMakeFiles/realsense2.dir/src/utils.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/src/utils.cpp -o CMakeFiles/realsense2.dir/src/utils.cpp.s
 
 # Object files for target realsense2
 realsense2_OBJECTS = \
@@ -214,7 +214,7 @@ realsense2_EXTERNAL_OBJECTS =
 ../build/realsense2: /usr/lib/x86_64-linux-gnu/libboost_serialization.so
 ../build/realsense2: /usr/lib/x86_64-linux-gnu/libboost_regex.so
 ../build/realsense2: /usr/lib/x86_64-linux-gnu/libqhull.so
-../build/realsense2: /usr/lib/x86_64-linux-gnu/librealsense2.so.2.29.0
+../build/realsense2: /usr/lib/x86_64-linux-gnu/librealsense2.so.2.30.0
 ../build/realsense2: /usr/lib/x86_64-linux-gnu/libfreetype.so
 ../build/realsense2: /usr/lib/x86_64-linux-gnu/libz.so
 ../build/realsense2: /usr/lib/x86_64-linux-gnu/libjpeg.so
@@ -311,7 +311,7 @@ realsense2_EXTERNAL_OBJECTS =
 ../build/realsense2: /usr/local/lib/libpcl_octree.so
 ../build/realsense2: /usr/local/lib/libpcl_common.so
 ../build/realsense2: CMakeFiles/realsense2.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/hayley/Development/OpenGL_Starter_Code/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable ../build/realsense2"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/media/hayley/RealNVME/ComputerGraphicsProject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable ../build/realsense2"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/realsense2.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -324,6 +324,6 @@ CMakeFiles/realsense2.dir/clean:
 .PHONY : CMakeFiles/realsense2.dir/clean
 
 CMakeFiles/realsense2.dir/depend:
-	cd /home/hayley/Development/OpenGL_Starter_Code/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/hayley/Development/OpenGL_Starter_Code /home/hayley/Development/OpenGL_Starter_Code /home/hayley/Development/OpenGL_Starter_Code/cmake-build-debug /home/hayley/Development/OpenGL_Starter_Code/cmake-build-debug /home/hayley/Development/OpenGL_Starter_Code/cmake-build-debug/CMakeFiles/realsense2.dir/DependInfo.cmake --color=$(COLOR)
+	cd /media/hayley/RealNVME/ComputerGraphicsProject/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /media/hayley/RealNVME/ComputerGraphicsProject /media/hayley/RealNVME/ComputerGraphicsProject /media/hayley/RealNVME/ComputerGraphicsProject/cmake-build-debug /media/hayley/RealNVME/ComputerGraphicsProject/cmake-build-debug /media/hayley/RealNVME/ComputerGraphicsProject/cmake-build-debug/CMakeFiles/realsense2.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/realsense2.dir/depend
 

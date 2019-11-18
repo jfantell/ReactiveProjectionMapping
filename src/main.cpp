@@ -36,9 +36,6 @@ int main(int argc, const char * argv[]) {
         return 1;
     }
 
-    pdal::BOX2D();
-    pcl::PointCloud<pcl::PointXYZ>::Ptr source_cloud (new pcl::PointCloud<pcl::PointXYZ> ());
-
     // Get the paths to the vertex and fragment shader files
     const char *vertShader = argv[1];
     const char *fragShader = argv[2];
@@ -61,7 +58,11 @@ int main(int argc, const char * argv[]) {
             return 1;
         }
     }
-
+    // Source: http://www.pointclouds.org/documentation/tutorials/greedy_projection.php
+    pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+    pcl::PCLPointCloud2 cloud_blob;
+    pcl::io::loadPCDFile ("bun0.pcd", cloud_blob);
+    pcl::fromPCLPointCloud2 (cloud_blob, *cloud);
 
     // OpenGL pre-window setup
     if(!glfwInit()){
@@ -95,37 +96,17 @@ int main(int argc, const char * argv[]) {
     //Initialize the OpenGL window
     init(window,vertShader,fragShader,textureMode,textureImage);
 
-    //Initialize the RealSense Camera
-    rs2::pipeline pipe;
-    rs2::config cfg;
-
-    const int width = actualScreenWidth;
-    const int height = actualScreenHeight;
-    cfg.enable_stream(RS2_STREAM_COLOR, width, height, RS2_FORMAT_BGR8, 30);
-    cfg.enable_stream(RS2_STREAM_DEPTH, width, height, RS2_FORMAT_Z16, 30);
-    cfg.enable_stream(RS2_STREAM_INFRARED, width, height, RS2_FORMAT_Y8, 30);
-
-    rs2::pipeline_profile profile = pipe.start(cfg);
-
     //While the window is open
     while(!glfwWindowShouldClose(window)){
         //Get a new frame from the RealSense
-        auto frames = pipe.wait_for_frames();
-        if(!frames){
-            cerr << "Error occured while attempting to get camera frames" << endl;
-            return 1;
-        }
 
         // Extract point cloud from the frame and display it in OpenGL
-        display(window, glfwGetTime(), frames);
+        display(window, glfwGetTime(), cloud);
 
         // Update the display
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
-
-    // Release the RealSense Camera
-    pipe.stop();
 
     // Destroy OpenGL window
     glfwDestroyWindow(window);

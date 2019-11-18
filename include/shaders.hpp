@@ -12,9 +12,11 @@
 
 #include <GLFW/glfw3.h>
 #include <librealsense2/rs.hpp>
+#include <pcl/point_types.h>
+#include <pcl/io/pcd_io.h>
 
 void init(GLFWwindow* window, const char * vertShaderFile, const char * fragShderFile, int textureMode_, const char * textureImage);
-void display(GLFWwindow* window, double currentTime, rs2::frameset &frames);
+void display(GLFWwindow* window, double currentTime, pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud);
 void window_size_callback(GLFWwindow* win, int newWidth, int newHeight);
 
 #endif /* shaders_hpp */

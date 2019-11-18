@@ -1,11 +1,8 @@
 #version 410
 
-in vec2 tc;
-out vec4 color;
+in vec3 fCol;
+out vec4 fragColor;
 
-uniform mat4 mv_matrix;
-uniform mat4 proj_matrix;
-uniform sampler2D samp;
 void main(void)
-{    color = texture(samp, tc);
+{    fragColor = vec4(fCol,1.0);
 }
