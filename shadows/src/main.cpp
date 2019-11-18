@@ -26,6 +26,7 @@
 #include "mesh.h"
 #include "camera.h"
 #include "scene.h"
+#include "entity.h"
 
 void CheckOpenGLError(const char* stmt, const char* fname, int line)
 {
@@ -154,6 +155,12 @@ int main() {
                                (GLvoid*) (3 * sizeof(float)) // offset into the buffer by 3 floats.
   ));
 
+  /* Use the entity class to keep track of transforms */
+  Entity meshEntity = Entity();
+  Entity floorEntity = Entity();
+
+
+
 
   // Set up things that need to be updated in the loop.
 
@@ -189,7 +196,7 @@ int main() {
     glm::vec3 ambientColor = glm::vec3(1.0f, 1.0f, 1.0f);
     glm::vec3 lightPos = glm::vec3(0,0,0);
 
-    lightRotationAngle += 0.001f;
+    lightRotationAngle += 0.01f;
     float sinXradius = sin(lightRotationAngle) * lightRotationRadius;
     float cosXradius = cos(lightRotationAngle) * lightRotationRadius;
     lightPos = glm::vec3(lightPos.x + cosXradius, lightPos.y, lightPos.z + sinXradius );
@@ -202,12 +209,21 @@ int main() {
     /* ****** End lighting code ****** */
     
     // Firstly draw the floor.
+    glm::mat4 floorModelMatrix = floorEntity.getModelMatrix();
+    mvp = camera.getProjection() * camera.getView() * floorEntity.getModelMatrix();
+    GLCALL(glUniformMatrix4fv(s_MatrixID, 1, GL_FALSE, &mvp[0][0]));
+    GLCALL(glUniformMatrix4fv(s_ModelID, 1, GL_FALSE, &floorModelMatrix[0][0]));
     floor_mesh.draw();
 
 
     // Finally draw the MESH
     GLCALL(glBindVertexArray(mesh_vao));
     mesh_ib.bind(); // Bind the index buffer
+    meshEntity.setXRotationDegrees(rotationCounter * 1.0f);
+    glm::mat4 meshModelMatrix = meshEntity.getModelMatrix();
+    mvp = camera.getProjection() * camera.getView() * meshEntity.getModelMatrix();
+    GLCALL(glUniformMatrix4fv(s_MatrixID, 1, GL_FALSE, &mvp[0][0]));
+    GLCALL(glUniformMatrix4fv(s_ModelID, 1, GL_FALSE, &meshModelMatrix[0][0]));
     GLCALL(glDrawElements(GL_TRIANGLES, mesh.indices_vertex.size(), GL_UNSIGNED_INT, nullptr));
 
 
@@ -222,6 +238,8 @@ int main() {
     glfwPollEvents();
     // put the stuff we've been drawing onto the display
     glfwSwapBuffers(window);
+
+    rotationCounter++;
   }
 
   //GLCALL(glDeleteBuffers(1, &mesh_ib.getBufferId())));
