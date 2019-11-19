@@ -30,7 +30,7 @@ struct window_state {
 
 //Initialize state to hold window information
 extern window_state windowState;
-extern long int max_, min_;
+extern long int max_z, min_z;
 extern glm::vec4 point_1, point_2;
 
 #endif //REALSENSE2_APP_STATE_H

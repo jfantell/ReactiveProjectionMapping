@@ -20,7 +20,7 @@ void perspective_matrix(GLFWwindow* win){
     glViewport(0, 0, actualScreenWidth, actualScreenHeight);
 
     aspect = (float)actualScreenWidth/(float)actualScreenWidth;
-    pMat = glm::perspective(1.0472f, aspect, 0.01f, 400.0f);
+    pMat = glm::perspective(1.0472f, aspect, 0.01f, 20.0f);
 }
 
 void print_homogenous(glm::vec4 &point,const char * identifier){
@@ -39,9 +39,9 @@ void model_view_matrix(){
     objectLocX = 0.0f; objectLocY = 5.0f; objectLocZ = 10.0f;
 
     //build model and view matrix
-    vMat = translate(glm::mat4(1.0f), glm::vec3(-cameraX,-cameraY,-cameraZ));
-    mMat = translate(glm::mat4(1.0f), glm::vec3(objectLocX, objectLocY, objectLocZ));
-    mvMat = vMat * mMat;
+//    vMat = translate(glm::mat4(1.0f), glm::vec3(-cameraX,-cameraY,-cameraZ));
+//    mMat = translate(glm::mat4(1.0f), glm::vec3(objectLocX, objectLocY, objectLocZ));
+//    mvMat = vMat * mMat;
 
     //Model scaling
 //    glm::vec3 scale = glm::vec3(5.0f, 5.0f, 5.0f);
@@ -49,10 +49,10 @@ void model_view_matrix(){
 //    mvMat = vMat * mMat;
 
     //METHOD 2: GLU LOOKAT MATRIX
-//    glm::vec3 eye = glm::vec3(0,0,1); //EYE
-//    glm::vec3 at = glm::vec3(0, 0, 0); //AT
-//    glm::vec3 up = glm::vec3(0,1,0); //UP
-//    mvMat = lookAt(eye,at,up);
+    glm::vec3 eye = glm::vec3(0,0,0); //EYE
+    glm::vec3 at = glm::vec3(0, 0, 1); //AT
+    glm::vec3 up = glm::vec3(0,-1,0); //UP
+    mvMat = lookAt(eye,at,up);
 
     //DIAGNOSTICS
     glm::vec4 projected_point_1 =  pMat * mvMat * point_1;

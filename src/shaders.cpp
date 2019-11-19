@@ -41,10 +41,6 @@ std::vector<unsigned int> vertexIndicesVector;
 rs2::pointcloud pc; // Point cloud object
 rs2::points points; // RealSense points object
 
-long int max_ = -100000;
-long int min_ = 100000;
-
-
 glm::mat4 mvMat, vMat, mMat, pMat; //Define global variables
 window_state windowState;
 vec4 point_1, point_2;
@@ -111,7 +107,7 @@ void updatePoints(pcl::PolygonMesh &triangles){
 
 }
 
-void updateFrame(pcl::PointCloud<pcl::PointXYZRGB>::Ptr &cloud){
+void clearCPUbuffers(){
     // Vectors store memory on the heap
     // this memory needs to be erased before
     // a new frame can be drawn
@@ -124,8 +120,31 @@ void updateFrame(pcl::PointCloud<pcl::PointXYZRGB>::Ptr &cloud){
     if(!vertexIndicesVector.empty()){
         vertexIndicesVector.clear();
     }
+}
 
+void updateFrame(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud){
     pcl::PolygonMesh triangles = create_mesh(cloud);
+    updatePoints(triangles);
+
+}
+
+void updateFrame(rs2::frameset &frames){
+    // Wait for the next set of frames from the RealSense Camera
+    auto color = frames.get_color_frame();
+
+    // Tell pointcloud object to map to this color frame
+    pc.map_to(color);
+
+    auto depth = frames.get_depth_frame();
+
+    // Generate the pointcloud and texture mappings
+    points = pc.calculate(depth);
+
+    // Convert RealSense point cloud to PCL point cloud
+    auto pcl_points = points_to_pcl(points,color);
+
+    //Create mesh
+    pcl::PolygonMesh triangles = create_mesh(pcl_points);
     updatePoints(triangles);
 
 }
@@ -153,17 +172,13 @@ void init(GLFWwindow* window, const char * vertShaderFile, const char * fragShde
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,vbo[2]);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER,maxPointsX3*sizeof(unsigned int),nullptr,GL_DYNAMIC_DRAW);
 }
-
-void display(GLFWwindow* window, double currentTime, pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud){
-    //Update points and corresponding texture locations
-    updateFrame(cloud);
-    
+void setup_buffers(){
     glClear(GL_DEPTH_BUFFER_BIT);
     glClearColor(0.0,0.0,0.0,1.0);
     glClear(GL_COLOR_BUFFER_BIT);
-    
+
     glUseProgram(renderingProgram);
-    
+
     //get uniform variables for the MV and projection matrices
     mvLoc = glGetUniformLocation(renderingProgram, "mv_matrix");
     projLoc = glGetUniformLocation(renderingProgram, "proj_matrix");
@@ -179,7 +194,7 @@ void display(GLFWwindow* window, double currentTime, pcl::PointCloud<pcl::PointX
     glBindBuffer(GL_ARRAY_BUFFER,vbo[0]);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,0,0);
     glEnableVertexAttribArray(0);
-    
+
     glBindBuffer(GL_ARRAY_BUFFER, vbo[1]);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
     glEnableVertexAttribArray(1);
@@ -190,6 +205,21 @@ void display(GLFWwindow* window, double currentTime, pcl::PointCloud<pcl::PointX
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo[2]);
     glDrawElements(GL_TRIANGLES,num_vertices,GL_UNSIGNED_INT, 0);
 }
+
+void display(GLFWwindow* window, double currentTime, rs2::frameset &frames){
+    clearCPUbuffers();
+    //Update points and corresponding texture locations
+    updateFrame(frames);
+    setup_buffers();
+}
+
+void display(GLFWwindow* window, double currentTime, pcl::PointCloud<pcl::PointXYZ>::Ptr cloud){
+    clearCPUbuffers();
+    //Update points and corresponding texture locations
+    updateFrame(cloud);
+    setup_buffers();
+}
+
 
 
 
