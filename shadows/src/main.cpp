@@ -28,6 +28,8 @@
 #include "scene.h"
 #include "entity.h"
 
+#include "r_floor.h"
+
 void CheckOpenGLError(const char* stmt, const char* fname, int line)
 {
   GLenum err = glGetError();
@@ -77,18 +79,12 @@ int main() {
 
   Shader vertexShader(GL_VERTEX_SHADER);
   Shader fragmentShader(GL_FRAGMENT_SHADER);
-  vertexShader.loadShaderSource("../src/shaders/VERTEX.shader");
-  fragmentShader.loadShaderSource("../src/shaders/FRAG.shader");
+  vertexShader.loadShaderSource("../src/shaders/VERTEX_tex.shader");
+  fragmentShader.loadShaderSource("../src/shaders/FRAG_tex.shader");
   vertexShader.compile();
   fragmentShader.compile();
   GLuint program = buildShaderProgram(vertexShader, fragmentShader);
 
-  // Link uniforms
-  // TODO change shader to perform per model MVP
-  // TODO use a UBO for the uniforms that do not need per model update
-  // TODO make an end all be all model class, that contains transform info
-  // TODO maybe make a light class to handle a. mesh rendering b. light transform.
-  // TODO once robust enough, go for the shadows!
   
   GLuint s_MatrixID = glGetUniformLocation(program, "MVP");
   GLuint s_ModelID = glGetUniformLocation(program, "Model");
@@ -102,71 +98,36 @@ int main() {
   /* *********** End Shader code ************* */
 
 
-  // Create the floor. defined in scene.cpp
-  Floor floor_mesh = Floor(10.0f);
-
-  // Create a mesh object for the mesh we're going to load.
-  Mesh mesh = Mesh();
-  mesh.loadOBJ("../res/bunny_new.obj");
-
-  // with this call, we double our vertex vector size, but every second element is now a normal.
-  mesh.interlaceVertexAndNormal();
-  mesh.printAttributes();
-
-  VertexBuffer mesh_vb;
-  IndexBuffer mesh_ib;
-
-  // Set up mesh indices, these are updated because of the call to interlaceVertexandNormal.
-  // interlaceVertexandNormal creates unique vertices by vertex/normal index and extrapolates new indices.
-  mesh_ib.genBuffer();
-  mesh_ib.bind();
-  mesh_ib.setBufferPtr(mesh.getIndexArrayPTR());
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * mesh.indexCount(), mesh_ib.getBufferPtr(), GL_STATIC_DRAW);
-
-  // Set up mesh vertices. As above, we now have 6 floats per vertex, (x y z), (nx ny nz).
-  mesh_vb.genBuffer();
-  mesh_vb.bind();
-  mesh_vb.setBufferPtr(mesh.getVertexArrayPTR());
-  glBufferData(GL_ARRAY_BUFFER, mesh.vertexCount() * sizeof(float) * 6, mesh_vb.getBufferPtr(), GL_STATIC_DRAW);
-
-
-  // Create vertex array, the vehicle from cpu land to graphics land
-  GLuint mesh_vao = 0;
-  GLCALL(glGenVertexArrays(1, &mesh_vao));
-  GLCALL(glBindVertexArray(mesh_vao));
-
-  // Remind OpenGl of how we like our data, every single draw call.
-  // Tell OpenGl about our floats XYZ, they come first, as specified in layout.
-  GLCALL(glEnableVertexAttribArray(0));
-  GLCALL(glVertexAttribPointer(0,  // Attribute ZERO (vertices)
-                               3, // 3 floats per vertex XYZ
-                               GL_FLOAT, // type is float
-                               GL_FALSE, // they are not normalized
-                               6 * sizeof(float), // stride is size of one whole vertex.
-                               nullptr // No offset into the buffer
-  ));
-
-  GLCALL(glEnableVertexAttribArray(1));
-  GLCALL(glVertexAttribPointer(1,  // Attribute ONE (normals)
-                               3, // 3 floats per vertex normal
-                               GL_FLOAT, // type is float
-                               GL_FALSE, // they are not normalized
-                               6 * sizeof(float), // stride is size of one whole vertex.
-                               (GLvoid*) (3 * sizeof(float)) // offset into the buffer by 3 floats.
-  ));
-
-  /* Use the entity class to keep track of transforms */
-  Entity meshEntity = Entity();
-  Entity floorEntity = Entity();
-
-
-
-
   // Set up things that need to be updated in the loop.
 
   int rotationCounter = 0;
   double lightRotationAngle = 0; // degrees.
   double lightRotationRadius = 15;
+
+
+  Camera camera = Camera(45.0f, (float)WIDTH/(float)HEIGHT, glm::vec3(-8, 8, -4), glm::vec3(0,0,0));
+
+  /* The r_ in r_Floor means that the class is derived from Renderable()
+   * What this does is:
+   *    Allows us to take all the messy setup code and put it into one spot that pertains to that particular mesh.
+   *    Allows us to simplify the code
+   *    Allows for model specific configuration
+   *    Generally makes things easier.
+   * There are two methods from Renderable() that the descendant class must implement.
+   * These are setup() and draw()
+   * setup() is where you declare EVERYTHING you need to render, set up vaos, vbos, ibos
+   * draw() is where you use the data that you have set up */
+
+  r_Floor r_floor = r_Floor(program, &camera);
+  r_floor.setup();
+
+  /* Doing transforms with this scheme is very easy.
+   * Simply grab the entity from the Renderable using getEntity()
+   * and do your transformations with the pointer.
+   * any transformation defined in entity.h works */
+  
+  r_floor.getEntity()->setModelScale(5.0f);
+
 
   // Render loop.
   while(!glfwWindowShouldClose(window)) {
@@ -177,15 +138,11 @@ int main() {
     /* ********* Start Matrix code ******/
 
 
-    Camera camera = Camera(45.0f, (float)WIDTH/(float)HEIGHT, glm::vec3(-8, 8, -4), glm::vec3(0,0,0));
     glm::vec3 scale = glm::vec3(1.5f, 1.5f, 1.5f);
     glm::mat4 Model = glm::scale(glm::mat4(1.0f), scale);
     glm::mat4 mvp = camera.getProjection() * camera.getView() * Model; // Remember, matrix multiplication is the other way around
 
-    GLCALL(glUniformMatrix4fv(s_MatrixID, 1, GL_FALSE, &mvp[0][0]));
-    GLCALL(glUniformMatrix4fv(s_ModelID, 1, GL_FALSE, &Model[0][0]));
     GLCALL(glUniform3f(s_viewPosition, camera.getWorldX(), camera.getWorldY(), camera.getWorldZ()));
-
 
     /* ******** End matrix code ******* */
 
@@ -207,25 +164,9 @@ int main() {
     GLCALL(glUniform3f(s_lightPosition, lightPos.x, lightPos.y, lightPos.z));
 
     /* ****** End lighting code ****** */
-    
-    // Firstly draw the floor.
-    glm::mat4 floorModelMatrix = floorEntity.getModelMatrix();
-    mvp = camera.getProjection() * camera.getView() * floorEntity.getModelMatrix();
-    GLCALL(glUniformMatrix4fv(s_MatrixID, 1, GL_FALSE, &mvp[0][0]));
-    GLCALL(glUniformMatrix4fv(s_ModelID, 1, GL_FALSE, &floorModelMatrix[0][0]));
-    floor_mesh.draw();
 
 
-    // Finally draw the MESH
-    GLCALL(glBindVertexArray(mesh_vao));
-    mesh_ib.bind(); // Bind the index buffer
-    meshEntity.setXRotationDegrees(rotationCounter * 1.0f);
-    glm::mat4 meshModelMatrix = meshEntity.getModelMatrix();
-    mvp = camera.getProjection() * camera.getView() * meshEntity.getModelMatrix();
-    GLCALL(glUniformMatrix4fv(s_MatrixID, 1, GL_FALSE, &mvp[0][0]));
-    GLCALL(glUniformMatrix4fv(s_ModelID, 1, GL_FALSE, &meshModelMatrix[0][0]));
-    GLCALL(glDrawElements(GL_TRIANGLES, mesh.indices_vertex.size(), GL_UNSIGNED_INT, nullptr));
-
+    r_floor.draw();
 
     /* ********* END drawing code *********** */
 

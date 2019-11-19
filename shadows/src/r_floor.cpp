@@ -1,13 +1,17 @@
-#include "scene.h"
-#include <iostream>
+#include "r_floor.h"
+#include "stb_image.h"
 
-Floor::Floor(float vertexScaleFactor) {
 
-  // Floor has support for it's own model matrix. give it a boilerplate one for now.
-  // This scale has NOTHING to do with vertexScaleFactor. It was simply put here because we'll need it in the future.
-  glm::vec3 scale = glm::vec3(vertexScaleFactor, vertexScaleFactor, vertexScaleFactor);
-  _model = glm::scale(glm::mat4(1.0f), scale);
+r_Floor::r_Floor(GLuint shaderProgramId, Camera * camera) {
+  _shaderId = shaderProgramId;
+  _camera = camera;
+  _entity = Entity();
+}
 
+void r_Floor::setup() {
+
+  _shaderMVPId = glGetUniformLocation(_shaderId, "MVP");
+  _shaderModelId = glGetUniformLocation(_shaderId, "Model");
 
   /* Experimental texture mapping stuff */
   int width, height, nrChannels;
@@ -32,10 +36,6 @@ Floor::Floor(float vertexScaleFactor) {
     exit(-1);
   }
   stbi_image_free(data);
-
-
-
-
 
   // Create a manual vbo for the floor.
   _vboId = 0;
@@ -78,18 +78,19 @@ Floor::Floor(float vertexScaleFactor) {
   );
 
 
-
 }
 
-Floor::~Floor() { }
+void r_Floor::draw() {
 
-void Floor::bindVao() {
-  glBindVertexArray(_vaoId);
-}
-
-void Floor::draw() {
+  glm::mat4 mvp = _camera->getProjection() * _camera->getView() * _entity.getModelMatrix();
+  glUniformMatrix4fv(_shaderMVPId, 1, GL_FALSE, &mvp[0][0]);
+  glUniformMatrix4fv(_shaderModelId, 1, GL_FALSE, &_entity.getModelMatrix()[0][0]);
   glBindTexture(GL_TEXTURE_2D, _texId);
-  bindVao();
+  glBindVertexArray(_vaoId);
   glDrawArrays(GL_TRIANGLES, 0, 6);
 
+  glBindBuffer(GL_ARRAY_BUFFER, 0);
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+  glBindVertexArray(0);
 }
+
