@@ -11,7 +11,7 @@
 #include <vector>
 #include <librealsense2/rs.hpp>
 
-enum TextureMode { Color = 1, Depth = 2, Image = 3};
+enum TextureMode { Color = 1, Image = 2};
 extern int textureMode;
 extern glm::mat4 pMat, vMat, mMat, mvMat; //perspective, view, mode, and model-view matrices
 
