@@ -3,14 +3,16 @@
 
 #include "glm/mat4x4.hpp"
 #include "glm/gtc/matrix_transform.hpp"
-
+#include "GL/glew.h"
+#include "GLFW/glfw3.h"
+#include "inputhandler.h"
 
 
 
 class Camera {
 
  public:
-  Camera(float fov_degrees, float aspectratio, glm::vec3 worldlocation, glm::vec3 lookat);
+  Camera(GLFWwindow * window, GLuint shaderProgramId, float fov_degrees, float aspectratio, glm::vec3 worldlocation, glm::vec3 lookat);
   ~Camera();
 
   glm::mat4 getView();
@@ -28,6 +30,13 @@ class Camera {
   float getWorldY() { return _worldLocation.y; }
   float getWorldZ() { return _worldLocation.z; }
 
+  void updateShaderUniforms();
+  void inputMoveUp();
+  void inputMoveDown();
+  void inputMoveLeft();
+  void inputMoveRight();
+
+
 
  private:
 
@@ -38,11 +47,20 @@ class Camera {
   glm::mat4 _projection;
   glm::vec3 _worldLocation;
   glm::vec3 _lookAt;
+  glm::vec3 _up = glm::vec3(0,1,0);
 
   float _fovRadians;
   float _aspectratio;
 
+  GLuint _shaderProgramId = 0;
+  GLuint _uniformViewPosition = 0;
+
+  GLFWwindow * _w = nullptr;
+
 
 };
+
+static void UP_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+
 
 #endif //SHADOWS_SHADOWS_INCLUDE_CAMERA_H_

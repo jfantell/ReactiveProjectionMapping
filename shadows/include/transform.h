@@ -29,6 +29,10 @@ class Transform {
   void setYRotationDegrees(float yDegrees) { _yRotationRadians = glm::radians(yDegrees); computeModel(); }
   void setZRotationDegrees(float zDegrees) { _zRotationRadians = glm::radians(zDegrees); computeModel(); }
 
+  void rotateXDegrees(float xDegrees) {_xRotationRadians += glm::radians(xDegrees); computeModel(); }
+  void rotateYDegrees(float yDegrees) {_yRotationRadians += glm::radians(yDegrees); computeModel(); }
+  void rotateZDegrees(float zDegrees) {_zRotationRadians += glm::radians(zDegrees); computeModel(); }
+
   void setModelScale(float modelScale) { _scale = modelScale; computeModel(); }
 
 

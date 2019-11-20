@@ -30,10 +30,10 @@ class r_Floor : public Renderable {
       1.0f, 1.0f,
       -1.0f, -1.0f,-1.0f,
       0.0f, 1.0f, 0.0f,
-      -1.0f, -1.0f,
+      0.0f, 0.0f,
       -1.0f, -1.0f, 1.0f,
       0.0f, 1.0f, 0.0f,
-      0.0f, 1.0f
+      1.0f, 0.0f
   };
 
   GLuint _vboId = 0;

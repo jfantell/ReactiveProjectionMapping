@@ -46,7 +46,8 @@ class Mesh {
   void interlaceVertexAndNormal();
   void interlaceAll();
   void printAttributes();
-  bool isInterlaced() {return _interlaced; }
+  bool isInterlaced() { return _interlaced; }
+  void setInterlaced(bool interlaced) { _interlaced = interlaced; }
 
 
   std::vector<glm::vec3> normals;

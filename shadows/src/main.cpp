@@ -27,9 +27,12 @@
 #include "camera.h"
 #include "scene.h"
 #include "transform.h"
+#include "pointlight.h"
 
 #include "r_floor.h"
 #include "r_rabbit.h"
+#include "r_lightmarker.h"
+#include "inputhandler.h"
 
 void CheckOpenGLError(const char* stmt, const char* fname, int line)
 {
@@ -86,7 +89,8 @@ int main() {
   fragmentShader.compile();
   GLuint program = buildShaderProgram(vertexShader, fragmentShader);
 
-  
+
+  // All uniforms required for this to work. They are updated elsewhere (camera, renderable, light)
   GLuint s_MatrixID = glGetUniformLocation(program, "MVP");
   GLuint s_ModelID = glGetUniformLocation(program, "Model");
   GLuint s_ambientLightStrength = glGetUniformLocation(program, "ambientLightStrength");
@@ -101,12 +105,9 @@ int main() {
 
   // Set up things that need to be updated in the loop.
 
-  int rotationCounter = 0;
-  double lightRotationAngle = 0; // degrees.
-  double lightRotationRadius = 15;
-
-
-  Camera camera = Camera(45.0f, (float)WIDTH/(float)HEIGHT, glm::vec3(-8, 8, -4), glm::vec3(0,0,0));
+  // Create our camera.
+  Camera camera = Camera(window, program, 45.0f, (float)WIDTH/(float)HEIGHT, glm::vec3(-8, 8, -4), glm::vec3(0,0,0));
+  InputHandler input = InputHandler(window);
 
   /* The r_ in r_Floor means that the class is derived from Renderable()
    * What this does is:
@@ -119,6 +120,7 @@ int main() {
    * setup() is where you declare EVERYTHING you need to render, set up vaos, vbos, ibos
    * draw() is where you use the data that you have set up, update shader uniforms, etc. */
 
+  // Create an instance of the floor renderable and set it up.
   r_Floor r_floor = r_Floor(program, &camera);
   r_floor.setup();
 
@@ -127,15 +129,26 @@ int main() {
    * and do your transformations with the pointer.
    * any transformation defined in entity.h works */
 
-  r_floor.getTransform()->setModelScale(5.0f);
+  // Let's scale up the floor.
+  r_floor.getTransform()->setModelScale(10.0f);
+  r_floor.getTransform()->setY(-.5);
 
-  /* Test r_Rabbit */
+  // Declare our renderable rabbit model and set it up.
   r_Rabbit r_rabbit = r_Rabbit(program, &camera);
   r_rabbit.setup();
 
-  r_rabbit.getTransform()->setModelScale(1.5f);
+  // Let's scale up our rabbit.
+  r_rabbit.getTransform()->setModelScale(2.5f);
+  r_rabbit.getTransform()->setY(-5);
 
+  PointLight light = PointLight(program);
+  light.setAmbientColor(glm::vec3(1.0f, 1.0f, 1.0f));
+  light.setAmbientStrength(0.1f);
+  light.setDiffuseStrength(1.2f);
+  light.setSpecularStrength(0.5f);
 
+  r_LightMarker lightmarker = r_LightMarker(program, &camera, &light);
+  lightmarker.setup();
 
   // Render loop.
   while(!glfwWindowShouldClose(window)) {
@@ -143,33 +156,34 @@ int main() {
     // Tell OpenGL to clean off the canvas.
     GLCALL(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 
+    // Update the light uniforms.
+    light.updateShaderUniforms();
 
-    /* ******* Lighting Code ******* */
+    // Handle input to move the camera.
+    unsigned int key = input.handle();
+    if (key == UP)
+      camera.inputMoveUp();
+    else if (key == DOWN)
+      camera.inputMoveDown();
+    else if (key == LEFT)
+      camera.inputMoveLeft();
+    else if (key == RIGHT)
+      camera.inputMoveRight();
+    camera.updateShaderUniforms();
 
-    float ambientStrength = 0.5f;
-    float specularStrength = 0.3f;
-    glm::vec3 ambientColor = glm::vec3(1.0f, 1.0f, 1.0f);
-    glm::vec3 lightPos = glm::vec3(0,0,0);
-
-    lightRotationAngle += 0.01f;
-    float sinXradius = sin(lightRotationAngle) * lightRotationRadius;
-    float cosXradius = cos(lightRotationAngle) * lightRotationRadius;
-    lightPos = glm::vec3(lightPos.x + cosXradius, lightPos.y, lightPos.z + sinXradius );
-
-    GLCALL(glUniform1f(s_ambientLightStrength, ambientStrength));
-    GLCALL(glUniform1f(s_specularStrength, specularStrength));
-    GLCALL(glUniform3f(s_ambientLightColor, ambientColor.r, ambientColor.g, ambientColor.b));
-    GLCALL(glUniform3f(s_lightPosition, lightPos.x, lightPos.y, lightPos.z));
-
-    // Update the shader with the camera's position.
-    GLCALL(glUniform3f(s_viewPosition, camera.getWorldX(), camera.getWorldY(), camera.getWorldZ()));
-
-
-    /* ****** End lighting code ****** */
-
-
+    // Draw the floor, and the rabbit.
     r_floor.draw();
     r_rabbit.draw();
+    r_rabbit.getTransform()->rotateYDegrees(0.01);
+
+    // Make the light roll out of the scene to test lighting.
+    glm::vec3 lightPosition = light.getWorldLocation();
+    //lightPosition.x += 0.01f;
+    //lightPosition.y -= 0.01f;
+    light.setWorldLocation(lightPosition);
+
+    // Draw the marker of the light source's location.
+    lightmarker.draw();
 
     /* ********* END drawing code *********** */
 
@@ -182,8 +196,6 @@ int main() {
     glfwPollEvents();
     // put the stuff we've been drawing onto the display
     glfwSwapBuffers(window);
-
-    rotationCounter++;
   }
 
   //GLCALL(glDeleteBuffers(1, &mesh_ib.getBufferId())));
@@ -193,6 +205,8 @@ int main() {
   glfwTerminate();
   return 0;
 }
+
+
 
 
 

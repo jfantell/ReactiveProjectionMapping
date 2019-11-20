@@ -7,6 +7,7 @@ in vec2 frag_tex_coord;
 out vec4 diffuse_color;
 
 uniform float ambientLightStrength;
+uniform float diffuseLightStrength;
 uniform vec3 ambientLightColor;
 uniform float specularStrength;
 uniform vec3 lightPosition;
@@ -31,7 +32,7 @@ void main() {
     vec3 specular = specularStrength * spec * ambientLightColor;
 
     //vec3 result = (ambientLight + diffuse + specular) * vec3(fragment_color);
-    vec3 result = (ambientLight + diffuse + specular) * vec3(texture(textureimage, frag_tex_coord));
+    vec3 result = (ambientLight + diffuseLightStrength * diffuse + specular) * vec3(texture(textureimage, frag_tex_coord));
 
     diffuse_color = vec4(result, 1.0f);
 
