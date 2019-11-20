@@ -5,6 +5,7 @@ out vec4 fragColor;
 
 uniform mat4 mv_matrix;
 uniform mat4 proj_matrix;
+uniform mat4 norm_matrix;
 uniform int use_texture;
 uniform sampler2D samp;
 

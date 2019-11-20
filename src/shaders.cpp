@@ -26,18 +26,19 @@ using namespace std;
 using namespace glm;
 
 #define numVAOs 1
-#define numVBOs 4
-#define maxPointsX3 2800000
+#define numVBOs 5
+#define MAX_SIZE 100000
 
 GLuint renderingProgram; // Vertex and Fragment Shader Program
 GLuint vao[numVAOs]; // Array to store Vertex Attribute Objects References
 GLuint vbo[numVBOs]; //Array to store Vertex Attribute Buffer References
-GLuint mvLoc, projLoc, useTextureLoc; // Connect C++ program to Shaders
+GLuint mvLoc, projLoc, normLoc, useTextureLoc; // Connect C++ program to Shaders
 GLsizei num_vertices; //The number of points to be drawn
 GLuint textureRef = 0; // Reference to texture address in memory
 std::vector<float> vertexCoordinatesVector;
 std::vector<float> RGBcolorVector;
 std::vector<float> textureCoordinatesVector;
+std::vector<float> vertexNormVector;
 std::vector<unsigned int> vertexIndicesVector;
 
 rs2::pointcloud pc; // Point cloud object
@@ -49,7 +50,7 @@ window_state windowState;
 vec4 point_1, point_2;
 
 void updatePoints(pcl::PolygonMesh &triangles){
-    pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_from_mesh (new pcl::PointCloud<pcl::PointXYZ>);
+    pcl::PointCloud<pcl::PointNormal>::Ptr cloud_from_mesh (new pcl::PointCloud<pcl::PointNormal>);
     pcl::fromPCLPointCloud2 (triangles.cloud, *cloud_from_mesh);
 
 //    cout << "Cloud Data " << cloud_from_mesh->size() << endl;
@@ -63,11 +64,16 @@ void updatePoints(pcl::PolygonMesh &triangles){
     float max_X = -1000000000;
     float min_Y = 1000000000;
     float max_Y = -1000000000;
+
+    cout << "CLOUD SIZE " << cloud_from_mesh->size() << endl;
     for (int i=0; i < cloud_from_mesh->size(); i++)
     {
         float x = cloud_from_mesh->points[i].x;
         float y = cloud_from_mesh->points[i].y;
         float z = cloud_from_mesh->points[i].z;
+        float x_normal = cloud_from_mesh->points[i].normal_x;
+        float y_normal = cloud_from_mesh->points[i].normal_y;
+        float z_normal = cloud_from_mesh->points[i].normal_z;
         if( i == 0){
             point_1 = vec4(x,y,z,1);
         }
@@ -78,6 +84,11 @@ void updatePoints(pcl::PolygonMesh &triangles){
         vertexCoordinatesVector.push_back(x);
         vertexCoordinatesVector.push_back(y);
         vertexCoordinatesVector.push_back(z);
+
+        //Assign normals to each vertex
+        vertexNormVector.push_back(x_normal);
+        vertexNormVector.push_back(y_normal);
+        vertexNormVector.push_back(z_normal);
 
         //Assign RGB colors to each vertex
         RGBcolorVector.push_back(1);
@@ -115,9 +126,8 @@ void updatePoints(pcl::PolygonMesh &triangles){
 //        cout << "Indices " << indices[0] << " " << indices[1] << " " << indices[2] << endl;
     }
 
-
     num_vertices = (GLsizei)triangles.polygons.size() * 3;
-//    cout << "Num Vertices " << num_vertices << endl;
+    cout << "Num Vertices " << num_vertices << endl;
 
     glBindBuffer(GL_ARRAY_BUFFER,vbo[0]);
     glBufferSubData(GL_ARRAY_BUFFER, 0, (long int)vertexCoordinatesVector.size() * sizeof(float), vertexCoordinatesVector.data());
@@ -125,7 +135,9 @@ void updatePoints(pcl::PolygonMesh &triangles){
     glBufferSubData(GL_ARRAY_BUFFER, 0, (long int)RGBcolorVector.size() * sizeof(float), RGBcolorVector.data());
     glBindBuffer(GL_ARRAY_BUFFER,vbo[2]);
     glBufferSubData(GL_ARRAY_BUFFER, 0, (long int)textureCoordinatesVector.size() * sizeof(float), textureCoordinatesVector.data());
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,vbo[3]);
+    glBindBuffer(GL_ARRAY_BUFFER,vbo[3]);
+    glBufferSubData(GL_ARRAY_BUFFER, 0, (long int)vertexNormVector.size() * sizeof(float), vertexNormVector.data());
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,vbo[4]);
     glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, (long int)vertexIndicesVector.size() * sizeof(unsigned int), vertexIndicesVector.data());
 
 }
@@ -136,8 +148,9 @@ void clearCPUbuffers(){
     // a new frame can be drawn
     vertexCoordinatesVector.clear();
     RGBcolorVector.clear();
-    vertexIndicesVector.clear();
     textureCoordinatesVector.clear();
+    vertexNormVector.clear();
+    vertexIndicesVector.clear();
 }
 
 void updateFrame(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud){
@@ -184,13 +197,15 @@ void init(GLFWwindow* window, const char * vertShaderFile, const char * fragShde
     // The second will store texture coordinates
     glGenBuffers(numVBOs,vbo);
     glBindBuffer(GL_ARRAY_BUFFER,vbo[0]);
-    glBufferData(GL_ARRAY_BUFFER,maxPointsX3*sizeof(float),nullptr,GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, MAX_SIZE * sizeof(float), nullptr, GL_DYNAMIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER,vbo[1]);
-    glBufferData(GL_ARRAY_BUFFER,maxPointsX3*sizeof(float),nullptr,GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, MAX_SIZE * sizeof(float), nullptr, GL_DYNAMIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER,vbo[2]);
-    glBufferData(GL_ARRAY_BUFFER,maxPointsX3*sizeof(float),nullptr,GL_DYNAMIC_DRAW);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,vbo[3]);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER,maxPointsX3*sizeof(unsigned int),nullptr,GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, MAX_SIZE * sizeof(float), nullptr, GL_DYNAMIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER,vbo[3]);
+    glBufferData(GL_ARRAY_BUFFER, MAX_SIZE * sizeof(float), nullptr, GL_DYNAMIC_DRAW);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,vbo[4]);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, MAX_SIZE * sizeof(unsigned int), nullptr, GL_DYNAMIC_DRAW);
 
     // Use user specified texture instead of images generated by camera
     if(textureMode == Image){
@@ -209,6 +224,7 @@ void setup_buffers(){
     //get uniform variable locations in GPU
     mvLoc = glGetUniformLocation(renderingProgram, "mv_matrix");
     projLoc = glGetUniformLocation(renderingProgram, "proj_matrix");
+    normLoc = glGetUniformLocation(renderingProgram, "norm_matrix");
     useTextureLoc = glGetUniformLocation(renderingProgram, "use_texture");
 
     model_view_matrix();
@@ -238,10 +254,15 @@ void setup_buffers(){
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, textureRef);
 
+    //Norm buffer
+    glBindBuffer(GL_ARRAY_BUFFER, vbo[3]);
+    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(3);
+
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo[3]);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo[4]);
     glDrawElements(GL_TRIANGLES,num_vertices,GL_UNSIGNED_INT, 0);
 }
 

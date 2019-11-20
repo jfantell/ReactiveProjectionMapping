@@ -3,10 +3,12 @@
 layout (location=0) in vec3 vPos;
 layout (location=1) in vec3 vCol;
 layout (location=2) in vec2 vTex;
+layout (location=3) in vec2 vNorm;
 out vec3 fCol;
 
 uniform mat4 mv_matrix;
 uniform mat4 proj_matrix;
+uniform mat4 norm_matrix;
 uniform int use_texture;
 uniform sampler2D samp;
 
