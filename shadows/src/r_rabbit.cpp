@@ -1,17 +1,22 @@
-#include "r_floor.h"
+#include "r_rabbit.h"
 #include "stb_image.h"
+#include "vertexbuffer.h"
+#include "indexbuffer.h"
+#include <iostream>
 
-
-r_Floor::r_Floor(GLuint shaderProgramId, Camera * camera) {
+r_Rabbit::r_Rabbit(GLuint shaderProgramId, Camera *camera) {
   _shaderId = shaderProgramId;
   _camera = camera;
   _transform = Transform();
+  _mesh = Mesh();
+  _vb = VertexBuffer();
+  _ib = IndexBuffer();
 }
 
-void r_Floor::setup() {
-
+void r_Rabbit::setup() {
   _shaderMVPId = glGetUniformLocation(_shaderId, "MVP");
   _shaderModelId = glGetUniformLocation(_shaderId, "Model");
+
 
   int width, height, nrChannels;
   unsigned char *data = stbi_load("../res/treetex.jpg", &width, &height, &nrChannels, 0);
@@ -36,25 +41,39 @@ void r_Floor::setup() {
   }
   stbi_image_free(data);
 
-  // Create a manual vbo for the floor.
-  _vboId = 0;
-  glGenBuffers(1, &_vboId);
-  glBindBuffer(GL_ARRAY_BUFFER, _vboId);
-  glBufferData(GL_ARRAY_BUFFER, 3*2*8*sizeof(float), vertices_normals, GL_STATIC_DRAW);
+  _mesh.loadOBJ("../res/bunny_uv.obj");
+  // with this call, we double our vertex vector size, but every second element is now a normal.
+  _mesh.interlaceAll();
 
-  // Create the subsequent floor vertex array. we need to draw mesh and floor separately.
-  _vaoId = 0;
+  // Set up mesh indices, these are updated because of the call to interlaceVertexandNormal.
+  // interlaceVertexandNormal creates unique vertices by vertex/normal index and extrapolates new indices.
+
+  _ib.genBuffer();
+  _ib.bind();
+  _ib.setBufferPtr(_mesh.getIndexArrayPTR());
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * _mesh.indexCount(), _ib.getBufferPtr(), GL_STATIC_DRAW);
+
+  // Set up mesh vertices. As above, we now have 6 floats per vertex, (x y z), (nx ny nz).
+  _vb.genBuffer();
+  _vb.bind();
+  _vb.setBufferPtr((void *)_mesh.getVertexArrayPTR());
+
+  glBufferData(GL_ARRAY_BUFFER, _mesh.vertexCount() * sizeof(float) * 8, _vb.getBufferPtr(), GL_STATIC_DRAW);
+
+
+  // Create vertex array, the vehicle from cpu land to graphics land
   glGenVertexArrays(1, &_vaoId);
   glBindVertexArray(_vaoId);
 
-  // Tell Opengl how to interpret our floor data. Same as mesh loading.
+  // Remind OpenGl of how we like our data, every single draw call.
+  // Tell OpenGl about our floats XYZ, they come first, as specified in layout.
   glEnableVertexAttribArray(0);
   glVertexAttribPointer(0,  // Attribute ZERO (vertices)
-                        3, // 3 floats per vertex XYZ
-                        GL_FLOAT, // type is float
-                        GL_FALSE, // they are not normalized
-                        8 * sizeof(float), // stride is size of one whole vertex.
-                        nullptr // No offset into the buffer
+                               3, // 3 floats per vertex XYZ
+                               GL_FLOAT, // type is float
+                               GL_FALSE, // they are not normalized
+                               8*sizeof(float), // stride is size of one whole vertex.
+                               nullptr // No offset into the buffer
   );
 
   glEnableVertexAttribArray(1);
@@ -67,29 +86,27 @@ void r_Floor::setup() {
   );
 
   glEnableVertexAttribArray(2);
-  glVertexAttribPointer(2, // Attribute TWO (Texcoords)
-                        2, // 2 floats U,V per vertex
+  glVertexAttribPointer(2,  // Attribute ONE (normals)
+                        2, // 3 floats per vertex normal
                         GL_FLOAT, // type is float
                         GL_FALSE, // they are not normalized
                         8*sizeof(float), // stride is size of one whole vertex.
-                        (GLvoid*) (6 * sizeof(float)) // offset by the size of 6 floats.
-
+                        (GLvoid*) (6 * sizeof(float)) // offset into the buffer by 3 floats.
   );
-
 
 }
 
-void r_Floor::draw() {
-
+void r_Rabbit::draw() {
   glm::mat4 mvp = _camera->getProjection() * _camera->getView() * _transform.getModelMatrix();
   glUniformMatrix4fv(_shaderMVPId, 1, GL_FALSE, &mvp[0][0]);
   glUniformMatrix4fv(_shaderModelId, 1, GL_FALSE, &_transform.getModelMatrix()[0][0]);
+
   glBindTexture(GL_TEXTURE_2D, _texId);
   glBindVertexArray(_vaoId);
-  glDrawArrays(GL_TRIANGLES, 0, 6);
+  _ib.bind();
+  glDrawElements(GL_TRIANGLES, _mesh.indexCount(), GL_UNSIGNED_INT, nullptr);
 
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
   glBindVertexArray(0);
 }
-

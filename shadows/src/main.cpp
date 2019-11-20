@@ -26,9 +26,10 @@
 #include "mesh.h"
 #include "camera.h"
 #include "scene.h"
-#include "entity.h"
+#include "transform.h"
 
 #include "r_floor.h"
+#include "r_rabbit.h"
 
 void CheckOpenGLError(const char* stmt, const char* fname, int line)
 {
@@ -116,7 +117,7 @@ int main() {
    * There are two methods from Renderable() that the descendant class must implement.
    * These are setup() and draw()
    * setup() is where you declare EVERYTHING you need to render, set up vaos, vbos, ibos
-   * draw() is where you use the data that you have set up */
+   * draw() is where you use the data that you have set up, update shader uniforms, etc. */
 
   r_Floor r_floor = r_Floor(program, &camera);
   r_floor.setup();
@@ -125,8 +126,15 @@ int main() {
    * Simply grab the entity from the Renderable using getEntity()
    * and do your transformations with the pointer.
    * any transformation defined in entity.h works */
-  
-  r_floor.getEntity()->setModelScale(5.0f);
+
+  r_floor.getTransform()->setModelScale(5.0f);
+
+  /* Test r_Rabbit */
+  r_Rabbit r_rabbit = r_Rabbit(program, &camera);
+  r_rabbit.setup();
+
+  r_rabbit.getTransform()->setModelScale(1.5f);
+
 
 
   // Render loop.
@@ -135,16 +143,6 @@ int main() {
     // Tell OpenGL to clean off the canvas.
     GLCALL(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 
-    /* ********* Start Matrix code ******/
-
-
-    glm::vec3 scale = glm::vec3(1.5f, 1.5f, 1.5f);
-    glm::mat4 Model = glm::scale(glm::mat4(1.0f), scale);
-    glm::mat4 mvp = camera.getProjection() * camera.getView() * Model; // Remember, matrix multiplication is the other way around
-
-    GLCALL(glUniform3f(s_viewPosition, camera.getWorldX(), camera.getWorldY(), camera.getWorldZ()));
-
-    /* ******** End matrix code ******* */
 
     /* ******* Lighting Code ******* */
 
@@ -163,10 +161,15 @@ int main() {
     GLCALL(glUniform3f(s_ambientLightColor, ambientColor.r, ambientColor.g, ambientColor.b));
     GLCALL(glUniform3f(s_lightPosition, lightPos.x, lightPos.y, lightPos.z));
 
+    // Update the shader with the camera's position.
+    GLCALL(glUniform3f(s_viewPosition, camera.getWorldX(), camera.getWorldY(), camera.getWorldZ()));
+
+
     /* ****** End lighting code ****** */
 
 
     r_floor.draw();
+    r_rabbit.draw();
 
     /* ********* END drawing code *********** */
 

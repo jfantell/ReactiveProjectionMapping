@@ -17,22 +17,22 @@ class r_Floor : public Renderable {
 
   float vertices_normals[3 * 2 * 8] = {
       1.0f, -1.0f, 1.0f, // first vertex
-      0.0f, -1.0f, 0.0f, // first normal
+      0.0f, 1.0f, 0.0f, // first normal
       1.0f, 1.0f,          // texcoord
       1.0f, -1.0f,-1.0f,
-      0.0f, -1.0f, 0.0f,
+      0.0f, 1.0f, 0.0f,
       1.0f, -1.0f,
       -1.0f, -1.0f,-1.0f,
-      0.0f, -1.0f, 0.0f,
+      0.0f, 1.0f, 0.0f,
       0.0f, 0.0f,
       1.0f, -1.0f, 1.0f,
-      0.0f, -1.0f, 0.0f,
+      0.0f, 1.0f, 0.0f,
       1.0f, 1.0f,
       -1.0f, -1.0f,-1.0f,
-      0.0f, -1.0f, 0.0f,
+      0.0f, 1.0f, 0.0f,
       -1.0f, -1.0f,
       -1.0f, -1.0f, 1.0f,
-      0.0f, -1.0f, 0.0f,
+      0.0f, 1.0f, 0.0f,
       0.0f, 1.0f
   };
 

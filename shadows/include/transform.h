@@ -6,12 +6,12 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include <math.h>
 
-class Entity {
+class Transform {
  public:
-  Entity() {
+  Transform() {
     computeModel();
   }
-  ~Entity() { };
+  ~Transform() { };
 
   glm::mat4 getModelMatrix() { return _model; }
   void setX(float x) { _worldPosition.x = x; computeModel(); }

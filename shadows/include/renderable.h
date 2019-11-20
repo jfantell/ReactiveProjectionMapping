@@ -1,7 +1,7 @@
 #ifndef SHADOWS_SHADOWS_INCLUDE_RENDERABLE_H_
 #define SHADOWS_SHADOWS_INCLUDE_RENDERABLE_H_
 
-#include "entity.h"
+#include "transform.h"
 #include "camera.h"
 #include "GL/glew.h"
 
@@ -11,7 +11,7 @@ class Renderable {
   virtual ~Renderable() {}
   virtual void setup() = 0; // MUST be implemented in base class
   virtual void draw() = 0;  // Must be implemented in base class
-  virtual Entity * getEntity() {return &_entity; }
+  virtual Transform * getTransform() {return &_transform; }
 
 
 
@@ -19,7 +19,7 @@ class Renderable {
  protected:
   GLuint _shaderId;
   Camera * _camera;
-  Entity  _entity;
+  Transform _transform;
 
 };
 

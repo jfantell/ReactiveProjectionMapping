@@ -1,6 +1,8 @@
 #include "mesh.h"
 #include <iostream>
 #include <map>
+#include <unordered_map>
+#include <tuple>
 
 
 Mesh::Mesh() {}
@@ -38,71 +40,72 @@ void Mesh::loadOBJ(std::string pathtofile) {
 
     } else if (strcmp(lineHeader, "f") == 0) {
       unsigned int vertexIndex[3];
-      /*
-
+      unsigned int vertexNormalIndex[3];
+      unsigned int vertexTextureIndex[3];
       int matches = fscanf(file,
-                           "%u %u %u\n",
-                           &vertexIndex[0],
-                           &vertexIndex[1],
-                           &vertexIndex[2]);
+                     "%d/%d/%d %d/%d/%d %d/%d/%d\n",
+                     &vertexIndex[0],
+                     &vertexNormalIndex[0],
+                     &vertexTextureIndex[0],
+                     &vertexIndex[1],
+                     &vertexNormalIndex[1],
+                     &vertexTextureIndex[1],
+                     &vertexIndex[2],
+                     &vertexNormalIndex[2],
+                     &vertexTextureIndex[2]
+                     );
+      if (matches == 9){
+        indices_vertex.push_back(vertexIndex[0] - 1);
+        indices_vertex.push_back(vertexIndex[1] - 1);
+        indices_vertex.push_back(vertexIndex[2] - 1);
 
-      if (matches == 3) {
+        indices_normal.push_back(vertexNormalIndex[0] - 1);
+        indices_normal.push_back(vertexNormalIndex[1] - 1);
+        indices_normal.push_back(vertexNormalIndex[2] - 1);
 
-        indices_vertex.push_back(vertexIndex[0]);
-        indices_vertex.push_back(vertexIndex[1]);
-        indices_vertex.push_back(vertexIndex[2]);
+        indices_uv.push_back(vertexTextureIndex[0] - 1);
+        indices_uv.push_back(vertexTextureIndex[1] - 1);
+        indices_uv.push_back(vertexTextureIndex[2] - 1);
 
       } else {
-        */
-          unsigned int vertexNormalIndex[3];
-          unsigned int vertexTextureIndex[3];
-          int matches = fscanf(file,
-                         "%d/%d/%d %d/%d/%d %d/%d/%d\n",
-                         &vertexIndex[0],
-                         &vertexNormalIndex[0],
-                         &vertexTextureIndex[0],
-                         &vertexIndex[1],
-                         &vertexNormalIndex[1],
-                         &vertexTextureIndex[1],
-                         &vertexIndex[2],
-                         &vertexNormalIndex[2],
-                         &vertexTextureIndex[2]
-                         );
-          if (matches == 9){
-            indices_vertex.push_back(vertexIndex[0] - 1);
-            indices_vertex.push_back(vertexIndex[1] - 1);
-            indices_vertex.push_back(vertexIndex[2] - 1);
 
-            indices_normal.push_back(vertexNormalIndex[0] - 1);
-            indices_normal.push_back(vertexNormalIndex[1] - 1);
-            indices_normal.push_back(vertexNormalIndex[2] - 1);
-
-            indices_uv.push_back(vertexTextureIndex[0] - 1);
-            indices_uv.push_back(vertexTextureIndex[1] - 1);
-            indices_uv.push_back(vertexTextureIndex[2] - 1);
-
-          } else {
-
-            std::cerr << vertices.size() << std::endl;
-            std::cerr << "Mesh cannot be read. Invalid options: " << pathtofile << std::endl;
-            exit(-1);
-          }
-        }
+        std::cerr << vertices.size() << std::endl;
+        std::cerr << "Mesh cannot be read. Invalid options: " << pathtofile << std::endl;
+        exit(-1);
+      }
+    }
 
 
       }
     }
   //}
 
-unsigned int Mesh::vertexCount() { return vertices.size(); }
+unsigned int Mesh::vertexCount() {
+  if (!_interlaced) return vertices.size();
+  else return interlacedVertices.size();
+}
 
-float * Mesh::getVertexArrayPTR() { return (float * ) vertices.data(); }
+float * Mesh::getVertexArrayPTR() {
+  if (!_interlaced){
+    return (float * ) vertices.data();
+  }
+  else {
+    return (float *) interlacedVertices.data();
+  }
+}
 
-float * Mesh::getNormalArrayPTR() { return (float *) normals.data(); }
+float * Mesh::getNormalArrayPTR() {
+  return (float *) normals.data(); }
 
-unsigned int Mesh::indexCount() { return indices_vertex.size(); }
+unsigned int Mesh::indexCount() {
+  if (!_interlaced ) return indices_vertex.size();
+  else return interlacedIndices.size();
+}
 
-unsigned int * Mesh::getIndexArrayPTR() { return (unsigned int * ) indices_vertex.data(); }
+unsigned int * Mesh::getIndexArrayPTR() {
+  if (!_interlaced) return (unsigned int * ) indices_vertex.data();
+  else return (unsigned int * ) interlacedIndices.data();
+}
 
 void Mesh::interlaceVertexAndNormal() {
   /*  OpenGL only allows for one single index buffer.
@@ -188,13 +191,109 @@ void Mesh::interlaceVertexAndNormal() {
 
 }
 
+
+void Mesh::interlaceAll() {
+
+  indices i_combo;
+  vertex_struct v_combo;
+
+  // Create two unordered maps.
+  // vertexMap maps the combo of indices to the vertex data it represents.
+  // indexMap is used to pull things back out of the map.
+  std::unordered_map<indices, vertex_struct> vertexMap;
+  std::unordered_map<indices, unsigned int> indexMap;
+
+  // If sizes are unequal, we can't perform this operation.
+  if (indices_vertex.size() != indices_normal.size() || indices_uv.size() != indices_vertex.size()) {
+    std::cerr << "Cannot interlace vertex and normals! Count not equal!" << std::endl;
+    exit(-1);
+  }
+
+  // Push everything to the maps.
+  for (int i = 0; i < indices_vertex.size(); i++) {
+
+    i_combo.vertex = indices_vertex[i];
+    i_combo.normal = indices_normal[i];
+    i_combo.uv = indices_uv[i];
+
+    v_combo.vertex = vertices[indices_vertex[i]];
+    v_combo.normal = normals[indices_normal[i]];
+    v_combo.uv = uvs[indices_uv[i]];
+
+    vertexMap[i_combo] = v_combo;
+    indexMap[i_combo] = 0;
+
+  }
+  // reduce our memory footprint
+  vertices.clear();
+  normals.clear();
+  uvs.clear();
+
+  // Allocate a new array with the proper size and create indices as well.
+  vertex_struct * newBuf = (vertex_struct *) malloc(sizeof(vertex_struct) * vertexMap.size());
+
+  // Enumerate all of the new unique vertices.
+  unsigned int indexCounter = 0;
+  for (auto itr = indexMap.begin(); itr != indexMap.end(); itr++) {
+    itr->second = indexCounter;
+    indexCounter++;
+  }
+
+  std::vector<unsigned int> newIndices;
+  unsigned int uniqueVertexID = 0;
+
+  // now for every combo of indices, copy over the corresponding vertex to the buffer indexed by the unique id.
+  for (unsigned int i = 0; i < indices_vertex.size(); i++) {
+
+    i_combo.vertex = indices_vertex[i];
+    i_combo.normal = indices_normal[i];
+    i_combo.uv = indices_uv[i];
+
+    // get the vertex's new ID
+    uniqueVertexID = indexMap[i_combo];
+    newIndices.push_back(uniqueVertexID);
+
+    // copy that vertex to the specified slot (corresponding to ID)
+    vertex_struct v = vertexMap[i_combo];
+    newBuf[uniqueVertexID] = vertexMap[i_combo];
+
+  }
+
+  // get rid of the unnecessary old index data.
+  indices_normal.clear();
+  indices_vertex.clear();
+  indices_uv.clear();
+
+  // update to the newest index array now.
+  interlacedIndices = newIndices;
+
+  // Sequentially push vertex data and normal data back into the vertices vector.
+  // So now we have double the number of vertices, but second element is really that vertex's normal.
+
+  for (int i = 0; i < vertexMap.size(); i++) {
+      interlacedVertices.push_back(newBuf[i]);
+  }
+
+  delete newBuf;
+  _interlaced = true;
+}
+
+
 void Mesh::printAttributes() {
-  std::cout << "Size of vertices: \t\t" << vertices.size() << " \t(glm::vec3)" << std::endl;
-  std::cout << "Size of normals: \t\t" << normals.size() <<  " \t(glm::vec3)" << std::endl;
-  std::cout << "Size of uvs: \t\t\t" << uvs.size() << " \t(glm::vec2)" << std::endl;
-  std::cout << "Size of indices_vertex: \t" << indices_vertex.size() << " \t(uint)" << std::endl;
-  std::cout << "Size of indices_normal: \t" << indices_normal.size() << " \t(uint)" << std::endl;
-  std::cout << "Size of indices_uvs: \t\t" << indices_uv.size() << " \t(uint)" << std::endl;
+  if (!_interlaced) {
+    std::cout << "MESH IS NOT INTERLACED." << std::endl;
+    std::cout << "Size of vertices: \t\t" << vertices.size() << " \t(glm::vec3)" << std::endl;
+    std::cout << "Size of normals: \t\t" << normals.size() << " \t(glm::vec3)" << std::endl;
+    std::cout << "Size of uvs: \t\t\t" << uvs.size() << " \t(glm::vec2)" << std::endl;
+    std::cout << "Size of indices_vertex: \t" << indices_vertex.size() << " \t(uint)" << std::endl;
+    std::cout << "Size of indices_normal: \t" << indices_normal.size() << " \t(uint)" << std::endl;
+    std::cout << "Size of indices_uvs: \t\t" << indices_uv.size() << " \t(uint)" << std::endl;
+  }
+  else {
+    std::cout << "MESH IS INTERLACED." << std::endl;
+    std::cout << "Size of vertices (vertex, normal, uv): \t" << interlacedVertices.size() << std::endl;
+    std::cout << "Size of extrapolated indices \t\t" << interlacedIndices.size() << std::endl;
+  }
 }
 
 
