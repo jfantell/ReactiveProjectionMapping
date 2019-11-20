@@ -14,7 +14,7 @@ void r_Floor::setup() {
   _shaderModelId = glGetUniformLocation(_shaderId, "Model");
 
   int width, height, nrChannels;
-  unsigned char *data = stbi_load("../res/metallicdrip.jpg", &width, &height, &nrChannels, 0);
+  unsigned char *data = stbi_load("../res/treetex.jpg", &width, &height, &nrChannels, 0);
   glGenTextures(1, &_texId);
   glBindTexture(GL_TEXTURE_2D, _texId);
   // set the texture wrapping/filtering options (on the currently bound texture object)

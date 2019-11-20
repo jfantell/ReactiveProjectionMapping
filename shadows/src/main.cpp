@@ -178,8 +178,8 @@ int main() {
 
     // Make the light roll out of the scene to test lighting.
     glm::vec3 lightPosition = light.getWorldLocation();
-    //lightPosition.x += 0.01f;
-    //lightPosition.y -= 0.01f;
+    lightPosition.x += 0.01f;
+    lightPosition.y -= 0.01f;
     light.setWorldLocation(lightPosition);
 
     // Draw the marker of the light source's location.

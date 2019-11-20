@@ -21,7 +21,7 @@ set(GLEW ${CMAKE_CURRENT_SOURCE_DIR}/lib/glew/libGLEW.2.1.0.dylib)
 set(GLFW ${CMAKE_CURRENT_SOURCE_DIR}/lib/glfw3/libglfw.dylib)
 set(GLFW3 ${CMAKE_CURRENT_SOURCE_DIR}/lib/glfw3/libglfw.3.dylib)
 set(SDL2 ${CMAKE_CURRENT_SOURCE_DIR}/lib/SDL2/libSDL2.dylib)
-set(LIBRARIES ${GLEW} ${GLFW} ${GLFW3} ${SDL2} )
+set(LIBRARIES ${GLEW} ${GLFW} ${GLFW3} )
 
 
 add_executable(shadows ${SOURCES})
