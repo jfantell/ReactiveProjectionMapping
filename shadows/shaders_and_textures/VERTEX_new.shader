@@ -3,7 +3,7 @@
 layout (location = 0) in vec3 vertex_position;
 layout (location = 1) in vec3 vertex_normal;
 layout (location = 2) in vec2 vertex_tex_coord;
-layout (location = 3) in vec3 vertex_colors;
+layout (location = 3) in vec3 vertex_color;
 
 out vec3 fragment_color;
 out vec3 normal;
@@ -48,13 +48,15 @@ void main(void) {
 
     if(USE_TEX == 1){
         frag_tex_coord = vertex_tex_coord;
+        fragment_color = vec3(1.0,1.0,1.0);
     }
     else{
         //Determing stripe values
         float range = max_z -min_z;
         float stripeRange = range/desiredStripes;
         //color
-        fragment_color = coloring(vCol, vPos, stripeRange, range, max_z);
+        fragment_color = coloring(vertex_color, vertex_position, stripeRange, range, max_z);
+        frag_tex_coord = vec2(0,0);
     }
 
     fragment_position = vec3(Model * vec4(vertex_position, 1.0f));

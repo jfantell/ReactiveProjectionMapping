@@ -41,7 +41,7 @@
 
 using namespace std;
 int textureMode;
-const char *textureImage;
+std::string textureImage;
 
 void CheckOpenGLError(const char* stmt, const char* fname, int line)
 {
@@ -65,8 +65,8 @@ int main(int argc, const char * argv[]) {
     window_state windowState;
 
     // Get the paths to the vertex and fragment shader files
-    const char *vertShader = argv[1];
-    const char *fragShader = argv[2];
+    std::string vertShader = argv[1];
+    std::string fragShader = argv[2];
     cout << "Vertex Shader File Path: " << vertShader << endl;
     cout << "Fragment Shader File Path: " << fragShader << endl;
 
@@ -253,6 +253,9 @@ int main(int argc, const char * argv[]) {
     // put the stuff we've been drawing onto the display
     glfwSwapBuffers(window);
   }
+
+    // Release the RealSense Camera
+    pipe.stop();
 
   //GLCALL(glDeleteBuffers(1, &mesh_ib.getBufferId())));
   //GLCALL(glDeleteBuffers(1, &vertices));

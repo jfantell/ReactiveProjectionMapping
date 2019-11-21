@@ -84,7 +84,7 @@ void r_Realsense::setup() {
     if(textureMode == Image){
         useTexture = 1;
         int width, height, nrChannels;
-        unsigned char *data = stbi_load(textureImage, &width, &height, &nrChannels, 0);
+        unsigned char *data = stbi_load(textureImage.c_str(), &width, &height, &nrChannels, 0);
         if(data) {
             glGenTextures(1, &_texId);
             glBindTexture(GL_TEXTURE_2D, _texId);
@@ -272,7 +272,11 @@ void r_Realsense::draw_buffers(){
 void r_Realsense::draw() {}
 
 void r_Realsense::draw(rs2::frameset &frames) {
+    std::cout << "Please stuff" << std::endl;
     clearDataVectors();
+    std::cout << "Please stuff 1" << std::endl;
     updateFrame(frames);
+    std::cout << "Please stuff 2" << std::endl;
     draw_buffers();
+    std::cout << "Please stuff 3" << std::endl;
 }
