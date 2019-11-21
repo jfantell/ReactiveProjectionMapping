@@ -86,3 +86,8 @@ void Camera::inputMoveRight() {
   _worldLocation -= glm::normalize(glm::cross(_worldLocation, _up)) * MOVEMENT_DELTA;
   computeView();
 }
+
+void Camera::set_aspect_ratio(float aspect) {
+    _aspectratio = aspect;
+    computeProjection();
+}

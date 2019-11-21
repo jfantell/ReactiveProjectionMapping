@@ -1,5 +1,5 @@
-#include "vertexbufferlayout.h"
 #include <vector>
+#include <iostream>
 
 #ifndef SHADOWS_SHADOWS_INCLUDE_VERTEXBUFFER_H_
 #define SHADOWS_SHADOWS_INCLUDE_VERTEXBUFFER_H_
@@ -12,14 +12,11 @@ class VertexBuffer {
   int genBuffer();
   void bind();
   void unbind();
-  void interleave(unsigned int vertexcount);
   void setBufferPtr(void * buffer);
   void * getBufferPtr();
   int getBufferId() {return _bufferId;}
-  VertexBufferLayout * getLayout() {return &_layout;}
-  
+
  private:
-  VertexBufferLayout _layout;
   int _bufferId;
   void * _buffer = nullptr;
 };

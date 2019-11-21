@@ -10,7 +10,7 @@ r_LightMarker::r_LightMarker(GLuint shaderProgramId, Camera * c, PointLight * p)
   _p = p;
   _c = c;
   _shaderProgramId = shaderProgramId;
-  _r = new r_OBJModel(_shaderProgramId, _c, "../res/cube.obj", "../res/blanktex.png");
+  _r = new r_ObjModel(_shaderProgramId, _c, "../res/cube.obj", "blanktex.png");
 
 }
 

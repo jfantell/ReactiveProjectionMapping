@@ -5,9 +5,6 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "GL/glew.h"
 #include "GLFW/glfw3.h"
-#include "inputhandler.h"
-
-
 
 class Camera {
 
@@ -36,18 +33,19 @@ class Camera {
   void inputMoveLeft();
   void inputMoveRight();
 
+    void computeView();
+    void computeProjection();
+
+    void set_aspect_ratio(float aspect);
 
 
  private:
-
-  void computeView();
-  void computeProjection();
 
   glm::mat4 _view;
   glm::mat4 _projection;
   glm::vec3 _worldLocation;
   glm::vec3 _lookAt;
-  glm::vec3 _up = glm::vec3(0,1,0);
+  glm::vec3 _up = glm::vec3(0,-1,0);
 
   float _fovRadians;
   float _aspectratio;

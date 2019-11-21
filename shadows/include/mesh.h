@@ -1,6 +1,8 @@
 #ifndef SHADOWS_SHADOWS_INCLUDE_MESH_H_
 #define SHADOWS_SHADOWS_INCLUDE_MESH_H_
 
+#include <string.h>
+#include <iostream>
 #include <vector>
 #include "glm/vec2.hpp"
 #include "glm/vec3.hpp"

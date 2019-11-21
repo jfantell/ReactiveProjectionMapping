@@ -4,7 +4,7 @@
 #include "indexbuffer.h"
 #include <iostream>
 
-r_OBJModel::r_OBJModel(GLuint shaderProgramId, Camera *camera, std::string objpath, std::string texpath) {
+r_ObjModel::r_ObjModel(GLuint shaderProgramId, Camera *camera, std::string objpath, std::string texpath) {
   _objpath = objpath;
   _texpath = texpath;
   _shaderId = shaderProgramId;
@@ -15,7 +15,7 @@ r_OBJModel::r_OBJModel(GLuint shaderProgramId, Camera *camera, std::string objpa
   _ib = IndexBuffer();
 }
 
-void r_OBJModel::setup() {
+void r_ObjModel::setup() {
   _shaderMVPId = glGetUniformLocation(_shaderId, "MVP");
   _shaderModelId = glGetUniformLocation(_shaderId, "Model");
 
@@ -38,7 +38,7 @@ void r_OBJModel::setup() {
   }
   else
   {
-    std::cerr << "Failed to load texture" << std::endl;
+    std::cerr << "Failed to load texture objmodel" << std::endl;
     exit(-1);
   }
   stbi_image_free(data);
@@ -98,7 +98,7 @@ void r_OBJModel::setup() {
 
 }
 
-void r_OBJModel::draw() {
+void r_ObjModel::draw() {
   glm::mat4 mvp = _camera->getProjection() * _camera->getView() * _transform.getModelMatrix();
   glUniformMatrix4fv(_shaderMVPId, 1, GL_FALSE, &mvp[0][0]);
   glUniformMatrix4fv(_shaderModelId, 1, GL_FALSE, &_transform.getModelMatrix()[0][0]);

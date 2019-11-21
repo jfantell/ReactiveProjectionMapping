@@ -1,6 +1,8 @@
 #include "shader.h"
 #include <fstream>
 #include <vector>
+#include <string.h>
+#include <iostream>
 
 // Use either GL_FRAGMENT_SHADER or GL_VERTEX_SHADER
 Shader::Shader(unsigned short shadertype) {
@@ -21,6 +23,7 @@ int Shader::loadShaderSource(const std::string path) {
 
     const char * source_cstr = source.c_str();
     strcpy(_shaderSource, source_cstr);
+//    std::cout << _shaderSource << std::endl;
     shaderFile.close();
     return 0;
   }

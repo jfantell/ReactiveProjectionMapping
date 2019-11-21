@@ -19,7 +19,7 @@ void r_Rabbit::setup() {
 
 
   int width, height, nrChannels;
-  unsigned char *data = stbi_load("../res/treetex.jpg", &width, &height, &nrChannels, 0);
+  unsigned char *data = stbi_load("treetex.jpg", &width, &height, &nrChannels, 0);
   glGenTextures(1, &_texId);
   glBindTexture(GL_TEXTURE_2D, _texId);
   // set the texture wrapping/filtering options (on the currently bound texture object)
@@ -36,7 +36,7 @@ void r_Rabbit::setup() {
   }
   else
   {
-    std::cerr << "Failed to load texture" << std::endl;
+    std::cerr << "Failed to load texture rabbit" << std::endl;
     exit(-1);
   }
   stbi_image_free(data);

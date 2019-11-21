@@ -7,10 +7,10 @@
 #include "indexbuffer.h"
 #include <iostream>
 
-class r_OBJModel : public Renderable {
+class r_ObjModel : public Renderable {
  public:
-  r_OBJModel(GLuint shaderProgramId, Camera * camera, std::string objpath, std::string texpath);
-  ~r_OBJModel() {}; // Overrides ~Renderable()
+  r_ObjModel(GLuint shaderProgramId, Camera * camera, std::string objpath, std::string texpath);
+  ~r_ObjModel() {}; // Overrides ~Renderable()
 
   void setup(); // Overrides Renderable::setup();
   void draw(); // Overrides Renderable::draw()
