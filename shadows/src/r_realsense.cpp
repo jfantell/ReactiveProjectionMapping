@@ -25,7 +25,6 @@
 #define numVBOs 5
 #define MAX_SIZE 100000
 
-GLuint vao[numVAOs]; // Array to store Vertex Attribute Objects References
 GLuint vbo[numVBOs]; //Array to store Vertex Attribute Buffer References
 
 GLsizei num_vertices; //The number of points to be drawn
@@ -35,9 +34,6 @@ std::vector<float> RGBcolorVector;
 std::vector<float> textureCoordinatesVector;
 std::vector<float> vertexNormVector;
 std::vector<unsigned int> vertexIndicesVector;
-
-rs2::pointcloud pc; // Point cloud object
-rs2::points points; // RealSense points object
 
 int useTexture = 0;
 window_state windowState;
@@ -214,15 +210,20 @@ void r_Realsense::clearDataVectors(){
 }
 void r_Realsense::updateFrame(rs2::frameset &frames){
     // Wait for the next set of frames from the RealSense Camera
+    rs2::pointcloud pc; // Point cloud object
+    rs2::points points; // RealSense points object
+
     auto color = frames.get_color_frame();
 
     // Tell pointcloud object to map to this color frame
     pc.map_to(color);
-
+    std::cout << " why" << endl;
     auto depth = frames.get_depth_frame();
+    std::cout << " you" << endl;
 
     // Generate the pointcloud and texture mappings
     points = pc.calculate(depth);
+    std::cout << " doin this" << endl;
 
     // Convert RealSense point cloud to PCL point cloud
     PCL_wrapper pcl_wrapper = PCL_wrapper();

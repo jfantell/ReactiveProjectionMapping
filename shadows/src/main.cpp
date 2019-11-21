@@ -209,6 +209,11 @@ int main(int argc, const char * argv[]) {
   // Render loop.
   while(!glfwWindowShouldClose(window)) {
 
+      auto frames = pipe.wait_for_frames();
+      if(!frames){
+          cerr << "Error occured while attempting to get camera frames" << endl;
+          return 1;
+      }
   float aspectratio = (float) width / (float) height;
   camera.set_aspect_ratio(aspectratio);
 
@@ -220,11 +225,7 @@ int main(int argc, const char * argv[]) {
 
     camera.updateShaderUniforms();
 
-      auto frames = pipe.wait_for_frames();
-      if(!frames){
-          cerr << "Error occured while attempting to get camera frames" << endl;
-          return 1;
-      }
+
 
     // Draw the floor, and the rabbit.
 //    r_floor.draw();
@@ -249,9 +250,9 @@ int main(int argc, const char * argv[]) {
 //    GLCALL(glBindVertexArray(0));
 
     // update other events like input handling
-    glfwPollEvents();
+      glfwSwapBuffers(window);
+      glfwPollEvents();
     // put the stuff we've been drawing onto the display
-    glfwSwapBuffers(window);
   }
 
     // Release the RealSense Camera
@@ -261,6 +262,7 @@ int main(int argc, const char * argv[]) {
   //GLCALL(glDeleteBuffers(1, &vertices));
 
   // close GL context and any other GLFW resources
+  glfwDestroyWindow(window);
   glfwTerminate();
   return 0;
 }
