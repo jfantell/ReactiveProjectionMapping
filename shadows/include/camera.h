@@ -33,11 +33,10 @@ class Camera {
   void inputMoveLeft();
   void inputMoveRight();
 
-    void computeView();
-    void computeProjection();
-
-    void set_aspect_ratio(float aspect);
-
+  void computeView();
+  void computeProjection();
+  void set_aspect_ratio(float aspect);
+  void moveView();
 
  private:
 

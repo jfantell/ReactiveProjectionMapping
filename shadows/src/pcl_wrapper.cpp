@@ -120,7 +120,7 @@ pcl::PolygonMesh PCL_wrapper::greedy_projection_mesh_reconstruction(pcl::PointCl
     gp3.reconstruct (triangles);
 
     // Additional vertex information
-    std::cout << "Mesh Constructed" << std::endl;
+//    std::cout << "Mesh Constructed" << std::endl;
     return triangles;
 }
 
@@ -129,11 +129,11 @@ void PCL_wrapper::save_cloud(const char * filepath, pcl::PointCloud<pcl::PointXY
     pcl::PCLPointCloud2 cloud_blob_samp;
     pcl::toPCLPointCloud2 (*cloud, cloud_blob_samp);
     pcl::io::saveVTKFile (filepath, cloud_blob_samp);
-    std::cout << "Cloud Saved" << std::endl;
+//    std::cout << "Cloud Saved" << std::endl;
 }
 
 pcl::PolygonMesh PCL_wrapper::create_mesh(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud_xyz) {
-    std::cout << "Constructing Mesh" << std::endl;
+//    std::cout << "Constructing Mesh" << std::endl;
 
     //Uniform Sampling
     pcl::PointCloud<pcl::PointXYZ>::Ptr uniform_sample = octree_voxel_downsample(cloud_xyz);

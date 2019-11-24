@@ -125,7 +125,7 @@ void r_Realsense::updatePoints(pcl::PolygonMesh &triangles){
     float min_Y = 1000000000;
     float max_Y = -1000000000;
 
-    cout << "CLOUD SIZE " << cloud_from_mesh->size() << endl;
+//    cout << "CLOUD SIZE " << cloud_from_mesh->size() << endl;
     for (int i=0; i < cloud_from_mesh->size(); i++)
     {
         float x = cloud_from_mesh->points[i].x;
@@ -187,7 +187,7 @@ void r_Realsense::updatePoints(pcl::PolygonMesh &triangles){
     }
 
     num_vertices = (GLsizei)triangles.polygons.size() * 3;
-    cout << "Num Vertices " << num_vertices << endl;
+//    cout << "Num Vertices " << num_vertices << endl;
 
     glBindBuffer(GL_ARRAY_BUFFER,vbo[0]); //vert
     glBufferSubData(GL_ARRAY_BUFFER, 0, (long int)vertexCoordinatesVector.size() * sizeof(float), vertexCoordinatesVector.data());

@@ -1,6 +1,6 @@
 // Let's define a macro and a function to catch any OpenGl errors.
 
-/* #define REALSENSE  DEFINE THIS IF USING THE REALSENSE. */
+#define REALSENSE  //DEFINE THIS IF USING THE REALSENSE. */
 
 #ifdef _DEBUG
 #define GLCALL(stmt) do { \
@@ -45,21 +45,21 @@ using namespace std;
 int textureMode;
 const char *textureImage;
 
-void CheckOpenGLError(const char* stmt, const char* fname, int line)
-{
-  GLenum err = glGetError();
-  if (err != GL_NO_ERROR)
-  {
-    printf("OpenGL error %08x, at %s:%i - for %s\n", err, fname, line, stmt);
-    exit(-1);
-  }
+void CheckOpenGLError(const char *stmt, const char *fname, int line) {
+    GLenum err = glGetError();
+    if (err != GL_NO_ERROR) {
+        printf("OpenGL error %08x, at %s:%i - for %s\n", err, fname, line, stmt);
+        exit(-1);
+    }
 }
 
-int main(int argc, const char * argv[]) {
-  // start GL context and O/S window using the GLFW helper library
+int main(int argc, const char *argv[]) {
+    // start GL context and O/S window using the GLFW helper library
     // Ensure that the correct number of command line arguments have been entered
-    if(argc < 4){
-        cout << "Please provide the following required input arguments: <vertex_shader_path>.glsl <fragment_shader_path>.glsl texture_mode" << endl;
+    if (argc < 4) {
+        cout
+                << "Please provide the following required input arguments: <vertex_shader_path>.glsl <fragment_shader_path>.glsl texture_mode"
+                << endl;
         return 1;
     }
 
@@ -77,125 +77,132 @@ int main(int argc, const char * argv[]) {
     // the realsense camera
     textureMode = atoi(argv[3]);
     cout << "Texture Mode: " << textureMode << endl;
-    if(textureMode == Image){
-        if(argc == 5){
+    if (textureMode == Image) {
+        if (argc == 5) {
             textureImage = argv[4];
             cout << "Texture Image File Path: " << textureImage << endl;
-        }
-        else {
+        } else {
             cout << "Since you have selected mode 2, you must supply an image file path for texture mapping" << endl;
             return 1;
         }
     }
 
     if (!glfwInit()) {
-    fprintf(stderr, "ERROR: could not start GLFW3\n");
-    return 1;
-  }
+        fprintf(stderr, "ERROR: could not start GLFW3\n");
+        return 1;
+    }
 
-  // uncomment these lines if on Apple OS X
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
-  glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    // uncomment these lines if on Apple OS X
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-  GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "ECSE 4750", NULL, NULL);
-  if (!window) {
-    fprintf(stderr, "ERROR: could not open window with GLFW3\n");
-    glfwTerminate();
-    return 1;
-  }
+    GLFWwindow *window = glfwCreateWindow(WIDTH, HEIGHT, "ECSE 4750", NULL, NULL);
+    if (!window) {
+        fprintf(stderr, "ERROR: could not open window with GLFW3\n");
+        glfwTerminate();
+        return 1;
+    }
 
-  int width, height;
-  glfwGetWindowSize(window, &width, &height);
-  glfwMakeContextCurrent(window);
+    int width, height;
+    glfwGetWindowSize(window, &width, &height);
+    glfwMakeContextCurrent(window);
 
-  // start GLEW extension handler
-  glewExperimental = GL_TRUE;
-  glewInit();
+    // start GLEW extension handler
+    glewExperimental = GL_TRUE;
+    glewInit();
 
-  // get version info
-  const GLubyte* renderer = glGetString(GL_RENDERER); // get renderer string
-  const GLubyte* version = glGetString(GL_VERSION); // version as a string
-  printf("Renderer: %s\n", renderer);
-  printf("OpenGL version supported %s\n", version);
+    // get version info
+    const GLubyte *renderer = glGetString(GL_RENDERER); // get renderer string
+    const GLubyte *version = glGetString(GL_VERSION); // version as a string
+    printf("Renderer: %s\n", renderer);
+    printf("OpenGL version supported %s\n", version);
 
-  // tell GL to only draw onto a pixel if the shape is closer to the viewer
-  GLCALL(glEnable(GL_DEPTH_TEST)); // enable depth-testing
-  GLCALL(glDepthFunc(GL_LESS)); // depth-testing interprets a smaller value as "closer"
+    // tell GL to only draw onto a pixel if the shape is closer to the viewer
+    GLCALL(glEnable(GL_DEPTH_TEST)); // enable depth-testing
+    GLCALL(glDepthFunc(GL_LESS)); // depth-testing interprets a smaller value as "closer"
 
-  /* ******** Set up shaders here ************ */
+    /* ******** Set up shaders here ************ */
 
-  Shader vertexShader(GL_VERTEX_SHADER);
-  Shader fragmentShader(GL_FRAGMENT_SHADER);
-  vertexShader.loadShaderSource(vertShader);
-  fragmentShader.loadShaderSource(fragShader);
-  vertexShader.compile();
-  fragmentShader.compile();
-  GLuint program = buildShaderProgram(vertexShader, fragmentShader);
-
-
-  // All uniforms required for this to work. They are updated elsewhere (camera, renderable, light)
-  GLuint s_MatrixID = glGetUniformLocation(program, "MVP");
-  GLuint s_ModelID = glGetUniformLocation(program, "Model");
-  GLuint s_ambientLightStrength = glGetUniformLocation(program, "ambientLightStrength");
-  GLuint s_ambientLightColor = glGetUniformLocation(program, "ambientLightColor");
-  GLuint s_specularStrength = glGetUniformLocation(program, "specularStrength");
-  GLuint s_lightPosition = glGetUniformLocation(program, "lightPosition");
-  GLuint s_viewPosition = glGetUniformLocation(program, "viewPosition");
+    Shader vertexShader(GL_VERTEX_SHADER);
+    Shader fragmentShader(GL_FRAGMENT_SHADER);
+    vertexShader.loadShaderSource(vertShader);
+    fragmentShader.loadShaderSource(fragShader);
+    vertexShader.compile();
+    fragmentShader.compile();
+    GLuint program = buildShaderProgram(vertexShader, fragmentShader);
 
 
-  /* *********** End Shader code ************* */
+    // All uniforms required for this to work. They are updated elsewhere (camera, renderable, light)
+    GLuint s_MatrixID = glGetUniformLocation(program, "MVP");
+    GLuint s_ModelID = glGetUniformLocation(program, "Model");
+    GLuint s_ambientLightStrength = glGetUniformLocation(program, "ambientLightStrength");
+    GLuint s_ambientLightColor = glGetUniformLocation(program, "ambientLightColor");
+    GLuint s_specularStrength = glGetUniformLocation(program, "specularStrength");
+    GLuint s_lightPosition = glGetUniformLocation(program, "lightPosition");
+    GLuint s_viewPosition = glGetUniformLocation(program, "viewPosition");
 
 
-  // Set up things that need to be updated in the loop.
+    /* *********** End Shader code ************* */
 
-  // Create our camera.
-  Camera camera = Camera(window, program, 60.0f, (float)WIDTH/(float)HEIGHT, glm::vec3(0, 0, 1), glm::vec3(0,0,0));
-  InputHandler input = InputHandler(window, &camera);
 
-  /* The r_ in r_Floor means that the class is derived from Renderable()
-   * What this does is:
-   *    Allows us to take all the messy setup code and put it into one spot that pertains to that particular mesh.
-   *    Allows us to simplify the code
-   *    Allows for model specific configuration
-   *    Generally makes things easier.
-   * There are two methods from Renderable() that the descendant class must implement.
-   * These are setup() and draw()
-   * setup() is where you declare EVERYTHING you need to render, set up vaos, vbos, ibos
-   * draw() is where you use the data that you have set up, update shader uniforms, etc. */
+    // Set up things that need to be updated in the loop.
 
-  // Create an instance of the floor renderable and set it up.
-  r_Floor r_floor = r_Floor(program, &camera);
-  r_floor.setup();
+    // Create our camera.
+    Camera camera = Camera(window, program, 60.0f, (float) WIDTH / (float) HEIGHT, glm::vec3(0, 0, 1),
+                           glm::vec3(0, 0, 0));
+    InputHandler::set_camera(&camera);
 
-  /* Doing transforms with this scheme is very easy.
-   * Simply grab the entity from the Renderable using getEntity()
-   * and do your transformations with the pointer.
-   * any transformation defined in entity.h works */
+    //Set up callbacks
+    glfwSetWindowSizeCallback(window,  InputHandler::window_size_callback);
+    glfwSetMouseButtonCallback(window,InputHandler::mouse_button_callback);
+    glfwSetScrollCallback(window,InputHandler::scroll_callback);
+    glfwSetCursorPosCallback(window,InputHandler::cursor_pos_callback);
+    glfwSetKeyCallback(window,InputHandler::key_callback);
 
-  // Let's scale up the floor.
-  r_floor.getTransform()->setModelScale(10.0f);
-  r_floor.getTransform()->setY(-.5);
+    /* The r_ in r_Floor means that the class is derived from Renderable()
+     * What this does is:
+     *    Allows us to take all the messy setup code and put it into one spot that pertains to that particular mesh.
+     *    Allows us to simplify the code
+     *    Allows for model specific configuration
+     *    Generally makes things easier.
+     * There are two methods from Renderable() that the descendant class must implement.
+     * These are setup() and draw()
+     * setup() is where you declare EVERYTHING you need to render, set up vaos, vbos, ibos
+     * draw() is where you use the data that you have set up, update shader uniforms, etc. */
 
-  // Declare our renderable rabbit model and set it up.
+    // Create an instance of the floor renderable and set it up.
+    r_Floor r_floor = r_Floor(program, &camera);
+    r_floor.setup();
+
+    /* Doing transforms with this scheme is very easy.
+     * Simply grab the entity from the Renderable using getEntity()
+     * and do your transformations with the pointer.
+     * any transformation defined in entity.h works */
+
+    // Let's scale up the floor.
+    r_floor.getTransform()->setModelScale(10.0f);
+    r_floor.getTransform()->setY(-.5);
+
+    // Declare our renderable rabbit model and set it up.
 //  r_Rabbit r_rabbit = r_Rabbit(program, &camera);
 //  r_rabbit.setup();
 
-  // Let's scale up our rabbit.
+    // Let's scale up our rabbit.
 //  r_rabbit.getTransform()->setModelScale(2.5f);
 //  r_rabbit.getTransform()->setY(-5);
 
-  PointLight light = PointLight(program);
-  light.setAmbientColor(glm::vec3(1.0f, 1.0f, 1.0f));
-  light.setAmbientStrength(0.1f);
-  light.setDiffuseStrength(1.2f);
-  light.setSpecularStrength(0.5f);
+    PointLight light = PointLight(program);
+    light.setAmbientColor(glm::vec3(1.0f, 1.0f, 1.0f));
+    light.setAmbientStrength(0.1f);
+    light.setDiffuseStrength(1.2f);
+    light.setSpecularStrength(0.5f);
 
 //  r_LightMarker lightmarker = r_LightMarker(program, &camera, &light);
 //  lightmarker.setup();
 
-#ifdef REALSENSE
+    #ifdef REALSENSE
     r_Realsense r_realsense = r_Realsense(program, &camera);
     r_realsense.setup();
 
@@ -207,68 +214,67 @@ int main(int argc, const char * argv[]) {
     cfg.enable_stream(RS2_STREAM_DEPTH, 640, 480, RS2_FORMAT_Z16, 30);
 
     rs2::pipeline_profile profile = pipe.start(cfg);
-#endif
+    #endif
 
     float aspectratio;
-  // Render loop.
-  while(!glfwWindowShouldClose(window)) {
+    // Render loop.
+    while (!glfwWindowShouldClose(window)) {
 
-  float aspectratio = (float) width / (float) height;
-  camera.set_aspect_ratio(aspectratio);
+        float aspectratio = (float) width / (float) height;
+        camera.set_aspect_ratio(aspectratio);
 
-    // Tell OpenGL to clean off the canvas.
-    GLCALL(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
+        // Tell OpenGL to clean off the canvas.
+        GLCALL(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 
-    // Update the light uniforms.
-    light.updateShaderUniforms();
+        // Update the light uniforms.
+        light.updateShaderUniforms();
 
-    camera.updateShaderUniforms();
+        camera.updateShaderUniforms();
 
-#ifdef REALSENSE
-      auto frames = pipe.wait_for_frames();
-      if(!frames){
-          cerr << "Error occured while attempting to get camera frames" << endl;
-          return 1;
-      }
-      r_realsense.draw(frames);
+        #ifdef REALSENSE
+        auto frames = pipe.wait_for_frames();
+        if (!frames) {
+            cerr << "Error occured while attempting to get camera frames" << endl;
+            return 1;
+        }
+        r_realsense.draw(frames);
+        #endif
 
-#endif
-
-    // Draw the floor, and the rabbit.
-    r_floor.draw();
+        // Draw the floor, and the rabbit.
+        r_floor.draw();
 //    r_rabbit.draw();
 //    r_rabbit.getTransform()->rotateYDegrees(1.0);
 
 
 
-    // Make the light roll out of the scene to test lighting.
-    glm::vec3 lightPosition = light.getWorldLocation();
-    lightPosition.x += 0.01f;
-    lightPosition.y -= 0.01f;
-    light.setWorldLocation(lightPosition);
+        // Make the light roll out of the scene to test lighting.
+        glm::vec3 lightPosition = light.getWorldLocation();
+        lightPosition.x += 0.01f;
+        lightPosition.y -= 0.01f;
+        light.setWorldLocation(lightPosition);
 
-    // Draw the marker of the light source's location.
+        // Draw the marker of the light source's location.
 //    lightmarker.draw();
 
-    /* ********* END drawing code *********** */
+        /* ********* END drawing code *********** */
 
-    // Reset all the bound buffers / arrays to unbound.
+        // Reset all the bound buffers / arrays to unbound.
 //    GLCALL(glBindBuffer(GL_ARRAY_BUFFER, 0));
 //    GLCALL(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
 //    GLCALL(glBindVertexArray(0));
 
-    // update other events like input handling
-    glfwPollEvents();
-    // put the stuff we've been drawing onto the display
-    glfwSwapBuffers(window);
-  }
+        // update other events like input handling
+        glfwPollEvents();
+        // put the stuff we've been drawing onto the display
+        glfwSwapBuffers(window);
+    }
 
-  //GLCALL(glDeleteBuffers(1, &mesh_ib.getBufferId())));
-  //GLCALL(glDeleteBuffers(1, &vertices));
+    //GLCALL(glDeleteBuffers(1, &mesh_ib.getBufferId())));
+    //GLCALL(glDeleteBuffers(1, &vertices));
 
-  // close GL context and any other GLFW resources
-  glfwTerminate();
-  return 0;
+    // close GL context and any other GLFW resources
+    glfwTerminate();
+    return 0;
 }
 
 

@@ -1,6 +1,8 @@
 #include "camera.h"
 #include <iostream>
 #include "GLFW/glfw3.h"
+#include "glm/glm.hpp"
+#include "app_state.h"
 
 #define MOVEMENT_DELTA 0.02f
 
@@ -90,4 +92,11 @@ void Camera::inputMoveRight() {
 void Camera::set_aspect_ratio(float aspect) {
     _aspectratio = aspect;
     computeProjection();
+}
+
+void Camera::moveView() {
+    _view = glm::translate(_view, glm::vec3(0, 0, 0.05+(float)windowState.offset_y*.05));
+    _view = glm::rotate(_view, glm::radians((float)windowState.pitch), glm::vec3(1.0f, 0.0f, 0.0f));
+    _view = glm::rotate(_view, glm::radians((float)windowState.yaw), glm::vec3(0.0f, 1.0f, 0.0f));
+    _view = glm::translate(_view, glm::vec3(0, 0, -0.5f));
 }
