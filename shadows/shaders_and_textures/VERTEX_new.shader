@@ -54,7 +54,7 @@ void main(void) {
         float range = max_z -min_z;
         float stripeRange = range/desiredStripes;
         //color
-        fragment_color = coloring(vCol, vPos, stripeRange, range, max_z);
+        fragment_color = coloring(vertex_colors, vertex_position, stripeRange, range, max_z);
     }
 
     fragment_position = vec3(Model * vec4(vertex_position, 1.0f));

@@ -34,7 +34,7 @@ void main(void) {
     vec3 specular = specularStrength * spec * ambientLightColor;
 
     //vec3 result = (ambientLight + diffuse + specular) * vec3(fragment_color);
-    //    vec3 result;
+    vec3 result;
     if(USE_TEX == 1){
         result = (ambientLight + diffuseLightStrength * diffuse + specular) * vec3(texture(textureimage, frag_tex_coord));
         diffuse_color = vec4(result, 1.0f);

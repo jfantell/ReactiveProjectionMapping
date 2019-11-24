@@ -1,5 +1,7 @@
 // Let's define a macro and a function to catch any OpenGl errors.
 
+/* #define REALSENSE  DEFINE THIS IF USING THE REALSENSE. */
+
 #ifdef _DEBUG
 #define GLCALL(stmt) do { \
             stmt; \
@@ -164,8 +166,8 @@ int main(int argc, const char * argv[]) {
    * draw() is where you use the data that you have set up, update shader uniforms, etc. */
 
   // Create an instance of the floor renderable and set it up.
-//  r_Floor r_floor = r_Floor(program, &camera);
-//  r_floor.setup();
+  r_Floor r_floor = r_Floor(program, &camera);
+  r_floor.setup();
 
   /* Doing transforms with this scheme is very easy.
    * Simply grab the entity from the Renderable using getEntity()
@@ -173,8 +175,8 @@ int main(int argc, const char * argv[]) {
    * any transformation defined in entity.h works */
 
   // Let's scale up the floor.
-//  r_floor.getTransform()->setModelScale(10.0f);
-//  r_floor.getTransform()->setY(-.5);
+  r_floor.getTransform()->setModelScale(10.0f);
+  r_floor.getTransform()->setY(-.5);
 
   // Declare our renderable rabbit model and set it up.
 //  r_Rabbit r_rabbit = r_Rabbit(program, &camera);
@@ -193,6 +195,7 @@ int main(int argc, const char * argv[]) {
 //  r_LightMarker lightmarker = r_LightMarker(program, &camera, &light);
 //  lightmarker.setup();
 
+#ifdef REALSENSE
     r_Realsense r_realsense = r_Realsense(program, &camera);
     r_realsense.setup();
 
@@ -204,6 +207,7 @@ int main(int argc, const char * argv[]) {
     cfg.enable_stream(RS2_STREAM_DEPTH, 640, 480, RS2_FORMAT_Z16, 30);
 
     rs2::pipeline_profile profile = pipe.start(cfg);
+#endif
 
     float aspectratio;
   // Render loop.
@@ -220,17 +224,22 @@ int main(int argc, const char * argv[]) {
 
     camera.updateShaderUniforms();
 
+#ifdef REALSENSE
       auto frames = pipe.wait_for_frames();
       if(!frames){
           cerr << "Error occured while attempting to get camera frames" << endl;
           return 1;
       }
+      r_realsense.draw(frames);
+
+#endif
 
     // Draw the floor, and the rabbit.
-//    r_floor.draw();
+    r_floor.draw();
 //    r_rabbit.draw();
 //    r_rabbit.getTransform()->rotateYDegrees(1.0);
-      r_realsense.draw(frames);
+
+
 
     // Make the light roll out of the scene to test lighting.
     glm::vec3 lightPosition = light.getWorldLocation();
