@@ -26,13 +26,14 @@ void InputHandler::key_callback(GLFWwindow *window, int key, int sancode, int ac
         _c->inputMoveRight();
     }
     if (key == GLFW_KEY_R && action == GLFW_PRESS) {
+        std::cout << " Reset " << std::endl;
         windowState.yaw = 0;
         windowState.pitch = 0;
         windowState.offset_x = 0;
         windowState.offset_y = 1;
         windowState.last_x = 0;
         windowState.last_y = 0;
-        _c->moveView();
+        _c->restoreDefaultWorldLocation();
     }
 }
 
@@ -55,7 +56,7 @@ void InputHandler::scroll_callback(GLFWwindow *window, double xoffset, double yo
     windowState.offset_x -= static_cast<float>(xoffset);
     windowState.offset_y -= static_cast<float>(yoffset);
     std::cout << "Zoom" << windowState.offset_y << std::endl;
-    _c->moveView();
+    _c->moveWorldLocation();
 }
 
 void InputHandler::cursor_pos_callback(GLFWwindow *window, double x, double y) {
@@ -63,7 +64,7 @@ void InputHandler::cursor_pos_callback(GLFWwindow *window, double x, double y) {
         windowState.yaw -= (x - windowState.last_x);
         windowState.pitch += (y - windowState.last_y);
         std::cout << "Rotate - Yaw: " << windowState.yaw <<  " Pitch:  " << windowState.pitch <<std::endl;
-        _c->moveView();
+        _c->moveWorldLocation();
     }
     windowState.last_x = x;
     windowState.last_y = y;

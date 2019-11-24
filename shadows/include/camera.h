@@ -36,13 +36,15 @@ class Camera {
   void computeView();
   void computeProjection();
   void set_aspect_ratio(float aspect);
-  void moveView();
+  void moveWorldLocation();
+  void restoreDefaultWorldLocation();
 
  private:
 
   glm::mat4 _view;
   glm::mat4 _projection;
   glm::vec3 _worldLocation;
+  glm::vec3 _worldLocationDefault;
   glm::vec3 _lookAt;
   glm::vec3 _up = glm::vec3(0,-1,0);
 

@@ -12,6 +12,7 @@ Camera::Camera(GLFWwindow * window, GLuint shaderProgramId, float fov_degrees, f
   _fovRadians = glm::radians(fov_degrees);
   _aspectratio = aspectratio;
   _worldLocation = worldLocation;
+  _worldLocationDefault = worldLocation;
   _lookAt = lookAt;
 
   _uniformViewPosition = glGetUniformLocation(shaderProgramId, "viewPosition");
@@ -94,9 +95,16 @@ void Camera::set_aspect_ratio(float aspect) {
     computeProjection();
 }
 
-void Camera::moveView() {
+void Camera::moveWorldLocation() {
     _view = glm::translate(_view, glm::vec3(0, 0, 0.05+(float)windowState.offset_y*.05));
     _view = glm::rotate(_view, glm::radians((float)windowState.pitch), glm::vec3(1.0f, 0.0f, 0.0f));
     _view = glm::rotate(_view, glm::radians((float)windowState.yaw), glm::vec3(0.0f, 1.0f, 0.0f));
     _view = glm::translate(_view, glm::vec3(0, 0, -0.5f));
+//    _worldLocation = worldTransform * glm::vec4(_worldLocation,1);
+//    computeView();
+}
+
+void Camera::restoreDefaultWorldLocation(){
+    _worldLocation = _worldLocationDefault;
+    computeView();
 }
