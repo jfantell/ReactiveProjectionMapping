@@ -59,7 +59,5 @@ class Camera {
 
 };
 
-static void UP_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
-
 
 #endif //SHADOWS_SHADOWS_INCLUDE_CAMERA_H_

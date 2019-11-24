@@ -36,11 +36,14 @@ class r_Floor : public Renderable {
       1.0f, 0.0f
   };
 
+
+
   GLuint _vboId = 0;
   GLuint _vaoId = 0;
   GLuint _texId = 0;
   GLuint _shaderMVPId = 0;
   GLuint _shaderModelId = 0;
+  GLuint _shaderUseTexId = 0;
 
 };
 

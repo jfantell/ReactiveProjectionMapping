@@ -1,6 +1,6 @@
 // Let's define a macro and a function to catch any OpenGl errors.
 
-#define REALSENSE  //DEFINE THIS IF USING THE REALSENSE. */
+/* #define REALSENSE  //DEFINE THIS IF USING THE REALSENSE. */
 
 #ifdef _DEBUG
 #define GLCALL(stmt) do { \
@@ -182,16 +182,16 @@ int main(int argc, const char *argv[]) {
      * any transformation defined in entity.h works */
 
     // Let's scale up the floor.
-    r_floor.getTransform()->setModelScale(10.0f);
-    r_floor.getTransform()->setY(-.5);
+    //r_floor.getTransform()->setModelScale(10.0f);
+    //r_floor.getTransform()->setY(-.5);
 
     // Declare our renderable rabbit model and set it up.
-//  r_Rabbit r_rabbit = r_Rabbit(program, &camera);
-//  r_rabbit.setup();
+    r_Rabbit r_rabbit = r_Rabbit(program, &camera);
+    r_rabbit.setup();
 
     // Let's scale up our rabbit.
-//  r_rabbit.getTransform()->setModelScale(2.5f);
-//  r_rabbit.getTransform()->setY(-5);
+    r_rabbit.getTransform()->setModelScale(2.5f);
+    //r_rabbit.getTransform()->setY(-5);
 
     PointLight light = PointLight(program);
     light.setAmbientColor(glm::vec3(1.0f, 1.0f, 1.0f));
@@ -220,15 +220,14 @@ int main(int argc, const char *argv[]) {
     // Render loop.
     while (!glfwWindowShouldClose(window)) {
 
-        float aspectratio = (float) width / (float) height;
-        camera.set_aspect_ratio(aspectratio);
+        aspectratio = (float) width / (float) height;
+        //camera.set_aspect_ratio(aspectratio);
 
         // Tell OpenGL to clean off the canvas.
         GLCALL(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 
         // Update the light uniforms.
         light.updateShaderUniforms();
-
         camera.updateShaderUniforms();
 
         #ifdef REALSENSE
@@ -242,16 +241,16 @@ int main(int argc, const char *argv[]) {
 
         // Draw the floor, and the rabbit.
         r_floor.draw();
-//    r_rabbit.draw();
+        r_rabbit.draw();
 //    r_rabbit.getTransform()->rotateYDegrees(1.0);
 
 
 
         // Make the light roll out of the scene to test lighting.
-        glm::vec3 lightPosition = light.getWorldLocation();
-        lightPosition.x += 0.01f;
-        lightPosition.y -= 0.01f;
-        light.setWorldLocation(lightPosition);
+//        glm::vec3 lightPosition = light.getWorldLocation();
+//        lightPosition.x += 0.01f;
+//        lightPosition.y -= 0.01f;
+//        light.setWorldLocation(lightPosition);
 
         // Draw the marker of the light source's location.
 //    lightmarker.draw();
@@ -262,6 +261,12 @@ int main(int argc, const char *argv[]) {
 //    GLCALL(glBindBuffer(GL_ARRAY_BUFFER, 0));
 //    GLCALL(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
 //    GLCALL(glBindVertexArray(0));
+
+
+        GLenum err = glGetError();
+        if (err != GL_NO_ERROR) {
+          printf("OpenGL error %08x", err);
+        }
 
         // update other events like input handling
         glfwPollEvents();

@@ -18,6 +18,7 @@ r_ObjModel::r_ObjModel(GLuint shaderProgramId, Camera *camera, std::string objpa
 void r_ObjModel::setup() {
   _shaderMVPId = glGetUniformLocation(_shaderId, "MVP");
   _shaderModelId = glGetUniformLocation(_shaderId, "Model");
+  _shaderUseTexId = glGetUniformLocation(_shaderUseTexId, "USE_TEX");
 
 
   int width, height, nrChannels;
@@ -102,6 +103,8 @@ void r_ObjModel::draw() {
   glm::mat4 mvp = _camera->getProjection() * _camera->getView() * _transform.getModelMatrix();
   glUniformMatrix4fv(_shaderMVPId, 1, GL_FALSE, &mvp[0][0]);
   glUniformMatrix4fv(_shaderModelId, 1, GL_FALSE, &_transform.getModelMatrix()[0][0]);
+  glUniform1i(_shaderUseTexId, 1);
+
 
   glBindTexture(GL_TEXTURE_2D, _texId);
   glBindVertexArray(_vaoId);
