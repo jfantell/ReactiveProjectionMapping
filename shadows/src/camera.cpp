@@ -90,8 +90,8 @@ void Camera::inputMoveRight() {
   computeView();
 }
 
-void Camera::set_aspect_ratio(float aspect) {
-    _aspectratio = aspect;
+void Camera::reset_aspect_ratio() {
+    _aspectratio = windowState.get_aspect_ratio();
     computeProjection();
 }
 

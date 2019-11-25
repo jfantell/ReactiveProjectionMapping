@@ -9,17 +9,14 @@
 #include "indexbuffer.h"
 #include <iostream>
 #include "app_state.h"
-#include <glm/ext.hpp>
 #include <glm/glm.hpp>
-#include <glm/gtc/type_ptr.hpp>
-#include <opencv2/opencv.hpp>
-#include <iostream>
 #include <pcl/point_types.h>
 #include <librealsense2/rs.hpp>
 #include <pcl/io/pcd_io.h>
 #include "pcl_wrapper.h"
+#include <glm/gtc/type_ptr.hpp>
 #define GLM_ENABLE_EXPERIMENTAL
-#include <glm/gtx/string_cast.hpp>
+#include <GL/glew.h>
 
 #define numVAOs 1
 #define numVBOs 5
@@ -36,6 +33,13 @@ std::vector<float> textureCoordinatesVector;
 std::vector<float> vertexNormVector;
 std::vector<unsigned int> vertexIndicesVector;
 
+//For shadows
+GLuint shadowTex, shadowBuffer;
+glm::mat4 lightVmatrix;
+glm::mat4 lightPmatrix;
+
+glm::mat4 b;
+
 rs2::pointcloud pc; // Point cloud object
 rs2::points points; // RealSense points object
 
@@ -47,6 +51,8 @@ using namespace std;
 
 r_Realsense::r_Realsense(GLuint shaderProgramId, Camera *camera) {
     _shaderId = shaderProgramId;
+    _shadowShaderID = -1;
+    _light = NULL;
     _camera = camera;
     _transform = Transform();
     _mesh = Mesh();
@@ -54,11 +60,25 @@ r_Realsense::r_Realsense(GLuint shaderProgramId, Camera *camera) {
     _ib = IndexBuffer();
 }
 
-void r_Realsense::setup() {
-    _shaderMVPId = glGetUniformLocation(_shaderId, "MVP");
-    _shaderModelId = glGetUniformLocation(_shaderId, "Model");
-    _shaderUseTextureId = glGetUniformLocation(_shaderId, "USE_TEX");
+void r_Realsense::setupShadowBuffers(){
+    glGenFramebuffers(1, &shadowBuffer);
 
+    glGenTextures(1, &shadowTex);
+    glBindTexture(GL_TEXTURE_2D, shadowTex);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32,
+                 windowState.height, windowState.width, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
+
+    // may reduce shadow border artifacts
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+}
+
+void r_Realsense::setup() {
     /////// BUFFER SETUP
     // Create a vertex array object
     // Required by OpenGL to transfer data to the GPU
@@ -106,6 +126,14 @@ void r_Realsense::setup() {
         }
         stbi_image_free(data);
     }
+
+    ////// SHADOW SETUP
+    setupShadowBuffers();
+    b = glm::mat4(
+            0.5f, 0.0f, 0.0f, 0.0f,
+            0.0f, 0.5f, 0.0f, 0.0f,
+            0.0f, 0.0f, 0.5f, 0.0f,
+            0.5f, 0.5f, 0.5f, 1.0f);
 
 }
 
@@ -202,7 +230,7 @@ void r_Realsense::updatePoints(pcl::PolygonMesh &triangles){
 
 }
 
-void r_Realsense::clearDataVectors(){
+void r_Realsense::removeOldData(){
     // Vectors store memory on the heap
     // this memory needs to be erased before
     // a new frame can be drawn
@@ -212,7 +240,7 @@ void r_Realsense::clearDataVectors(){
     vertexNormVector.clear();
     vertexIndicesVector.clear();
 }
-void r_Realsense::updateFrame(rs2::frameset &frames){
+void r_Realsense::addNewData(rs2::frameset &frames){
     // Wait for the next set of frames from the RealSense Camera
     auto color = frames.get_color_frame();
 
@@ -234,14 +262,62 @@ void r_Realsense::updateFrame(rs2::frameset &frames){
 
 }
 
-void r_Realsense::draw_buffers(){
-    glm::mat4 mvp = _camera->getProjection() * _camera->getView() * _transform.getModelMatrix();
-    glUniformMatrix4fv(_shaderMVPId, 1, GL_FALSE, &mvp[0][0]);
-    glUniformMatrix4fv(_shaderModelId, 1, GL_FALSE, &_transform.getModelMatrix()[0][0]);
+void r_Realsense::add_shadow_shader(GLuint shadow_shaderProgramId){
+    _shadowShaderID = shadow_shaderProgramId;
+}
+
+void r_Realsense::add_light(PointLight* light){
+    _light = light;
+}
+
+void r_Realsense::pass_one() {
+    glUseProgram(_shadowShaderID);
+
+    glm::mat4 shadowMVP1 = lightPmatrix * lightVmatrix * _transform.getModelMatrix();
+    _shadowMVPId = glGetUniformLocation(_shadowShaderID, "Shadow_MVP");
+    glUniformMatrix4fv(_shadowMVPId, 1, GL_FALSE, glm::value_ptr(shadowMVP1));
+
+    //Vertex Buffer
+    glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(0);
+
+    glClear(GL_DEPTH_BUFFER_BIT);
+    glEnable(GL_CULL_FACE);
+    glFrontFace(GL_CCW);
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LEQUAL);
+
+    //Element Array Buffer
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo[4]);
+    glDrawElements(GL_TRIANGLES,num_vertices,GL_UNSIGNED_INT, 0);
+}
+
+void r_Realsense::pass_two() {
+    glUseProgram(_shaderId);
+
+    _shaderModelId = glGetUniformLocation(_shaderId, "Model");
+    _shaderViewId = glGetUniformLocation(_shaderId, "View");
+    _shaderModelViewId = glGetUniformLocation(_shaderId, "ModelView");
+    _shaderPerpectiveId = glGetUniformLocation(_shaderId, "Perpective");
+    _shaderUseTextureId = glGetUniformLocation(_shaderId, "Use_Text");
+    _shadowMVPId = glGetUniformLocation(_shaderId, "Shadow_MVP");
+    _invTrMVId = glGetUniformLocation(_shaderId, "InvTr_MV");
+
+    glm::mat4 shadowMVP2 = b * lightPmatrix * lightVmatrix * _transform.getModelMatrix();
+    glm::mat4 mvMat = _camera->getView() * _transform.getModelMatrix();
+    glm::mat4 invTrMat = glm::transpose(glm::inverse(mvMat));
+
+    glUniformMatrix4fv(_shaderModelId, 1, GL_FALSE, glm::value_ptr( _transform.getModelMatrix()));
+    glUniformMatrix4fv(_shaderViewId, 1, GL_FALSE, glm::value_ptr( _camera->getView()));
+    glUniformMatrix4fv(_shaderModelViewId, 1, GL_FALSE, glm::value_ptr( mvMat));
+    glUniformMatrix4fv(_shaderPerpectiveId, 1, GL_FALSE, glm::value_ptr(_camera->getProjection()));
+    glUniformMatrix4fv(_shadowMVPId, 1, GL_FALSE, glm::value_ptr(shadowMVP2));
+    glUniformMatrix4fv(_invTrMVId, 1, GL_FALSE, glm::value_ptr(invTrMat));
     glUniform1i(_shaderUseTextureId,useTexture);
 
-    glBindTexture(GL_TEXTURE_2D, _texId);
-    glBindVertexArray(_vaoId);
+//    glBindTexture(GL_TEXTURE_2D, _texId);
+////    glBindVertexArray(_vaoId);
 
     //Vertex buffer
     glBindBuffer(GL_ARRAY_BUFFER,vbo[0]);
@@ -257,7 +333,7 @@ void r_Realsense::draw_buffers(){
     glBindBuffer(GL_ARRAY_BUFFER, vbo[2]);
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, 0);
     glEnableVertexAttribArray(2);
-    glActiveTexture(GL_TEXTURE0);
+    glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, textureRef);
 
     //Color buffer
@@ -265,6 +341,13 @@ void r_Realsense::draw_buffers(){
     glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, 0);
     glEnableVertexAttribArray(3);
 
+    glClear(GL_DEPTH_BUFFER_BIT);
+    glEnable(GL_CULL_FACE);
+    glFrontFace(GL_CCW);
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LEQUAL);
+
+    // Element array buffer
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo[4]);
     glDrawElements(GL_TRIANGLES,num_vertices,GL_UNSIGNED_INT, 0);
 }
@@ -272,7 +355,34 @@ void r_Realsense::draw_buffers(){
 void r_Realsense::draw() {}
 
 void r_Realsense::draw(rs2::frameset &frames) {
-    clearDataVectors();
-    updateFrame(frames);
-    draw_buffers();
+    // Remove old camera data and add new camera data to vectors
+    removeOldData();
+    addNewData(frames);
+
+    // Set up light view matrix and perpective matrix
+    glm::vec3 origin(0.0f, 0.0f, 0.0f);
+    glm::vec3 up(0.0f, 1.0f, 0.0f);
+    glm::vec3 current_loc = _light->getWorldLocation();
+    lightVmatrix = glm::lookAt(current_loc, origin, up);
+    lightPmatrix = glm::perspective(windowState.get_fov(), windowState.get_aspect_ratio(), windowState.get_z_near(), windowState.get_z_far());
+
+    glBindFramebuffer(GL_FRAMEBUFFER, shadowBuffer);
+    glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, shadowTex, 0);
+
+    glDrawBuffer(GL_NONE);
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_POLYGON_OFFSET_FILL);	// for reducing
+    glPolygonOffset(2.0f, 4.0f);		//  shadow artifacts
+
+    pass_one();
+
+    glDisable(GL_POLYGON_OFFSET_FILL);	// artifact reduction, continued
+
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, shadowTex);
+
+    glDrawBuffer(GL_FRONT);
+
+    pass_two();
 }

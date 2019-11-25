@@ -39,8 +39,9 @@ void InputHandler::key_callback(GLFWwindow *window, int key, int sancode, int ac
 
 // When the window is resized, re-generate the perspective matrix (new aspect ratio)
 void InputHandler::window_size_callback(GLFWwindow *window, int newWidth, int newHeight) {
-    float aspectRatio = (float) newWidth / (float) newHeight;
-    _c->set_aspect_ratio(aspectRatio);
+    windowState.width = newWidth;
+    windowState.height = newHeight;
+    _c->reset_aspect_ratio();
 }
 
 void InputHandler::mouse_button_callback(GLFWwindow *window, int button, int action, int mods) {
