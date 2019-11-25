@@ -1,11 +1,11 @@
 // Let's define a macro and a function to catch any OpenGl errors.
 
-/* #define REALSENSE  //DEFINE THIS IF USING THE REALSENSE. */
+#define REALSENSE  //DEFINE THIS IF USING THE REALSENSE//
 
 #ifdef _DEBUG
 #define GLCALL(stmt) do { \
             stmt; \
-            CheckOpenGLError(#stmt, __FILE__, __LINE__);
+            CheckOpenGLError(#stmt, __FILE__, __LINE__); \
         } while (0)
 #else
 #define GLCALL(stmt) stmt
@@ -256,7 +256,6 @@ int main(int argc, const char *argv[]) {
 //        r_floor.draw();
 //    r_rabbit.draw();
 //    r_rabbit.getTransform()->rotateYDegrees(1.0);
-
 
         // Make the light roll out of the scene to test lighting.
 //        glm::vec3 lightPosition = light.getWorldLocation();
