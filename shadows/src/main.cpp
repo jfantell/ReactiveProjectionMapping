@@ -190,8 +190,8 @@ int main(int argc, const char *argv[]) {
     r_rabbit.setup();
 
     // Let's scale up our rabbit.
-    r_rabbit.getTransform()->setModelScale(2.5f);
-    //r_rabbit.getTransform()->setY(-5);
+    r_rabbit.getTransform()->setModelScale(1.5f);
+    r_rabbit.getTransform()->rotateXDegrees(180);
 
     PointLight light = PointLight(program);
     light.setAmbientColor(glm::vec3(1.0f, 1.0f, 1.0f));
@@ -199,8 +199,8 @@ int main(int argc, const char *argv[]) {
     light.setDiffuseStrength(1.2f);
     light.setSpecularStrength(0.5f);
 
-//  r_LightMarker lightmarker = r_LightMarker(program, &camera, &light);
-//  lightmarker.setup();
+    //r_LightMarker lightmarker = r_LightMarker(program, &camera, &light);
+    //lightmarker.setup();
 
     #ifdef REALSENSE
     r_Realsense r_realsense = r_Realsense(program, &camera);
@@ -242,7 +242,6 @@ int main(int argc, const char *argv[]) {
         // Draw the floor, and the rabbit.
         r_floor.draw();
         r_rabbit.draw();
-//    r_rabbit.getTransform()->rotateYDegrees(1.0);
 
 
 
@@ -281,8 +280,3 @@ int main(int argc, const char *argv[]) {
     glfwTerminate();
     return 0;
 }
-
-
-
-
-

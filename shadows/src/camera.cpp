@@ -101,6 +101,10 @@ void Camera::zoom(float amount) {
   computeView();
 }
 
+void Camera::strafe(float amount) {
+  _worldLocation += -amount * glm::normalize(glm::cross(_viewDirection, _up)) * MOVEMENT_DELTA;
+}
+
 
 void Camera::updateMouse(const glm::vec2 &newMousePosition) {
 
@@ -133,5 +137,6 @@ void Camera::updateMouse(const glm::vec2 &newMousePosition) {
 
 void Camera::restoreDefaultWorldLocation(){
     _worldLocation = _worldLocationDefault;
+    _viewDirection = _viewDirectionDefault;
     computeView();
 }

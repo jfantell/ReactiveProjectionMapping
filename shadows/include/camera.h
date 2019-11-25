@@ -40,6 +40,7 @@ class Camera {
   void set_aspect_ratio(float aspect);
 
   void zoom(float factor);
+  void strafe(float factor);
   void moveWorldLocation();
   void restoreDefaultWorldLocation();
 
@@ -52,6 +53,7 @@ class Camera {
   glm::vec3 _lookAt;
   glm::vec3 _up = glm::vec3(0,-1,0);
   glm::vec3 _viewDirection = glm::vec3(0,0,-1);
+  glm::vec3 _viewDirectionDefault = _viewDirection;
 
 
   float _fovRadians;

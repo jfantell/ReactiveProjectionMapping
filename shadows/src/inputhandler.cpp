@@ -5,8 +5,6 @@
 #include "inputhandler.h"
 #include "app_state.h"
 
-#define MOUSE_DEGREES_PER_PIXEL .000001f;
-
 //Define static variable in cpp file
 Camera* InputHandler:: _c;
 
@@ -59,9 +57,13 @@ void InputHandler::scroll_callback(GLFWwindow *window, double xoffset, double yo
     windowState.offset_y -= static_cast<float>(yoffset);
     std::cout << "Zoom" << windowState.offset_y << std::endl;
     _c->zoom(yoffset);
+    _c->strafe(xoffset);
 }
 
 void InputHandler::cursor_pos_callback(GLFWwindow *window, double x, double y) {
     if (windowState.ml)
       _c->updateMouse(glm::vec2(x,y));
+    else
+      windowState.last_x = x;
+      windowState.last_y = y;
 }
