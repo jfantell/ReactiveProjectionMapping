@@ -49,7 +49,7 @@ glm::mat4 Camera::getProjection() {
 
 void Camera::computeView() {
   _view = glm::lookAt(
-          _eye, // Camera is at (4,3,3), in World Space
+          _eye + _viewDirection, // Camera is at (4,3,3), in World Space
       _at, // and looks at the origin
       _up  // Head is up (set to 0,-1,0 to look upside-down)
   );
@@ -59,8 +59,9 @@ void Camera::computeView() {
   glm::mat4 R = glm::mat4(rBrown[0], rBrown[1], rBrown[2], 0, rBrown[3], rBrown[4], rBrown[5], 0, rBrown[6], rBrown[7], rBrown[8], 0, 0,0,0,1);
   _view = R * _view;
   _view = T * _view;
-  _view = glm::rotate(_view, glm::radians((float)windowState.pitch), glm::vec3(1.0f, 0.0f, 0.0f));
-  _view = glm::rotate(_view, glm::radians((float)windowState.yaw), glm::vec3(0.0f, 1.0f, 0.0f));
+//  _view = glm::rotate(_view, _viewDirection.x, glm::vec3(1.0f, 0.0f, 0.0f));
+//  _view = glm::rotate(_view, glm::radians((float)windowState.yaw), glm::vec3(0.0f, 1.0f, 0.0f));
+//  _view = glm::rotate(_view, glm::radians((float)windowState.yaw), glm::vec3(0.0f, 1.0f, 0.0f));
 
 }
 
