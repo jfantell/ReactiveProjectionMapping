@@ -20,6 +20,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <vector>
 
 #include "shader.h"
 #include "cubedata.h"
@@ -30,6 +31,7 @@
 #include "scene.h"
 #include "transform.h"
 #include "pointlight.h"
+#include "draw.h"
 
 #include "app_state.h"
 
@@ -69,6 +71,7 @@ int main(int argc, const char *argv[]) {
     textureMode = atoi(argv[1]);
     cout << "Texture Mode: " << textureMode << endl;
     if (textureMode == Image) {
+        windowState.useTexture = 1;
         if (argc == 3) {
             textureImage = argv[2];
             cout << "Texture Image File Path: " << textureImage << endl;
@@ -167,6 +170,23 @@ int main(int argc, const char *argv[]) {
     glfwSetCursorPosCallback(window,InputHandler::cursor_pos_callback);
     glfwSetKeyCallback(window,InputHandler::key_callback);
 
+    /* ******** Set up models here ************ */
+
+    #ifdef REALSENSE
+    Renderable r_realsense = r_Realsense();
+    r_realsense.setup();
+    r_realsense.set_description((string &) "R_Realsense");
+
+    //Initialize the RealSense Camera
+    rs2::pipeline pipe;
+    rs2::config cfg;
+
+    cfg.enable_stream(RS2_STREAM_COLOR, 640, 480, RS2_FORMAT_BGR8, 30);
+    cfg.enable_stream(RS2_STREAM_DEPTH, 640, 480, RS2_FORMAT_Z16, 30);
+
+    rs2::pipeline_profile profile = pipe.start(cfg);
+    #endif
+
     /* The r_ in r_Floor means that the class is derived from Renderable()
      * What this does is:
      *    Allows us to take all the messy setup code and put it into one spot that pertains to that particular mesh.
@@ -206,35 +226,21 @@ int main(int argc, const char *argv[]) {
     light.setDiffuseStrength(1.2f);
     light.setSpecularStrength(0.5f);
 
+    /* ********* Set up drawing class *********** */
+    Draw draw = Draw(shadowProgram,defaultProgram,&camera,&light);
+    std::vector<Renderable*> models;
+    models.push_back(&r_realsense);
+    draw.add_models(models);
+    draw.setup_shadow_buffers();
+
     //r_LightMarker lightmarker = r_LightMarker(program, &camera, &light);
     //lightmarker.setup();
 
-    #ifdef REALSENSE
-    r_Realsense r_realsense = r_Realsense(defaultProgram, &camera);
-    r_realsense.add_shadow_shader(shadowProgram); //add shadow shader to r_realsense
-    r_realsense.add_light(&light);
-    r_realsense.setup();
-
-    //Initialize the RealSense Camera
-    rs2::pipeline pipe;
-    rs2::config cfg;
-
-    cfg.enable_stream(RS2_STREAM_COLOR, 640, 480, RS2_FORMAT_BGR8, 30);
-    cfg.enable_stream(RS2_STREAM_DEPTH, 640, 480, RS2_FORMAT_Z16, 30);
-
-    rs2::pipeline_profile profile = pipe.start(cfg);
-    #endif
-
     // Render loop.
     while (!glfwWindowShouldClose(window)) {
-
         glClear(GL_DEPTH_BUFFER_BIT);
         glClear(GL_COLOR_BUFFER_BIT);
         camera.reset_aspect_ratio();
-
-
-        // Tell OpenGL to clean off the canvas.
-//        GLCALL(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 
         // Update the light uniforms.
         light.updateShaderUniforms();
@@ -246,7 +252,7 @@ int main(int argc, const char *argv[]) {
             cerr << "Error occured while attempting to get camera frames" << endl;
             return 1;
         }
-        r_realsense.draw(frames);
+        r_realsense.refresh(frames);
         #endif
 
         // Draw the floor, and the rabbit.

@@ -11,7 +11,6 @@
 #include <librealsense2/rs.hpp>
 
 enum TextureMode { Color = 1, Image = 2};
-extern int textureMode;
 
 //Modified from https://github.com/IntelRealSense/librealsense/blob/master/examples/example.hpp
 class window_state {
@@ -29,6 +28,7 @@ public:
         fov = glm::radians(60.0f);
         z_near = 0.01f;
         z_far = 100.0f;
+        useTexture = 0;
     }
     float get_aspect_ratio(){
         return (float) width / (float) height;
@@ -58,6 +58,7 @@ public:
     float fov;
     float z_near;
     float z_far;
+    int useTexture;
 };
 
 //Initialize state to hold window information

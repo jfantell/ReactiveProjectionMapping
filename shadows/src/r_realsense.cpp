@@ -22,8 +22,6 @@
 #define numVBOs 5
 #define MAX_SIZE 100000
 
-GLuint vao[numVAOs]; // Array to store Vertex Attribute Objects References
-GLuint vbo[numVBOs]; //Array to store Vertex Attribute Buffer References
 
 GLsizei num_vertices; //The number of points to be drawn
 GLuint textureRef = 0; // Reference to texture address in memory
@@ -32,13 +30,6 @@ std::vector<float> RGBcolorVector;
 std::vector<float> textureCoordinatesVector;
 std::vector<float> vertexNormVector;
 std::vector<unsigned int> vertexIndicesVector;
-
-//For shadows
-GLuint shadowTex, shadowBuffer;
-glm::mat4 lightVmatrix;
-glm::mat4 lightPmatrix;
-
-glm::mat4 b;
 
 rs2::pointcloud pc; // Point cloud object
 rs2::points points; // RealSense points object
@@ -49,60 +40,36 @@ glm::vec4 point_1, point_2;
 
 using namespace std;
 
-r_Realsense::r_Realsense(GLuint shaderProgramId, Camera *camera) {
-    _shaderId = shaderProgramId;
-    _shadowShaderID = -1;
-    _light = NULL;
-    _camera = camera;
+r_Realsense::r_Realsense() {
     _transform = Transform();
-    _mesh = Mesh();
-    _vb = VertexBuffer();
-    _ib = IndexBuffer();
-}
-
-void r_Realsense::setupShadowBuffers(){
-    glGenFramebuffers(1, &shadowBuffer);
-
-    glGenTextures(1, &shadowTex);
-    glBindTexture(GL_TEXTURE_2D, shadowTex);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32,
-                 windowState.width, windowState.height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
-
-    // may reduce shadow border artifacts
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-
+    _vao[numVAOs];
+    _vbo[numVBOs];
 }
 
 void r_Realsense::setup() {
     /////// BUFFER SETUP
     // Create a vertex array object
     // Required by OpenGL to transfer data to the GPU
-    glGenVertexArrays(numVAOs,&_vaoId);
-    glBindVertexArray(_vaoId);
+    glGenVertexArrays(numVAOs,_vao);
+    glBindVertexArray(*_vao);
 
     // Create two vertex array buffers
     // The first will store point vertices
     // The second will store texture coordinates
-    glGenBuffers(numVBOs,vbo);
-    glBindBuffer(GL_ARRAY_BUFFER,vbo[0]); //vert
+    glGenBuffers(numVBOs,_vbo);
+    glBindBuffer(GL_ARRAY_BUFFER,_vbo[0]); //vert
     glBufferData(GL_ARRAY_BUFFER, MAX_SIZE * sizeof(float), nullptr, GL_DYNAMIC_DRAW);
-    glBindBuffer(GL_ARRAY_BUFFER,vbo[1]); //normals
+    glBindBuffer(GL_ARRAY_BUFFER,_vbo[1]); //normals
     glBufferData(GL_ARRAY_BUFFER, MAX_SIZE * sizeof(float), nullptr, GL_DYNAMIC_DRAW);
-    glBindBuffer(GL_ARRAY_BUFFER,vbo[2]); //text
+    glBindBuffer(GL_ARRAY_BUFFER,_vbo[2]); //text
     glBufferData(GL_ARRAY_BUFFER, MAX_SIZE * sizeof(float), nullptr, GL_DYNAMIC_DRAW);
-    glBindBuffer(GL_ARRAY_BUFFER,vbo[3]); //colors
+    glBindBuffer(GL_ARRAY_BUFFER,_vbo[3]); //colors
     glBufferData(GL_ARRAY_BUFFER, MAX_SIZE * sizeof(float), nullptr, GL_DYNAMIC_DRAW);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,vbo[4]); //indicies
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,_vbo[4]); //indicies
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, MAX_SIZE * sizeof(unsigned int), nullptr, GL_DYNAMIC_DRAW);
 
     ////// TEXTURE MAPPING SETUP
-    if(textureMode == Image){
-        useTexture = 1;
+    if(windowState.useTexture == 1){
         int width, height, nrChannels;
         unsigned char *data = stbi_load(textureImage, &width, &height, &nrChannels, 0);
         if(data) {
@@ -126,15 +93,6 @@ void r_Realsense::setup() {
         }
         stbi_image_free(data);
     }
-
-    ////// SHADOW SETUP
-    setupShadowBuffers();
-    b = glm::mat4(
-            0.5f, 0.0f, 0.0f, 0.0f,
-            0.0f, 0.5f, 0.0f, 0.0f,
-            0.0f, 0.0f, 0.5f, 0.0f,
-            0.5f, 0.5f, 0.5f, 1.0f);
-
 }
 
 void r_Realsense::updatePoints(pcl::PolygonMesh &triangles){
@@ -217,15 +175,15 @@ void r_Realsense::updatePoints(pcl::PolygonMesh &triangles){
     num_vertices = (GLsizei)triangles.polygons.size() * 3;
 //    cout << "Num Vertices " << num_vertices << endl;
 
-    glBindBuffer(GL_ARRAY_BUFFER,vbo[0]); //vert
+    glBindBuffer(GL_ARRAY_BUFFER,_vbo[0]); //vert
     glBufferSubData(GL_ARRAY_BUFFER, 0, (long int)vertexCoordinatesVector.size() * sizeof(float), vertexCoordinatesVector.data());
-    glBindBuffer(GL_ARRAY_BUFFER,vbo[1]); //norm
+    glBindBuffer(GL_ARRAY_BUFFER,_vbo[1]); //norm
     glBufferSubData(GL_ARRAY_BUFFER, 0, (long int)vertexNormVector.size() * sizeof(float), vertexNormVector.data());
-    glBindBuffer(GL_ARRAY_BUFFER,vbo[2]); //text
+    glBindBuffer(GL_ARRAY_BUFFER,_vbo[2]); //text
     glBufferSubData(GL_ARRAY_BUFFER, 0, (long int)textureCoordinatesVector.size() * sizeof(float), textureCoordinatesVector.data());
-    glBindBuffer(GL_ARRAY_BUFFER,vbo[3]); //colors
+    glBindBuffer(GL_ARRAY_BUFFER,_vbo[3]); //colors
     glBufferSubData(GL_ARRAY_BUFFER, 0, (long int)RGBcolorVector.size() * sizeof(float), RGBcolorVector.data());
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,vbo[4]); //indices
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,_vbo[4]); //indices
     glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, (long int)vertexIndicesVector.size() * sizeof(unsigned int), vertexIndicesVector.data());
 
 }
@@ -262,133 +220,12 @@ void r_Realsense::addNewData(rs2::frameset &frames){
 
 }
 
-void r_Realsense::add_shadow_shader(GLuint shadow_shaderProgramId){
-    _shadowShaderID = shadow_shaderProgramId;
-}
-
-void r_Realsense::add_light(PointLight* light){
-    _light = light;
-}
-
-void r_Realsense::pass_one() {
-    glUseProgram(_shadowShaderID);
-
-    glm::mat4 shadowMVP1 = lightPmatrix * lightVmatrix * _transform.getModelMatrix();
-    _shadowMVPId = glGetUniformLocation(_shadowShaderID, "Shadow_MVP");
-    glUniformMatrix4fv(_shadowMVPId, 1, GL_FALSE, glm::value_ptr(shadowMVP1));
-
-    //Vertex Buffer
-    glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-    glEnableVertexAttribArray(0);
-
-    glClear(GL_DEPTH_BUFFER_BIT);
-//    glEnable(GL_CULL_FACE);
-//    glFrontFace(GL_CCW);
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LEQUAL);
-
-    //Element Array Buffer
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo[4]);
-    glDrawElements(GL_TRIANGLES,num_vertices,GL_UNSIGNED_INT, 0);
-}
-
-void r_Realsense::pass_two() {
-    glUseProgram(_shaderId);
-
-//    //Bind VAO
-//    glBindVertexArray(_vaoId);
-
-    _shaderModelId = glGetUniformLocation(_shaderId, "Model");
-    _shaderViewId = glGetUniformLocation(_shaderId, "View");
-    _shaderModelViewId = glGetUniformLocation(_shaderId, "ModelView");
-    _shaderPerpectiveId = glGetUniformLocation(_shaderId, "Perpective");
-    _shaderUseTextureId = glGetUniformLocation(_shaderId, "Use_Text");
-    _shadowMVPId = glGetUniformLocation(_shaderId, "Shadow_MVP");
-    _invTrMVId = glGetUniformLocation(_shaderId, "InvTr_MV");
-
-    glm::mat4 shadowMVP2 = b * lightPmatrix * lightVmatrix * _transform.getModelMatrix();
-    glm::mat4 mvMat = _camera->getView() * _transform.getModelMatrix();
-    glm::mat4 invTrMat = glm::transpose(glm::inverse(mvMat));
-
-    glUniformMatrix4fv(_shaderModelId, 1, GL_FALSE, glm::value_ptr( _transform.getModelMatrix()));
-    glUniformMatrix4fv(_shaderViewId, 1, GL_FALSE, glm::value_ptr( _camera->getView()));
-    glUniformMatrix4fv(_shaderModelViewId, 1, GL_FALSE, glm::value_ptr( mvMat));
-    glUniformMatrix4fv(_shaderPerpectiveId, 1, GL_FALSE, glm::value_ptr(_camera->getProjection()));
-    glUniformMatrix4fv(_shadowMVPId, 1, GL_FALSE, glm::value_ptr(shadowMVP2));
-    glUniformMatrix4fv(_invTrMVId, 1, GL_FALSE, glm::value_ptr(invTrMat));
-    glUniform1i(_shaderUseTextureId,useTexture);
-
-//    glBindTexture(GL_TEXTURE_2D, _texId);
-////    glBindVertexArray(_vaoId);
-
-    //Vertex buffer
-    glBindBuffer(GL_ARRAY_BUFFER,vbo[0]);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,0,0);
-    glEnableVertexAttribArray(0);
-
-    //Norm buffer
-    glBindBuffer(GL_ARRAY_BUFFER, vbo[1]);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
-    glEnableVertexAttribArray(1);
-
-    //Texture Buffer
-    glBindBuffer(GL_ARRAY_BUFFER, vbo[2]);
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, 0);
-    glEnableVertexAttribArray(2);
-
-    glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, _texId);
-    glUniform1i(glGetUniformLocation(_shaderId, "textureimage"), 1);
-
-    //Color buffer
-    glBindBuffer(GL_ARRAY_BUFFER, vbo[3]);
-    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, 0);
-    glEnableVertexAttribArray(3);
-
-    glClear(GL_DEPTH_BUFFER_BIT);
-//    glEnable(GL_CULL_FACE);
-//    glFrontFace(GL_CCW);
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LEQUAL);
-
-    // Element array buffer
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo[4]);
-    glDrawElements(GL_TRIANGLES,num_vertices,GL_UNSIGNED_INT, 0);
-}
-
-void r_Realsense::draw() {}
-
-void r_Realsense::draw(rs2::frameset &frames) {
+void r_Realsense::refresh(rs2::frameset &frames) {
     // Remove old camera data and add new camera data to vectors
     removeOldData();
     addNewData(frames);
+}
 
-    // Set up light view matrix and perpective matrix
-    glm::vec3 up(0.0f, -1.0f, 0.0f);
-    glm::vec3 current_loc_light = _light->getWorldLocation();
-    glm::vec3 current_loc_model = _transform.getWorldPosition();
-    lightVmatrix = glm::lookAt(current_loc_light, current_loc_model, up);
-    lightPmatrix = glm::perspective(windowState.get_fov(), windowState.get_aspect_ratio(), windowState.get_z_near(), windowState.get_z_far());
-
-    glBindFramebuffer(GL_FRAMEBUFFER, shadowBuffer);
-    glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, shadowTex, 0);
-
-    glDrawBuffer(GL_NONE);
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_POLYGON_OFFSET_FILL);	// for reducing
-    glPolygonOffset(2.0f, 4.0f);		//  shadow artifacts
-
-    pass_one();
-
-    glDisable(GL_POLYGON_OFFSET_FILL);	// artifact reduction, continued
-
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, shadowTex);
-    glUniform1i(glGetUniformLocation(_shadowShaderID, "shadowTex"), 0);
-
-    glDrawBuffer(GL_FRONT);
-
-    pass_two();
+void r_Realsense::set_description(std::string &description) {
+    _description = description;
 }

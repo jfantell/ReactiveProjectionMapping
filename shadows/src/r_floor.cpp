@@ -2,17 +2,11 @@
 #include "stb_image.h"
 
 
-r_Floor::r_Floor(GLuint shaderProgramId, Camera * camera) {
-  _shaderId = shaderProgramId;
-  _camera = camera;
+r_Floor::r_Floor() {
   _transform = Transform();
 }
 
 void r_Floor::setup() {
-
-  _shaderMVPId = glGetUniformLocation(_shaderId, "MVP");
-  _shaderModelId = glGetUniformLocation(_shaderId, "Model");
-  _shaderUseTexId = glGetUniformLocation(_shaderId, "USE_TEX");
 
   int width, height, nrChannels;
   unsigned char *data = stbi_load("../shaders_and_textures/treetex.jpg", &width, &height, &nrChannels, 0);

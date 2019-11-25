@@ -117,7 +117,7 @@ else()
             ${PCL_LIBRARIES}
             ${OPENCV}
             ${REALSENSE2})
-    add_executable(shadows ${SOURCES})
+    add_executable(shadows ${SOURCES} src/draw.cpp src/draw.h)
     target_link_libraries(shadows ${LIBRARIES})
 
 endif()

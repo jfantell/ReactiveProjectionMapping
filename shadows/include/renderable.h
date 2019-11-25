@@ -9,18 +9,22 @@ class Renderable {
  public:
 
   virtual ~Renderable() {}
-  virtual void setup() = 0; // MUST be implemented in base class
-  virtual void draw() = 0;  // Must be implemented in base class
+  virtual void setup(); // MUST be implemented in base class
   virtual Transform * getTransform() {return &_transform; }
-
-
-
+  virtual GLuint* getVBO() {return _vbo;}
+  virtual GLuint* getVAO() {return _vao;}
+  virtual long int get_num_vertices() {return _num_vertices; }
+  virtual GLuint get_textureID() {return _texId; }
+  virtual void set_description(std::string &description) {_description = description;}
+  virtual void refresh(rs2::frameset &frames); // MUST be implemented in base class
 
  protected:
-  GLuint _shaderId;
-  Camera * _camera;
-  Transform _transform;
-
+    GLuint* _vao;
+    GLuint* _vbo;
+    std::string _description;
+    Transform _transform;
+    long int _num_vertices;
+    GLuint _texId;
 };
 
 
