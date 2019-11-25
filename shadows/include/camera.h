@@ -3,6 +3,7 @@
 
 #include "glm/mat4x4.hpp"
 #include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtx/transform.hpp"
 #include "GL/glew.h"
 #include "GLFW/glfw3.h"
 
@@ -32,10 +33,13 @@ class Camera {
   void inputMoveDown();
   void inputMoveLeft();
   void inputMoveRight();
+  void updateMouse(const glm::vec2 &newMousePosition);
 
   void computeView();
   void computeProjection();
   void set_aspect_ratio(float aspect);
+
+  void zoom(float factor);
   void moveWorldLocation();
   void restoreDefaultWorldLocation();
 
@@ -47,6 +51,8 @@ class Camera {
   glm::vec3 _worldLocationDefault;
   glm::vec3 _lookAt;
   glm::vec3 _up = glm::vec3(0,-1,0);
+  glm::vec3 _viewDirection = glm::vec3(0,0,-1);
+
 
   float _fovRadians;
   float _aspectratio;

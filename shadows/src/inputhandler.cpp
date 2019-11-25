@@ -5,6 +5,8 @@
 #include "inputhandler.h"
 #include "app_state.h"
 
+#define MOUSE_DEGREES_PER_PIXEL .000001f;
+
 //Define static variable in cpp file
 Camera* InputHandler:: _c;
 
@@ -56,22 +58,10 @@ void InputHandler::scroll_callback(GLFWwindow *window, double xoffset, double yo
     windowState.offset_x -= static_cast<float>(xoffset);
     windowState.offset_y -= static_cast<float>(yoffset);
     std::cout << "Zoom" << windowState.offset_y << std::endl;
-    _c->moveWorldLocation();
+    _c->zoom(yoffset);
 }
 
 void InputHandler::cursor_pos_callback(GLFWwindow *window, double x, double y) {
-    if (windowState.ml) {
-        windowState.yaw -= (x - windowState.last_x);
-        windowState.pitch += (y - windowState.last_y);
-        std::cout << "Rotate - Yaw: " << windowState.yaw <<  " Pitch:  " << windowState.pitch <<std::endl;
-        _c->moveWorldLocation();
-    }
-    windowState.last_x = x;
-    windowState.last_y = y;
-    if (fabs(windowState.yaw) > 360) {
-        windowState.yaw = windowState.yaw = 0;
-    }
-    if (fabs(windowState.pitch) > 360) {
-        windowState.pitch = windowState.pitch = 0;
-    }
+    if (windowState.ml)
+      _c->updateMouse(glm::vec2(x,y));
 }

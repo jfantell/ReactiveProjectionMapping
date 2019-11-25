@@ -5,6 +5,7 @@
 #include "app_state.h"
 
 #define MOVEMENT_DELTA 0.02f
+#define MOUSE_DEGREES_PER_PIXEL .02f;
 
 
 Camera::Camera(GLFWwindow * window, GLuint shaderProgramId, float fov_degrees, float aspectratio, glm::vec3 worldLocation, glm::vec3 lookAt) {
@@ -54,7 +55,7 @@ glm::vec3 Camera::getWorldLocation() {
 void Camera::computeView() {
   _view = glm::lookAt(
       _worldLocation, // Camera is at (4,3,3), in World Space
-      _lookAt, // and looks at the origin
+      _worldLocation + _viewDirection, // and looks at the origin
       _up  // Head is up (set to 0,-1,0 to look upside-down)
   );
 }
@@ -71,22 +72,22 @@ void Camera::updateShaderUniforms() {
 
 
 void Camera::inputMoveUp() {
-  _worldLocation -= glm::normalize(_worldLocation) * MOVEMENT_DELTA;
+  _worldLocation += glm::normalize(_viewDirection) * MOVEMENT_DELTA;
   computeView();
 }
 
 void Camera::inputMoveDown() {
-  _worldLocation += glm::normalize(_worldLocation) * MOVEMENT_DELTA;
+  _worldLocation -= glm::normalize(_viewDirection) * MOVEMENT_DELTA;
   computeView();
 }
 
 void Camera::inputMoveLeft() {
-  _worldLocation += glm::normalize(glm::cross(_worldLocation, _up)) * MOVEMENT_DELTA;
+  _worldLocation -= glm::normalize(glm::cross(_viewDirection, _up)) * MOVEMENT_DELTA;
   computeView();
 }
 
 void Camera::inputMoveRight() {
-  _worldLocation -= glm::normalize(glm::cross(_worldLocation, _up)) * MOVEMENT_DELTA;
+  _worldLocation += glm::normalize(glm::cross(_viewDirection, _up)) * MOVEMENT_DELTA;
   computeView();
 }
 
@@ -95,13 +96,39 @@ void Camera::set_aspect_ratio(float aspect) {
     computeProjection();
 }
 
-void Camera::moveWorldLocation() {
-    _view = glm::translate(_view, glm::vec3(0, 0, 0.05+(float)windowState.offset_y*.05));
-    _view = glm::rotate(_view, glm::radians((float)windowState.pitch), glm::vec3(1.0f, 0.0f, 0.0f));
-    _view = glm::rotate(_view, glm::radians((float)windowState.yaw), glm::vec3(0.0f, 1.0f, 0.0f));
-    _view = glm::translate(_view, glm::vec3(0, 0, -0.5f));
-//    _worldLocation = worldTransform * glm::vec4(_worldLocation,1);
-//    computeView();
+void Camera::zoom(float amount) {
+  _worldLocation += amount * glm::normalize(_viewDirection) * MOVEMENT_DELTA;
+  computeView();
+}
+
+
+void Camera::updateMouse(const glm::vec2 &newMousePosition) {
+
+  glm::vec2 mouseDelta = glm::vec2(newMousePosition.x - windowState.last_x, newMousePosition.y - windowState.last_y);
+  mouseDelta *= MOUSE_DEGREES_PER_PIXEL;
+
+  // Do the yaw. Full 360 degree rotation is allowed.
+  _viewDirection = glm::mat3(glm::rotate(-mouseDelta.x, _up)) * _viewDirection;
+  windowState.last_x = newMousePosition.x;
+  windowState.last_y = newMousePosition.y;
+
+  glm::vec3 across = glm::normalize(glm::cross(_viewDirection, _up));
+
+  // Do the pitch rotation. we're going to clip the rotation to an angle range.
+
+  _viewDirection = glm::mat3(glm::rotate(-mouseDelta.y, across)) * _viewDirection;
+  std::cout << "viewDirection: " << _viewDirection.x << " " << _viewDirection.y << "" << _viewDirection.z << std::endl;
+
+  float angle = glm::acos(glm::dot(_viewDirection, _up));
+  glm::vec3 cross = glm::cross(_viewDirection, _up);
+  if(glm::dot(cross, across) < 0) angle = -angle;
+
+  std::cout << "angle: " << angle << std::endl;
+
+  if (angle < glm::radians(45.0)) std::cout << "looking too far up." << std::endl;
+  if (angle > glm::radians(137.0)) std::cout << "looking too far down. " << std::endl;
+
+  computeView();
 }
 
 void Camera::restoreDefaultWorldLocation(){
