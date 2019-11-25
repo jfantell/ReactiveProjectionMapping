@@ -1,4 +1,4 @@
-#version 330 core
+#version 410
 
 layout (location = 0) in vec3 vertex_position;
 layout (location = 1) in vec3 vertex_normal;
@@ -12,8 +12,8 @@ out vec2 frag_tex_coord;
 out vec3 vNormal, vLightDir, vVertPos, vHalfVec;
 out vec4 shadow_coord;
 
-layout (binding=0) uniform sampler2DShadow shadowTex;
-layout (binding=1) uniform sampler2D textureimage;
+uniform sampler2DShadow shadowTex;
+uniform sampler2D textureimage;
 
 uniform mat4 Model; //rendables
 uniform mat4 View;
@@ -59,9 +59,9 @@ vec3 coloring(vec3 vCol, vec3 vPos, float stripeRange, float range, float max_z)
 }
 
 void main(void) {
-    gl_Position = MVP * vec4(vertex_position, 1.0);
+    gl_Position = Perpective * ModelView * vec4(vertex_position, 1.0);
 
-    if(USE_TEX == 1){
+    if(Use_Text == 1){
         frag_tex_coord = vertex_tex_coord;
     }
     else{
@@ -84,7 +84,7 @@ void main(void) {
     // calculate the half vector (L+V)
     vHalfVec = (vLightDir-vVertPos).xyz;
 
-    shadow_coord = shadowMVP * vec4(vertPos,1.0);
+    shadow_coord = Shadow_MVP * vec4(vertex_position,1.0);
 
     fragment_position = vec3(Model * vec4(vertex_position, 1.0f));
     normal = vertex_normal;

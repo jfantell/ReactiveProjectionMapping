@@ -1,7 +1,7 @@
 #ifndef SHADOWS_SHADOWS_INCLUDE_SHADER_H_
 #define SHADOWS_SHADOWS_INCLUDE_SHADER_H_
 
-#define MAX_SHADER_SIZE 2000
+#define MAX_SHADER_SIZE 40000
 
 #include <iostream>
 #include <stdlib.h>

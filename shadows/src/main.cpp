@@ -69,7 +69,7 @@ int main(int argc, const char *argv[]) {
     textureMode = atoi(argv[1]);
     cout << "Texture Mode: " << textureMode << endl;
     if (textureMode == Image) {
-        if (argc == 5) {
+        if (argc == 3) {
             textureImage = argv[2];
             cout << "Texture Image File Path: " << textureImage << endl;
         } else {
@@ -179,8 +179,8 @@ int main(int argc, const char *argv[]) {
      * draw() is where you use the data that you have set up, update shader uniforms, etc. */
 
     // Create an instance of the floor renderable and set it up.
-    r_Floor r_floor = r_Floor(defaultProgram, &camera);
-    r_floor.setup();
+//    r_Floor r_floor = r_Floor(defaultProgram, &camera);
+//    r_floor.setup();
 
     /* Doing transforms with this scheme is very easy.
      * Simply grab the entity from the Renderable using getEntity()
@@ -188,8 +188,8 @@ int main(int argc, const char *argv[]) {
      * any transformation defined in entity.h works */
 
     // Let's scale up the floor.
-    r_floor.getTransform()->setModelScale(10.0f);
-    r_floor.getTransform()->setY(-.5);
+//    r_floor.getTransform()->setModelScale(10.0f);
+//    r_floor.getTransform()->setY(-.5);
 
     // Declare our renderable rabbit model and set it up.
 //  r_Rabbit r_rabbit = r_Rabbit(program, &camera);
@@ -226,11 +226,12 @@ int main(int argc, const char *argv[]) {
 
     // Render loop.
     while (!glfwWindowShouldClose(window)) {
-
+        glClear(GL_DEPTH_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT);
         camera.reset_aspect_ratio();
 
         // Tell OpenGL to clean off the canvas.
-        GLCALL(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
+//        GLCALL(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 
         // Update the light uniforms.
         light.updateShaderUniforms();
@@ -247,7 +248,7 @@ int main(int argc, const char *argv[]) {
         #endif
 
         // Draw the floor, and the rabbit.
-        r_floor.draw();
+//        r_floor.draw();
 //    r_rabbit.draw();
 //    r_rabbit.getTransform()->rotateYDegrees(1.0);
 
@@ -261,16 +262,19 @@ int main(int argc, const char *argv[]) {
 //    lightmarker.draw();
 
         /* ********* END drawing code *********** */
-
         // Reset all the bound buffers / arrays to unbound.
 //    GLCALL(glBindBuffer(GL_ARRAY_BUFFER, 0));
-//    GLCALL(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
 //    GLCALL(glBindVertexArray(0));
 
         // update other events like input handling
         glfwPollEvents();
         // put the stuff we've been drawing onto the display
         glfwSwapBuffers(window);
+    }
+
+    GLenum err = glGetError();
+    if (err != GL_NO_ERROR) {
+        printf("OpenGL error %08x", err);
     }
 
     //GLCALL(glDeleteBuffers(1, &mesh_ib.getBufferId())));

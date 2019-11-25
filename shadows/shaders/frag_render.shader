@@ -1,16 +1,16 @@
-#version 330 core
+#version 410
 
 in vec3 fragment_color;
 in vec3 normal;
 in vec3 fragment_position;
 in vec2 frag_tex_coord;
 in vec3 vNormal, vLightDir, vVertPos, vHalfVec;
-in shadow_coord;
+in vec4 shadow_coord;
 
 out vec4 diffuse_color;
 
-layout (binding=0) uniform sampler2DShadow shadowTex;
-layout (binding=1) uniform sampler2D textureimage;
+uniform sampler2DShadow shadowTex;
+uniform sampler2D textureimage;
 
 uniform mat4 Model; //rendables
 uniform mat4 View;
@@ -25,9 +25,6 @@ uniform vec3 ambientLightColor;
 uniform float specularStrength;
 uniform vec3 lightPosition;
 uniform vec3 viewPosition; //camera
-
-layout (binding=0) uniform sampler2DShadow shadowTex;
-layout (binding=1) uniform sampler2D textureimage;
 
 void main(void) {
     vec3 L = normalize(vLightDir);
@@ -51,21 +48,16 @@ void main(void) {
 
     float inShadow = textureProj(shadowTex, shadow_coord);
 
-    //vec3 result = (ambientLight + diffuse + specular) * vec3(fragment_color);
     vec3 result;
-    if(USE_TEX == 1){
+    if(Use_Text == 1){
         result = (ambientLight + diffuseLightStrength * diffuse + specular) * vec3(texture(textureimage, frag_tex_coord));
-        diffuse_color = vec4(result, 1.0f);
     }
     else{
         result = (ambientLight + diffuseLightStrength * diffuse + specular) * fragment_color;
-        diffuse_color = vec4(result, 1.0f);
     }
 
-    if (inShadow != 0.0)
-    {	fragColor += light.diffuse * material.diffuse * max(dot(L,N),0.0)
-    		+ light.specular * material.specular
-    		* pow(max(dot(H,N),0.0),material.shininess*3.0);
+    if (inShadow != 0.0){
+        result += diffuse  * max(dot(L,N), 0.0) + specular * pow(max(dot(H,N),0.0),16);
     }
 
     diffuse_color = vec4(result, 1.0f);

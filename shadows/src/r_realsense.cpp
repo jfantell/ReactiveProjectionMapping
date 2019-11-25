@@ -43,7 +43,7 @@ glm::mat4 b;
 rs2::pointcloud pc; // Point cloud object
 rs2::points points; // RealSense points object
 
-int useTexture = 0;
+GLuint useTexture = 0;
 window_state windowState;
 glm::vec4 point_1, point_2;
 
@@ -66,7 +66,7 @@ void r_Realsense::setupShadowBuffers(){
     glGenTextures(1, &shadowTex);
     glBindTexture(GL_TEXTURE_2D, shadowTex);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32,
-                 windowState.height, windowState.width, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
+                 windowState.width, windowState.height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
@@ -141,8 +141,8 @@ void r_Realsense::updatePoints(pcl::PolygonMesh &triangles){
     pcl::PointCloud<pcl::PointNormal>::Ptr cloud_from_mesh (new pcl::PointCloud<pcl::PointNormal>);
     pcl::fromPCLPointCloud2 (triangles.cloud, *cloud_from_mesh);
 
-//    cout << "Cloud Data " << cloud_from_mesh->size() << endl;
-//    cout << "Polygons Data " << triangles.polygons.size() << endl;
+    cout << "Vertex Data " << cloud_from_mesh->size() << endl;
+    cout << "Polygons Data " << triangles.polygons.size() << endl;
 
     //Load vertex coordinates into vertex buffer
     //Load corresponding RGB values into color buffer
@@ -283,8 +283,8 @@ void r_Realsense::pass_one() {
     glEnableVertexAttribArray(0);
 
     glClear(GL_DEPTH_BUFFER_BIT);
-    glEnable(GL_CULL_FACE);
-    glFrontFace(GL_CCW);
+//    glEnable(GL_CULL_FACE);
+//    glFrontFace(GL_CCW);
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
 
@@ -295,6 +295,9 @@ void r_Realsense::pass_one() {
 
 void r_Realsense::pass_two() {
     glUseProgram(_shaderId);
+
+//    //Bind VAO
+//    glBindVertexArray(_vaoId);
 
     _shaderModelId = glGetUniformLocation(_shaderId, "Model");
     _shaderViewId = glGetUniformLocation(_shaderId, "View");
@@ -333,8 +336,10 @@ void r_Realsense::pass_two() {
     glBindBuffer(GL_ARRAY_BUFFER, vbo[2]);
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, 0);
     glEnableVertexAttribArray(2);
+
     glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, textureRef);
+    glBindTexture(GL_TEXTURE_2D, _texId);
+    glUniform1i(glGetUniformLocation(_shaderId, "textureimage"), 1);
 
     //Color buffer
     glBindBuffer(GL_ARRAY_BUFFER, vbo[3]);
@@ -342,8 +347,8 @@ void r_Realsense::pass_two() {
     glEnableVertexAttribArray(3);
 
     glClear(GL_DEPTH_BUFFER_BIT);
-    glEnable(GL_CULL_FACE);
-    glFrontFace(GL_CCW);
+//    glEnable(GL_CULL_FACE);
+//    glFrontFace(GL_CCW);
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
 
@@ -360,10 +365,10 @@ void r_Realsense::draw(rs2::frameset &frames) {
     addNewData(frames);
 
     // Set up light view matrix and perpective matrix
-    glm::vec3 origin(0.0f, 0.0f, 0.0f);
-    glm::vec3 up(0.0f, 1.0f, 0.0f);
-    glm::vec3 current_loc = _light->getWorldLocation();
-    lightVmatrix = glm::lookAt(current_loc, origin, up);
+    glm::vec3 up(0.0f, -1.0f, 0.0f);
+    glm::vec3 current_loc_light = _light->getWorldLocation();
+    glm::vec3 current_loc_model = _transform.getWorldPosition();
+    lightVmatrix = glm::lookAt(current_loc_light, current_loc_model, up);
     lightPmatrix = glm::perspective(windowState.get_fov(), windowState.get_aspect_ratio(), windowState.get_z_near(), windowState.get_z_far());
 
     glBindFramebuffer(GL_FRAMEBUFFER, shadowBuffer);
@@ -381,6 +386,7 @@ void r_Realsense::draw(rs2::frameset &frames) {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, shadowTex);
+    glUniform1i(glGetUniformLocation(_shadowShaderID, "shadowTex"), 0);
 
     glDrawBuffer(GL_FRONT);
 
