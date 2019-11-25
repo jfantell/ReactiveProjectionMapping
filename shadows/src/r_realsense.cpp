@@ -34,9 +34,7 @@ std::vector<unsigned int> vertexIndicesVector;
 rs2::pointcloud pc; // Point cloud object
 rs2::points points; // RealSense points object
 
-GLuint useTexture = 0;
 window_state windowState;
-glm::vec4 point_1, point_2;
 
 using namespace std;
 
@@ -120,12 +118,6 @@ void r_Realsense::updatePoints(pcl::PolygonMesh &triangles){
         float x_normal = cloud_from_mesh->points[i].normal_x;
         float y_normal = cloud_from_mesh->points[i].normal_y;
         float z_normal = cloud_from_mesh->points[i].normal_z;
-        if( i == 0){
-            point_1 = glm::vec4(x,y,z,1);
-        }
-        if( i == 200){
-            point_2 = glm::vec4(x,y,z,1);
-        }
 
         vertexCoordinatesVector.push_back(x);
         vertexCoordinatesVector.push_back(y);

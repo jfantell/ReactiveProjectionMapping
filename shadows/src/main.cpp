@@ -255,6 +255,8 @@ int main(int argc, const char *argv[]) {
         r_realsense.refresh(frames);
         #endif
 
+        draw.draw();
+
         // Draw the floor, and the rabbit.
 //        r_floor.draw();
 //        r_rabbit.draw();

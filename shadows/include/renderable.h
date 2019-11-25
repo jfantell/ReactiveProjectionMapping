@@ -1,6 +1,9 @@
 #ifndef SHADOWS_SHADOWS_INCLUDE_RENDERABLE_H_
 #define SHADOWS_SHADOWS_INCLUDE_RENDERABLE_H_
 
+#include <iostream>
+#include <string.h>
+#include <librealsense2/rs.hpp>
 #include "transform.h"
 #include "camera.h"
 #include "GL/glew.h"
