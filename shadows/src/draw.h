@@ -19,9 +19,9 @@
 class Draw {
 public:
     Draw(GLuint shaderShadowProgramID, GLuint shaderPrimaryProgramID, Camera* camera, PointLight* light);
-    ~Draw();
+    ~Draw() {};
     void setup_shadow_buffers();
-    void add_models(const std::vector<Renderable *> renderable_models);
+    void add_models(std::vector<Renderable *> renderable_models);
     void draw();
 
 private:

@@ -173,9 +173,9 @@ int main(int argc, const char *argv[]) {
     /* ******** Set up models here ************ */
 
     #ifdef REALSENSE
-    Renderable r_realsense = r_Realsense();
-    r_realsense.setup();
-    r_realsense.set_description((string &) "R_Realsense");
+    Renderable* r_realsense = new r_Realsense();
+    r_realsense->setup();
+    r_realsense->set_description("R_Realsense");
 
     //Initialize the RealSense Camera
     rs2::pipeline pipe;
@@ -229,7 +229,7 @@ int main(int argc, const char *argv[]) {
     /* ********* Set up drawing class *********** */
     Draw draw = Draw(shadowProgram,defaultProgram,&camera,&light);
     std::vector<Renderable*> models;
-    models.push_back(&r_realsense);
+    models.push_back(r_realsense);
     draw.add_models(models);
     draw.setup_shadow_buffers();
 
@@ -252,7 +252,7 @@ int main(int argc, const char *argv[]) {
             cerr << "Error occured while attempting to get camera frames" << endl;
             return 1;
         }
-        r_realsense.refresh(frames);
+        r_realsense->refresh(frames);
         #endif
 
         draw.draw();

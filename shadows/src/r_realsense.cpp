@@ -18,10 +18,7 @@
 #define GLM_ENABLE_EXPERIMENTAL
 #include <GL/glew.h>
 
-#define numVAOs 1
-#define numVBOs 5
 #define MAX_SIZE 100000
-
 
 GLsizei num_vertices; //The number of points to be drawn
 GLuint textureRef = 0; // Reference to texture address in memory
@@ -40,8 +37,6 @@ using namespace std;
 
 r_Realsense::r_Realsense() {
     _transform = Transform();
-    _vao[numVAOs];
-    _vbo[numVBOs];
 }
 
 void r_Realsense::setup() {

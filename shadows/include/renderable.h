@@ -8,22 +8,25 @@
 #include "camera.h"
 #include "GL/glew.h"
 
+#define numVAOs 1
+#define numVBOs 5
+
 class Renderable {
  public:
 
   virtual ~Renderable() {}
-  virtual void setup(); // MUST be implemented in base class
+  virtual void setup() = 0; // MUST be implemented in base class
   virtual Transform * getTransform() {return &_transform; }
   virtual GLuint* getVBO() {return _vbo;}
   virtual GLuint* getVAO() {return _vao;}
   virtual long int get_num_vertices() {return _num_vertices; }
   virtual GLuint get_textureID() {return _texId; }
   virtual void set_description(std::string &description) {_description = description;}
-  virtual void refresh(rs2::frameset &frames); // MUST be implemented in base class
+  virtual void refresh(rs2::frameset &frames) = 0; // MUST be implemented in base class
 
  protected:
-    GLuint* _vao;
-    GLuint* _vbo;
+    GLuint _vao[numVAOs];
+    GLuint _vbo[numVBOs];
     std::string _description;
     Transform _transform;
     long int _num_vertices;
