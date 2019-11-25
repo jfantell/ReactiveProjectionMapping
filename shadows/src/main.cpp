@@ -5,7 +5,7 @@
 #ifdef _DEBUG
 #define GLCALL(stmt) do { \
             stmt; \
-            CheckOpenGLError(#stmt, __FILE__, __LINE__); \
+            CheckOpenGLError(#stmt, __FILE__, __LINE__);
         } while (0)
 #else
 #define GLCALL(stmt) stmt
