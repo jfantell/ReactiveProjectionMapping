@@ -37,11 +37,10 @@ class Camera {
 
   void computeView();
   void computeProjection();
-  void set_aspect_ratio(float aspect);
 
   void zoom(float factor);
   void strafe(float factor);
-  void moveWorldLocation();
+  void reset_aspect_ratio();
   void restoreDefaultWorldLocation();
 
  private:
