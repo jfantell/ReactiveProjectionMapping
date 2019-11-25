@@ -40,7 +40,7 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr PCL_wrapper::points_to_pcl(const rs2::points
 }
 
 pcl::PointCloud<pcl::PointXYZ>::Ptr PCL_wrapper::octree_voxel_downsample(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud){
-    float leaf = 0.05f;
+    float leaf = 0.03f;
     pcl::octree::OctreePointCloudVoxelCentroid<pcl::PointXYZ> octree(leaf);
     octree.setInputCloud(cloud);
     octree.defineBoundingBox();

@@ -29,7 +29,7 @@ class Camera {
   void zoom(float factor);
   void strafe(float factor);
   void reset_aspect_ratio();
-  void restoreDefaultWorldLocation();
+  void restoreDefaultEyeLocation();
 
  private:
 

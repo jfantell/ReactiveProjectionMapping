@@ -13,16 +13,16 @@ void InputHandler::set_camera(Camera *c) {
 }
 
 void InputHandler::key_callback(GLFWwindow *window, int key, int sancode, int action, int mods) {
-    if (key == GLFW_KEY_UP && action == GLFW_PRESS) {
+    if (key == GLFW_KEY_UP) {
         _c->inputMoveUp();
     }
-    if (key == GLFW_KEY_DOWN && action == GLFW_PRESS) {
+    if (key == GLFW_KEY_DOWN) {
         _c->inputMoveDown();
     }
-    if (key == GLFW_KEY_LEFT && action == GLFW_PRESS) {
+    if (key == GLFW_KEY_LEFT) {
         _c->inputMoveLeft();
     }
-    if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS) {
+    if (key == GLFW_KEY_RIGHT) {
         _c->inputMoveRight();
     }
     if (key == GLFW_KEY_R && action == GLFW_PRESS) {
@@ -33,7 +33,7 @@ void InputHandler::key_callback(GLFWwindow *window, int key, int sancode, int ac
         windowState.offset_y = 1;
         windowState.last_x = 0;
         windowState.last_y = 0;
-        _c->restoreDefaultWorldLocation();
+        _c->restoreDefaultEyeLocation();
     }
 }
 

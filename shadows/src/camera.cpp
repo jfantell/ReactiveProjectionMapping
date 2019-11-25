@@ -4,7 +4,7 @@
 #include "glm/glm.hpp"
 #include "app_state.h"
 
-#define MOVEMENT_DELTA 0.02f
+#define MOVEMENT_DELTA 0.06f
 #define MOUSE_DEGREES_PER_PIXEL .02f;
 
 
@@ -50,9 +50,18 @@ glm::mat4 Camera::getProjection() {
 void Camera::computeView() {
   _view = glm::lookAt(
           _eye, // Camera is at (4,3,3), in World Space
-      _at + _viewDirection, // and looks at the origin
+      _at, // and looks at the origin
       _up  // Head is up (set to 0,-1,0 to look upside-down)
   );
+  float rBrown[9] = {0.9993056180948953, -0.03696037875994081, -0.004712965722452996, 0.03671444479747512, 0.998333504916434, -0.04452260666764154, 0.006350683994063414, 0.04431865705535405, 0.998997259981036};
+  float tBrown[3] = {119.5728106196159, -53.34722888908106, 174.9022427120458};
+  glm::mat4 T = glm::translate(glm::mat4(1.0f), glm::vec3(tBrown[0]/1000, tBrown[1]/-1000,tBrown[2]/1000)); // scaled and y,z axises are switched
+  glm::mat4 R = glm::mat4(rBrown[0], rBrown[1], rBrown[2], 0, rBrown[3], rBrown[4], rBrown[5], 0, rBrown[6], rBrown[7], rBrown[8], 0, 0,0,0,1);
+  _view = R * _view;
+  _view = T * _view;
+  _view = glm::rotate(_view, glm::radians((float)windowState.pitch), glm::vec3(1.0f, 0.0f, 0.0f));
+  _view = glm::rotate(_view, glm::radians((float)windowState.yaw), glm::vec3(0.0f, 1.0f, 0.0f));
+
 }
 
 void Camera::computeProjection() {
@@ -125,10 +134,11 @@ void Camera::updateMouse(const glm::vec2 &newMousePosition) {
   if (angle < glm::radians(45.0)) std::cout << "looking too far up." << std::endl;
   if (angle > glm::radians(137.0)) std::cout << "looking too far down. " << std::endl;
 
+  //Rotate and Translate View Matrix
   computeView();
 }
 
-void Camera::restoreDefaultWorldLocation(){
+void Camera::restoreDefaultEyeLocation(){
     _viewDirection = _viewDirectionDefault;
     _eye = _eyeDefault;
     computeView();

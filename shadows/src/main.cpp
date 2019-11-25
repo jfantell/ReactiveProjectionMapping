@@ -225,6 +225,12 @@ int main(int argc, const char *argv[]) {
     rs2::pipeline_profile profile = pipe.start(cfg);
     #endif
 
+
+    //Set up variables to rotate light source
+    int rotationCounter = 0;
+    float degreesPerTick = 1;
+    float lightRadius = 5;
+
     // Render loop.
     while (!glfwWindowShouldClose(window)) {
 
@@ -248,6 +254,13 @@ int main(int argc, const char *argv[]) {
         }
         r_realsense.draw(frames);
         #endif
+
+
+        //Actually rotate light
+        glm::vec3 lightPosition =  light.getWorldLocation();
+        lightPosition.x = lightRadius * cos(glm::radians((float) rotationCounter * degreesPerTick));
+        lightPosition.z = lightRadius * sin(glm::radians((float) rotationCounter * degreesPerTick));
+        light.setWorldLocation(lightPosition);
 
         // Draw the floor, and the rabbit.
 //        r_floor.draw();
@@ -276,6 +289,8 @@ int main(int argc, const char *argv[]) {
         if (err != GL_NO_ERROR) {
           printf("OpenGL error %08x", err);
         }
+
+        rotationCounter += 1;
 
         // update other events like input handling
         glfwPollEvents();
