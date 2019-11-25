@@ -156,8 +156,8 @@ int main(int argc, const char *argv[]) {
     // Set up things that need to be updated in the loop.
 
     // Create our camera.
-    Camera camera = Camera(window, defaultProgram, 60.0f, (float) WIDTH / (float) HEIGHT, glm::vec3(0, 0, 1),
-                           glm::vec3(0, 0, 0));
+    Camera camera = Camera(window, defaultProgram,glm::vec3(0,0,0), glm::vec3(0, 0, 1),
+                           glm::vec3(0,-1,0));
     InputHandler::set_camera(&camera);
 
     //Set up callbacks

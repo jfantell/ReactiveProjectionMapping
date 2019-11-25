@@ -10,23 +10,11 @@
 class Camera {
 
  public:
-  Camera(GLFWwindow * window, GLuint shaderProgramId, float fov_degrees, float aspectratio, glm::vec3 worldlocation, glm::vec3 lookat);
-  ~Camera();
+    Camera(GLFWwindow * window, GLuint shaderProgramId, glm::vec3 eye, glm::vec3 at, glm::vec3 up);
+    ~Camera();
 
   glm::mat4 getView();
   glm::mat4 getProjection();
-
-  void lookAt(glm::vec3 lookAt);
-  void setWorldLocation(glm::vec3 worldLocation);
-  glm::vec3 getWorldLocation();
-
-  void setWorldX(float x) { _worldLocation.x = x; computeView(); }
-  void setWorldY(float y) { _worldLocation.y = y; computeView(); }
-  void setWorldZ(float z) { _worldLocation.z = z; computeView(); }
-
-  float getWorldX() { return _worldLocation.x; }
-  float getWorldY() { return _worldLocation.y; }
-  float getWorldZ() { return _worldLocation.z; }
 
   void updateShaderUniforms();
   void inputMoveUp();
@@ -47,16 +35,12 @@ class Camera {
 
   glm::mat4 _view;
   glm::mat4 _projection;
-  glm::vec3 _worldLocation;
-  glm::vec3 _worldLocationDefault;
-  glm::vec3 _lookAt;
+  glm::vec3 _eye;
+  glm::vec3 _eyeDefault;
+  glm::vec3 _at;
   glm::vec3 _up = glm::vec3(0,-1,0);
-  glm::vec3 _viewDirection = glm::vec3(0,0,-1);
+  glm::vec3 _viewDirection = glm::vec3(0,0,1);
   glm::vec3 _viewDirectionDefault = _viewDirection;
-
-
-  float _fovRadians;
-  float _aspectratio;
 
   GLuint _shaderProgramId = 0;
   GLuint _uniformViewPosition = 0;
