@@ -50,7 +50,7 @@ glm::mat4 Camera::getProjection() {
 void Camera::computeView() {
   _view = glm::lookAt(
           _eye, // Camera is at (4,3,3), in World Space
-      _at, // and looks at the origin
+      _eye + _viewDirection, // and looks at the origin
       _up  // Head is up (set to 0,-1,0 to look upside-down)
   );
   float rBrown[9] = {0.9993056180948953, -0.03696037875994081, -0.004712965722452996, 0.03671444479747512, 0.998333504916434, -0.04452260666764154, 0.006350683994063414, 0.04431865705535405, 0.998997259981036};
@@ -59,9 +59,10 @@ void Camera::computeView() {
   glm::mat4 R = glm::mat4(rBrown[0], rBrown[1], rBrown[2], 0, rBrown[3], rBrown[4], rBrown[5], 0, rBrown[6], rBrown[7], rBrown[8], 0, 0,0,0,1);
   _view = R * _view;
   _view = T * _view;
-//  _view = glm::rotate(_view, _viewDirection.x, glm::vec3(1.0f, 0.0f, 0.0f));
-//  _view = glm::rotate(_view, glm::radians((float)windowState.yaw), glm::vec3(0.0f, 1.0f, 0.0f));
-//  _view = glm::rotate(_view, glm::radians((float)windowState.yaw), glm::vec3(0.0f, 1.0f, 0.0f));
+//  _view = glm::translate(mvMat, glm::vec3(0, 0, 0.05+(float)windowState.offset_y*.5));
+//  mvMat = glm::rotate(mvMat, glm::radians((float)windowState.pitch), glm::vec3(1.0f, 0.0f, 0.0f));
+//  mvMat = glm::rotate(mvMat, glm::radians((float)windowState.yaw), glm::vec3(0.0f, 1.0f, 0.0f));
+//  mvMat = glm::translate(mvMat, glm::vec3(0, 0, -0.5f));
 
 }
 
@@ -76,9 +77,8 @@ void Camera::computeProjection() {
   float kBrown[9] = {320.913404297975, 0, 464.073296207169, 0, 317.2041738539567, 290.5717543103951, 0, 0, 1};
   glm::mat4 Persp = glm::mat4(kBrown[0]*3.1, kBrown[1], -1*kBrown[2], 0, kBrown[3], -1*kBrown[4]*3.1, -1*kBrown[5], 0, 0, 0, A,B, kBrown[6], kBrown[7], -1*kBrown[8], 0);
   Persp = glm::transpose(Persp);
-  glm::mat4 NDC = glm::ortho(0.0f, 960.0f, 560.0f, 0.0f, near, far);
+  glm::mat4 NDC = glm::ortho(0.0f, width_, height_, 0.0f, near, far);
   _projection = NDC * Persp;
-  //_projection = glm::perspective(windowState.get_fov(), windowState.get_aspect_ratio(), windowState.get_z_near(), windowState.get_z_far());
 
 }
 
