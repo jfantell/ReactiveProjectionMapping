@@ -297,7 +297,7 @@ void r_Realsense::pass_two() {
     glUseProgram(_shaderId);
 
 //    //Bind VAO
-//    glBindVertexArray(_vaoId);
+    glBindVertexArray(_vaoId);
 
     _shaderModelId = glGetUniformLocation(_shaderId, "Model");
     _shaderViewId = glGetUniformLocation(_shaderId, "View");
@@ -357,7 +357,10 @@ void r_Realsense::pass_two() {
     glDrawElements(GL_TRIANGLES,num_vertices,GL_UNSIGNED_INT, 0);
 }
 
-void r_Realsense::draw() {}
+void r_Realsense::draw() {
+  glBindVertexArray(_vaoId);
+  glDrawElements(GL_TRIANGLES,num_vertices,GL_UNSIGNED_INT, 0);
+}
 
 void r_Realsense::draw(rs2::frameset &frames) {
     // Remove old camera data and add new camera data to vectors
