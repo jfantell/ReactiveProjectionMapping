@@ -4,8 +4,8 @@
 #include "glm/glm.hpp"
 #include "app_state.h"
 
-#define MOVEMENT_DELTA 0.06f
-#define MOUSE_DEGREES_PER_PIXEL .02f;
+#define MOVEMENT_DELTA 0.02f
+#define MOUSE_DEGREES_PER_PIXEL 0.02f
 
 
 Camera::Camera(GLFWwindow * window, GLuint shaderProgramId, glm::vec3 eye, glm::vec3 at, glm::vec3 up) {
@@ -52,6 +52,11 @@ void Camera::computeView() {
   _view = R * _view;
   _view = T * _view;
 
+//  _view = glm::rotate(_view, glm::radians((float)windowState.pitch), glm::vec3(0.0f, 1.0f, 0.0f)); //y
+  _view = glm::rotate(_view, glm::radians(2.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+  _view = glm::rotate(_view, glm::radians(2.0f), glm::vec3(0.0f, 1.0f, 0.0f)); //y
+
+
 }
 
 void Camera::computeProjection() {
@@ -63,7 +68,9 @@ void Camera::computeProjection() {
   float width_ = 960.0;
   float height_ = 560.0;
   float kBrown[9] = {320.913404297975, 0, 464.073296207169, 0, 317.2041738539567, 290.5717543103951, 0, 0, 1};
-  glm::mat4 Persp = glm::mat4(kBrown[0]*3.1, kBrown[1], -1*kBrown[2], 0, kBrown[3], -1*kBrown[4]*3.1, -1*kBrown[5], 0, 0, 0, A,B, kBrown[6], kBrown[7], -1*kBrown[8], 0);
+  //float kBrown[9] = {261.0022751388152, 0, 135.1240364809884, 0, 259.7411584038114, 117.1397042180994, 0, 0, 1};
+
+  glm::mat4 Persp = glm::mat4(kBrown[0]*2.8, kBrown[1], -1*kBrown[2], 0, kBrown[3], -1*kBrown[4]*2.8, -1*kBrown[5], 0, 0, 0, A,B, kBrown[6], kBrown[7], -1*kBrown[8], 0);
   Persp = glm::transpose(Persp);
   glm::mat4 NDC = glm::ortho(0.0f, width_, height_, 0.0f, near, far);
   _projection = NDC * Persp;
@@ -98,7 +105,6 @@ void Camera::inputMoveRight() {
 }
 
 void Camera::reset_aspect_ratio() {
-    glViewport(0,0,windowState.width,windowState.height);
     computeProjection();
 
 }
@@ -122,12 +128,16 @@ void Camera::updateMouse(const glm::vec2 &newMousePosition) {
   _viewDirection = glm::mat3(glm::rotate(-mouseDelta.x, _up)) * _viewDirection;
   windowState.last_x = newMousePosition.x;
   windowState.last_y = newMousePosition.y;
+  windowState.yaw += -mouseDelta.x;
+  windowState.pitch += -mouseDelta.y;
+
+  std::cout << "Yaw " << windowState.yaw << " Pitch " << windowState.pitch << std::endl;
 
   glm::vec3 across = glm::normalize(glm::cross(_viewDirection, _up));
 
   // Do the pitch rotation. we're going to clip the rotation to an angle range.
   _viewDirection = glm::mat3(glm::rotate(-mouseDelta.y, across)) * _viewDirection;
-  std::cout << "viewDirection: " << _viewDirection.x << " " << _viewDirection.y << "" << _viewDirection.z << std::endl;
+  std::cout << "viewDirection: " << _viewDirection.x << " " << _viewDirection.y << " " << _viewDirection.z << std::endl;
 
   float angle = glm::acos(glm::dot(_viewDirection, _up));
   glm::vec3 cross = glm::cross(_viewDirection, _up);

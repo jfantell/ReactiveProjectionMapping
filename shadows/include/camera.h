@@ -39,7 +39,8 @@ class Camera {
   glm::vec3 _eyeDefault;
   glm::vec3 _at;
   glm::vec3 _up = glm::vec3(0,-1,0);
-  glm::vec3 _viewDirection = glm::vec3(0,0,1);
+  glm::vec3 _viewDirection = glm::vec3(0, 0,1);
+//  glm::vec3 _viewDirection = glm::vec3(-0.5453, -0.4389,0.9975);
   glm::vec3 _viewDirectionDefault = _viewDirection;
 
   GLuint _shaderProgramId = 0;

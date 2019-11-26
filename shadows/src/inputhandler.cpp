@@ -4,6 +4,7 @@
 
 #include "inputhandler.h"
 #include "app_state.h"
+#include <iostream>
 
 //Define static variable in cpp file
 Camera* InputHandler:: _c;
@@ -65,9 +66,11 @@ void InputHandler::scroll_callback(GLFWwindow *window, double xoffset, double yo
 }
 
 void InputHandler::cursor_pos_callback(GLFWwindow *window, double x, double y) {
-    if (windowState.ml)
-      _c->updateMouse(glm::vec2(x,y));
-    else
-      windowState.last_x = x;
-      windowState.last_y = y;
+    if (windowState.ml){
+        _c->updateMouse(glm::vec2(x,y));
+    }
+    else {
+        windowState.last_x = x;
+        windowState.last_y = y;
+    }
 }
