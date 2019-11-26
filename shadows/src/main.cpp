@@ -227,7 +227,8 @@ int main(int argc, const char *argv[]) {
 
 
     //Set up variables to rotate light source
-    int rotationCounter = 0;
+    int tickCounter = 0;
+    int updateRealsenseTicks = 20;
     float degreesPerTick = 1;
     float lightRadius = 5;
 
@@ -247,19 +248,23 @@ int main(int argc, const char *argv[]) {
         camera.updateShaderUniforms();
 
         #ifdef REALSENSE
-        auto frames = pipe.wait_for_frames();
-        if (!frames) {
+        if (tickCounter % 20) {
+
+          auto frames = pipe.wait_for_frames();
+          if (!frames) {
             cerr << "Error occured while attempting to get camera frames" << endl;
             return 1;
+          }
+          r_realsense.draw(frames);
         }
-        r_realsense.draw(frames);
+        else r_realsense.draw();
         #endif
 
 
         //Actually rotate light
         glm::vec3 lightPosition =  light.getWorldLocation();
-        lightPosition.x = lightRadius * cos(glm::radians((float) rotationCounter * degreesPerTick));
-        lightPosition.z = lightRadius * sin(glm::radians((float) rotationCounter * degreesPerTick));
+        lightPosition.x = lightRadius * cos(glm::radians((float) tickCounter * degreesPerTick));
+        lightPosition.z = lightRadius * sin(glm::radians((float) tickCounter * degreesPerTick));
         light.setWorldLocation(lightPosition);
 
         // Draw the floor, and the rabbit.
@@ -290,7 +295,7 @@ int main(int argc, const char *argv[]) {
           printf("OpenGL error %08x", err);
         }
 
-        rotationCounter += 1;
+        tickCounter += 1;
 
         // update other events like input handling
         glfwPollEvents();
