@@ -99,6 +99,7 @@ int main(int argc, const char *argv[]) {
     int width, height;
     glfwGetWindowSize(window, &width, &height);
     glfwMakeContextCurrent(window);
+    glViewport(0,0,width,height);
 
     // Record with and height in global variable
     windowState.height = height;

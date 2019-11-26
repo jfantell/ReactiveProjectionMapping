@@ -28,7 +28,7 @@ public:
         width = 0.0;
         fov = glm::radians(60.0f);
         z_near = 0.01f;
-        z_far = 100.0f;
+        z_far = 10.0f;
     }
     float get_aspect_ratio(){
         return (float) width / (float) height;

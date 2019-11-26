@@ -37,37 +37,25 @@ glm::mat4 Camera::getProjection() {
   return _projection;
 }
 
-//void Camera::setWorldLocation(glm::vec3 worldLocation) {
-//  _worldLocation = worldLocation;
-//  computeView();
-//  computeProjection();
-//}
-
-//glm::vec3 Camera::getWorldLocation() {
-//  return _worldLocation;
-//}
-
 void Camera::computeView() {
   _view = glm::lookAt(
           _eye, // Camera is at (4,3,3), in World Space
       _eye + _viewDirection, // and looks at the origin
       _up  // Head is up (set to 0,-1,0 to look upside-down)
   );
-  float rBrown[9] = {0.9993056180948953, -0.03696037875994081, -0.004712965722452996, 0.03671444479747512, 0.998333504916434, -0.04452260666764154, 0.006350683994063414, 0.04431865705535405, 0.998997259981036};
-  float tBrown[3] = {119.5728106196159, -53.34722888908106, 174.9022427120458};
+
+  // BROWN ROTATION + TRANSLATION MATRIX (Comment out when not using projector)
+  float rBrown[9] = {0.996507808516201, -0.03092390501794334, -0.07756223091608143, 0.02496544786410276, 0.9967455972718228, -0.07664816196218925, 0.0796800726605033, 0.07444411607157712, 0.994036799923996};
+  float tBrown[3] = {105.2294283662379,-84.08153502322591,32.49814771812322};
   glm::mat4 T = glm::translate(glm::mat4(1.0f), glm::vec3(tBrown[0]/1000, tBrown[1]/-1000,tBrown[2]/1000)); // scaled and y,z axises are switched
   glm::mat4 R = glm::mat4(rBrown[0], rBrown[1], rBrown[2], 0, rBrown[3], rBrown[4], rBrown[5], 0, rBrown[6], rBrown[7], rBrown[8], 0, 0,0,0,1);
   _view = R * _view;
   _view = T * _view;
-//  _view = glm::translate(mvMat, glm::vec3(0, 0, 0.05+(float)windowState.offset_y*.5));
-//  mvMat = glm::rotate(mvMat, glm::radians((float)windowState.pitch), glm::vec3(1.0f, 0.0f, 0.0f));
-//  mvMat = glm::rotate(mvMat, glm::radians((float)windowState.yaw), glm::vec3(0.0f, 1.0f, 0.0f));
-//  mvMat = glm::translate(mvMat, glm::vec3(0, 0, -0.5f));
 
 }
 
 void Camera::computeProjection() {
-  // Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
+  //METHOD 1: Projection based on Brown Code (FOR PROJECTION MAPPING)
   float near = 0.01;
   float far = 10;
   float A = near + far;
@@ -79,6 +67,8 @@ void Camera::computeProjection() {
   Persp = glm::transpose(Persp);
   glm::mat4 NDC = glm::ortho(0.0f, width_, height_, 0.0f, near, far);
   _projection = NDC * Persp;
+  //METHOD 2: Default OpenGL Projection
+  //_projection = glm::perspective(windowState.get_fov(), windowState.get_aspect_ratio(), windowState.get_z_near(), windowState.get_z_far());
 
 }
 
@@ -108,7 +98,9 @@ void Camera::inputMoveRight() {
 }
 
 void Camera::reset_aspect_ratio() {
+    glViewport(0,0,windowState.width,windowState.height);
     computeProjection();
+
 }
 
 void Camera::zoom(float amount) {
