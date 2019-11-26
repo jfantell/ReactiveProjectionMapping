@@ -120,10 +120,10 @@ int main(int argc, const char *argv[]) {
 
     /* ******** Set up shaders here ************ */
 
-    std::string shadowVertexShader_path = "vertex_shadow.shader";
-    std::string defaultVertexShader_path = "vertex_render.shader";
-    std::string shadowFragmentShader_path = "frag_shadow.shader";
-    std::string defaultFragmentShader_path = "frag_render.shader";
+    std::string shadowVertexShader_path = "../shaders/vertex_shadow.shader";
+    std::string defaultVertexShader_path = "../shaders/vertex_render.shader";
+    std::string shadowFragmentShader_path = "../shaders/frag_shadow.shader";
+    std::string defaultFragmentShader_path = "../shaders/frag_render.shader";
     Shader shadowVertexShader(GL_VERTEX_SHADER);
     Shader defaultVertexShader(GL_VERTEX_SHADER);
     Shader shadowFragmentShader(GL_FRAGMENT_SHADER);
@@ -228,8 +228,8 @@ int main(int argc, const char *argv[]) {
 
     //Set up variables to rotate light source
     int tickCounter = 0;
-    int updateRealsenseTicks = 20;
-    float degreesPerTick = 1;
+    int updateRealsenseTicks = 200;
+    float degreesPerTick = .1;
     float lightRadius = 5;
 
     // Render loop.
@@ -248,7 +248,7 @@ int main(int argc, const char *argv[]) {
         camera.updateShaderUniforms();
 
         #ifdef REALSENSE
-        if (tickCounter % 20) {
+        if (tickCounter == 0) {
 
           auto frames = pipe.wait_for_frames();
           if (!frames) {
@@ -263,7 +263,7 @@ int main(int argc, const char *argv[]) {
 
         //Actually rotate light
         glm::vec3 lightPosition =  light.getWorldLocation();
-        lightPosition.x = lightRadius * cos(glm::radians((float) tickCounter * degreesPerTick));
+        lightPosition.x = -abs(lightRadius * cos(glm::radians((float) tickCounter * degreesPerTick)));
         lightPosition.z = lightRadius * sin(glm::radians((float) tickCounter * degreesPerTick));
         light.setWorldLocation(lightPosition);
 
