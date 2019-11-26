@@ -4,6 +4,7 @@
 #include <iostream>
 #include "camera.h"
 #include "GLFW/glfw3.h"
+#include "r_realsense.h"
 
 class InputHandler {
  public:

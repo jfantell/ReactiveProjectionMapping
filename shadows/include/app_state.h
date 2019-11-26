@@ -29,6 +29,7 @@ public:
         fov = glm::radians(60.0f);
         z_near = 0.01f;
         z_far = 10.0f;
+        update_realsense = false;
     }
     float get_aspect_ratio(){
         return (float) width / (float) height;
@@ -58,6 +59,7 @@ public:
     float fov;
     float z_near;
     float z_far;
+    bool update_realsense;
 };
 
 //Initialize state to hold window information

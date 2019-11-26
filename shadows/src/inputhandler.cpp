@@ -8,7 +8,7 @@
 //Define static variable in cpp file
 Camera* InputHandler:: _c;
 
-void InputHandler::set_camera(Camera *c) {
+void InputHandler::set_camera(Camera *c ) {
     _c = c;
 }
 
@@ -34,6 +34,9 @@ void InputHandler::key_callback(GLFWwindow *window, int key, int sancode, int ac
         windowState.last_x = 0;
         windowState.last_y = 0;
         _c->restoreDefaultEyeLocation();
+    }
+    if (key == GLFW_KEY_F && action == GLFW_PRESS) {
+      windowState.update_realsense = true;
     }
 }
 
