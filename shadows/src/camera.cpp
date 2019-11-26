@@ -49,7 +49,7 @@ glm::mat4 Camera::getProjection() {
 
 void Camera::computeView() {
   _view = glm::lookAt(
-          _eye + _viewDirection, // Camera is at (4,3,3), in World Space
+          _eye, // Camera is at (4,3,3), in World Space
       _at, // and looks at the origin
       _up  // Head is up (set to 0,-1,0 to look upside-down)
   );
@@ -67,7 +67,18 @@ void Camera::computeView() {
 
 void Camera::computeProjection() {
   // Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
-  _projection = glm::perspective(windowState.get_fov(), windowState.get_aspect_ratio(), windowState.get_z_near(), windowState.get_z_far());
+  float near = 0.01;
+  float far = 10;
+  float A = near + far;
+  float B = near * far;
+  float width_ = 960.0;
+  float height_ = 560.0;
+  float kBrown[9] = {320.913404297975, 0, 464.073296207169, 0, 317.2041738539567, 290.5717543103951, 0, 0, 1};
+  glm::mat4 Persp = glm::mat4(kBrown[0]*3.1, kBrown[1], -1*kBrown[2], 0, kBrown[3], -1*kBrown[4]*3.1, -1*kBrown[5], 0, 0, 0, A,B, kBrown[6], kBrown[7], -1*kBrown[8], 0);
+  Persp = glm::transpose(Persp);
+  glm::mat4 NDC = glm::ortho(0.0f, 960.0f, 560.0f, 0.0f, near, far);
+  _projection = NDC * Persp;
+  //_projection = glm::perspective(windowState.get_fov(), windowState.get_aspect_ratio(), windowState.get_z_near(), windowState.get_z_far());
 
 }
 
