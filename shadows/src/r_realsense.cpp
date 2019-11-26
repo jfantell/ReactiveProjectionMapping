@@ -358,6 +358,10 @@ void r_Realsense::pass_two() {
 }
 
 void r_Realsense::draw() {
+  glm::mat4 mvMat = _camera->getView() * _transform.getModelMatrix();
+  glUniformMatrix4fv(_shaderModelId, 1, GL_FALSE, glm::value_ptr( _transform.getModelMatrix()));
+  glUniformMatrix4fv(_shaderViewId, 1, GL_FALSE, glm::value_ptr( _camera->getView()));
+  glUniformMatrix4fv(_shaderModelViewId, 1, GL_FALSE, glm::value_ptr( mvMat));
   glBindVertexArray(_vaoId);
   glDrawElements(GL_TRIANGLES,num_vertices,GL_UNSIGNED_INT, 0);
 }

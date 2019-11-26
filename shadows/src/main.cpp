@@ -153,12 +153,14 @@ int main(int argc, const char *argv[]) {
     /* *********** End Shader code ************* */
 
 
-    // Set up things that need to be updated in the loop.
+  // Set up things that need to be updated in the loop.
 
-    // Create our camera.
-    Camera camera = Camera(window, defaultProgram,glm::vec3(0,0,0), glm::vec3(0, 0, 1),
-                           glm::vec3(0,-1,0));
-    InputHandler::set_camera(&camera);
+  // Create our camera.
+  Camera camera = Camera(window, defaultProgram,glm::vec3(0,0,0), glm::vec3(0, 0, 1),
+                         glm::vec3(0,-1,0));
+  InputHandler::set_camera(&camera);
+
+
 
     //Set up callbacks
     glfwSetWindowSizeCallback(window,  InputHandler::window_size_callback);
@@ -226,6 +228,7 @@ int main(int argc, const char *argv[]) {
     #endif
 
 
+
     //Set up variables to rotate light source
     int tickCounter = 0;
     int updateRealsenseTicks = 200;
@@ -248,7 +251,8 @@ int main(int argc, const char *argv[]) {
         camera.updateShaderUniforms();
 
         #ifdef REALSENSE
-        if (tickCounter == 0) {
+        if (tickCounter == 0 || windowState.update_realsense) {
+          if (windowState.update_realsense) windowState.update_realsense = false;
 
           auto frames = pipe.wait_for_frames();
           if (!frames) {
