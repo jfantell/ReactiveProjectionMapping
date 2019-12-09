@@ -161,7 +161,6 @@ int main(int argc, const char *argv[]) {
   InputHandler::set_camera(&camera);
 
 
-
     //Set up callbacks
     glfwSetWindowSizeCallback(window,  InputHandler::window_size_callback);
     glfwSetMouseButtonCallback(window,InputHandler::mouse_button_callback);
@@ -169,129 +168,89 @@ int main(int argc, const char *argv[]) {
     glfwSetCursorPosCallback(window,InputHandler::cursor_pos_callback);
     glfwSetKeyCallback(window,InputHandler::key_callback);
 
-    /* The r_ in r_Floor means that the class is derived from Renderable()
-     * What this does is:
-     *    Allows us to take all the messy setup code and put it into one spot that pertains to that particular mesh.
-     *    Allows us to simplify the code
-     *    Allows for model specific configuration
-     *    Generally makes things easier.
-     * There are two methods from Renderable() that the descendant class must implement.
-     * These are setup() and draw()
-     * setup() is where you declare EVERYTHING you need to render, set up vaos, vbos, ibos
-     * draw() is where you use the data that you have set up, update shader uniforms, etc. */
-
-    // Create an instance of the floor renderable and set it up.
-//    r_Floor r_floor = r_Floor(defaultProgram, &camera);
-//    r_floor.setup();
-
-    /* Doing transforms with this scheme is very easy.
-     * Simply grab the entity from the Renderable using getEntity()
-     * and do your transformations with the pointer.
-     * any transformation defined in entity.h works */
-
-    // Let's scale up the floor.
-    //r_floor.getTransform()->setModelScale(10.0f);
-    //r_floor.getTransform()->setY(-.5);
-
-
-    // Declare our renderable rabbit model and set it up.
-//    r_Rabbit r_rabbit = r_Rabbit(program, &camera);
-//    r_rabbit.setup();
-
-    // Let's scale up our rabbit.
-//    r_rabbit.getTransform()->setModelScale(1.5f);
-//    r_rabbit.getTransform()->rotateXDegrees(180);
-
+    // Initialize the point light container class.
     PointLight light = PointLight(defaultProgram);
     light.setAmbientColor(glm::vec3(1.0f, 1.0f, 1.0f));
     light.setAmbientStrength(0.1f);
     light.setDiffuseStrength(1.2f);
     light.setSpecularStrength(0.5f);
 
-    //r_LightMarker lightmarker = r_LightMarker(program, &camera, &light);
-    //lightmarker.setup();
 
     #ifdef REALSENSE
-    r_Realsense r_realsense = r_Realsense(defaultProgram, &camera);
-    r_realsense.add_shadow_shader(shadowProgram); //add shadow shader to r_realsense
-    r_realsense.add_light(&light);
-    r_realsense.setup();
+     // If configured to use the realsense, set it up!
+     // Create the r_ (renderable) handler.
+     r_Realsense r_realsense = r_Realsense(defaultProgram, &camera);
 
-    //Initialize the RealSense Camera
-    rs2::pipeline pipe;
-    rs2::config cfg;
+     /* The r_ in r_realsense means that the class is derived from Renderable()
+      * What this does is:
+      *    Allows us to take all the messy setup code and put it into one spot that pertains to that particular mesh.
+      *    Allows us to simplify the code
+      *    Allows for model specific configuration
+      *    Generally makes things easier.
+      * There are two methods from Renderable() that the descendant class must implement.
+      * These are setup() and draw()
+      * setup() is where you declare EVERYTHING you need to render, set up vaos, vbos, ibos
+      * draw() is where you use the data that you have set up, update shader uniforms, etc.
+      * with r_realsense - draw(rs2::frameset &f) is also implemented to draw incoming data. */
 
-    cfg.enable_stream(RS2_STREAM_COLOR, 640, 480, RS2_FORMAT_BGR8, 30);
-    cfg.enable_stream(RS2_STREAM_DEPTH, 640, 480, RS2_FORMAT_Z16, 30);
 
-    rs2::pipeline_profile profile = pipe.start(cfg);
+     // add shadow shader to r_realsense
+     r_realsense.add_shadow_shader(shadowProgram);
+     r_realsense.add_light(&light);
+
+     // finalize the setup and bake the renderable.
+     r_realsense.setup();
+
+     //Initialize the RealSense Camera
+     rs2::pipeline pipe;
+     rs2::config cfg;
+
+     // Realsense initialization constants go here.
+     cfg.enable_stream(RS2_STREAM_COLOR, 640, 480, RS2_FORMAT_BGR8, 30);
+     cfg.enable_stream(RS2_STREAM_DEPTH, 640, 480, RS2_FORMAT_Z16, 30);
+
+     rs2::pipeline_profile profile = pipe.start(cfg);
     #endif
 
-
-
-    //Set up variables to rotate light source
+    // Set up variables to rotate light source
     int tickCounter = 0;
-    int updateRealsenseTicks = 200;
     float degreesPerTick = .1;
     float lightRadius = 5;
 
     // Render loop.
     while (!glfwWindowShouldClose(window)) {
 
-        glClear(GL_DEPTH_BUFFER_BIT);
-        glClear(GL_COLOR_BUFFER_BIT);
-        camera.reset_aspect_ratio();
+        glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
-
-        // Tell OpenGL to clean off the canvas.
-//        GLCALL(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
+        camera.reset_aspect_ratio(); // Listen for window updates within camera.
 
         // Update the light uniforms.
         light.updateShaderUniforms();
         camera.updateShaderUniforms();
 
         #ifdef REALSENSE
-        if (tickCounter == 0 || windowState.update_realsense) {
-          if (windowState.update_realsense) windowState.update_realsense = false;
+          // If we happen to be on the very first loop, or have an update queued: get a new frame.
+          if (tickCounter == 0 || windowState.update_realsense) {
+            if (windowState.update_realsense) windowState.update_realsense = false;
 
-          auto frames = pipe.wait_for_frames();
-          if (!frames) {
-            cerr << "Error occured while attempting to get camera frames" << endl;
-            return 1;
+            auto frames = pipe.wait_for_frames();
+            if (!frames) {
+              cerr << "Error occured while attempting to get camera frames" << endl;
+              return 1;
+            }
+            // draw(rs2::frameset &f) updates the renderable's mesh and process all the vertex data.
+            r_realsense.draw(frames);
           }
-          r_realsense.draw(frames);
-        }
-        else r_realsense.draw();
+          // draw() simply redraws the previously calculated mesh and does not process any vertex data.
+          else r_realsense.draw();
         #endif
 
 
-        //Actually rotate light
+        // Rotate the light in a 180 degree swing behind the camera.
         glm::vec3 lightPosition =  light.getWorldLocation();
         lightPosition.x = -abs(lightRadius * cos(glm::radians((float) tickCounter * degreesPerTick)));
         lightPosition.z = lightRadius * sin(glm::radians((float) tickCounter * degreesPerTick));
         light.setWorldLocation(lightPosition);
-
-        // Draw the floor, and the rabbit.
-//        r_floor.draw();
-//        r_rabbit.draw();
-
-//        r_floor.draw();
-//    r_rabbit.draw();
-//    r_rabbit.getTransform()->rotateYDegrees(1.0);
-
-        // Make the light roll out of the scene to test lighting.
-//        glm::vec3 lightPosition = light.getWorldLocation();
-//        lightPosition.x += 0.01f;
-//        lightPosition.y -= 0.01f;
-//        light.setWorldLocation(lightPosition);
-
-        // Draw the marker of the light source's location.
-//    lightmarker.draw();
-
-        /* ********* END drawing code *********** */
-        // Reset all the bound buffers / arrays to unbound.
-//    GLCALL(glBindBuffer(GL_ARRAY_BUFFER, 0));
-//    GLCALL(glBindVertexArray(0));
 
 
         GLenum err = glGetError();
@@ -311,9 +270,6 @@ int main(int argc, const char *argv[]) {
     if (err != GL_NO_ERROR) {
         printf("OpenGL error %08x", err);
     }
-
-    //GLCALL(glDeleteBuffers(1, &mesh_ib.getBufferId())));
-    //GLCALL(glDeleteBuffers(1, &vertices));
 
     // close GL context and any other GLFW resources
     glfwTerminate();
