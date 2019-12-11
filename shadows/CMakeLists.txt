@@ -18,7 +18,7 @@ endif()
 
 if(LINUX)
 
-    file(GLOB SOURCES "src/*.cpp")
+    set(NEW_SOURCES src/camera.cpp src/indexbuffer.cpp src/inputhandler.cpp src/loadstb_image.cpp src/main.cpp src/mesh.cpp src/pcl_wrapper.cpp src/r_realsense.cpp src/shader.cpp src/vertexbuffer.cpp)
     include_directories(include)
 
     message("LINUX")
@@ -47,7 +47,7 @@ if(LINUX)
             ${OpenCV_LIBS}
             ${PCL_LIBRARIES}
             ${PDAL})
-    add_executable(shadows ${SOURCES} include/app_state.h src/r_realsense.cpp include/r_realsense.h src/pcl_wrapper.cpp include/pcl_wrapper.h)
+    add_executable(shadows ${NEW_SOURCES})
     target_link_libraries(shadows ${LIBRARIES})
 
 else()
@@ -58,8 +58,9 @@ else()
     set(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINK_FLAGS}")
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/build")
 
-    file(GLOB SOURCES "src/*.cpp")
-    message("SOURCES: ${SOURCES}")
+#    file(GLOB SOURCES "src/*.cpp")
+#    message("SOURCES: ${SOURCES}")
+    set(NEW_SOURCES src/camera.cpp src/indexbuffer.cpp src/inputhandler.cpp src/loadstb_image.cpp src/main.cpp src/mesh.cpp src/pcl_wrapper.cpp src/r_floor.cpp src/r_realsense.cpp src/shader.cpp src/vertexbuffer.cpp)
     include_directories(include)
 
     # Listen here, kid. FINDGlew.cmake, the module that's supposed to do all this for pcl
@@ -117,7 +118,7 @@ else()
             ${PCL_LIBRARIES}
             ${OPENCV}
             ${REALSENSE2})
-    add_executable(shadows ${SOURCES})
+    add_executable(shadows ${NEW_SOURCES})
     target_link_libraries(shadows ${LIBRARIES})
 
 endif()

@@ -13,6 +13,9 @@
 enum TextureMode { Color = 1, Image = 2};
 extern int textureMode;
 
+#define REALSENSE  // DEFINE THIS IF USING THE REALSENSE - used to switch projection modes in camera, and handlers in main.
+
+
 //Modified from https://github.com/IntelRealSense/librealsense/blob/master/examples/example.hpp
 class window_state {
 public:

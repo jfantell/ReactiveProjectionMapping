@@ -1,6 +1,5 @@
 // Let's define a macro and a function to catch any OpenGl errors.
 
-#define REALSENSE  //DEFINE THIS IF USING THE REALSENSE//
 
 #ifdef _DEBUG
 #define GLCALL(stmt) do { \
@@ -139,17 +138,6 @@ int main(int argc, const char *argv[]) {
     GLuint shadowProgram = buildShaderProgram(shadowVertexShader, shadowFragmentShader);
     GLuint defaultProgram = buildShaderProgram(defaultVertexShader, defaultFragmentShader);
 
-    // All uniforms required for this to work. They are updated elsewhere (camera, renderable, light)
-    GLuint s_shadowMPVID = glGetUniformLocation(shadowProgram, "shadowMVP");
-    GLuint s_MatrixID = glGetUniformLocation(defaultProgram, "MVP");
-    GLuint s_ModelID = glGetUniformLocation(defaultProgram, "Model");
-    GLuint s_ambientLightStrength = glGetUniformLocation(defaultProgram, "ambientLightStrength");
-    GLuint s_ambientLightColor = glGetUniformLocation(defaultProgram, "ambientLightColor");
-    GLuint s_specularStrength = glGetUniformLocation(defaultProgram, "specularStrength");
-    GLuint s_lightPosition = glGetUniformLocation(defaultProgram, "lightPosition");
-    GLuint s_viewPosition = glGetUniformLocation(defaultProgram, "viewPosition");
-
-
     /* *********** End Shader code ************* */
 
 
@@ -180,19 +168,6 @@ int main(int argc, const char *argv[]) {
      // If configured to use the realsense, set it up!
      // Create the r_ (renderable) handler.
      r_Realsense r_realsense = r_Realsense(defaultProgram, &camera);
-
-     /* The r_ in r_realsense means that the class is derived from Renderable()
-      * What this does is:
-      *    Allows us to take all the messy setup code and put it into one spot that pertains to that particular mesh.
-      *    Allows us to simplify the code
-      *    Allows for model specific configuration
-      *    Generally makes things easier.
-      * There are two methods from Renderable() that the descendant class must implement.
-      * These are setup() and draw()
-      * setup() is where you declare EVERYTHING you need to render, set up vaos, vbos, ibos
-      * draw() is where you use the data that you have set up, update shader uniforms, etc.
-      * with r_realsense - draw(rs2::frameset &f) is also implemented to draw incoming data. */
-
 
      // add shadow shader to r_realsense
      r_realsense.add_shadow_shader(shadowProgram);

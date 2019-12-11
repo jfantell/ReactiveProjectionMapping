@@ -1,18 +1,16 @@
-//
-// Created by John Fantell on 11/24/19.
-//
-
 #include "inputhandler.h"
 #include "app_state.h"
 #include <iostream>
 
-//Define static variable in cpp file
+// Define static variable in cpp file
 Camera* InputHandler:: _c;
 
+// Simple setter for the camera pointer.
 void InputHandler::set_camera(Camera *c ) {
     _c = c;
 }
 
+// Switch through possible input keys and do their respective operations.
 void InputHandler::key_callback(GLFWwindow *window, int key, int sancode, int action, int mods) {
     if (key == GLFW_KEY_UP) {
         _c->inputMoveUp();
@@ -48,6 +46,7 @@ void InputHandler::window_size_callback(GLFWwindow *window, int newWidth, int ne
     _c->reset_aspect_ratio();
 }
 
+// If the mouse is clicked, handle it here.
 void InputHandler::mouse_button_callback(GLFWwindow *window, int button, int action, int mods) {
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
         windowState.ml = true;
@@ -56,7 +55,7 @@ void InputHandler::mouse_button_callback(GLFWwindow *window, int button, int act
         windowState.ml = false;
     }
 }
-
+// When the mouse is zoomed in X OR Y (2D scroll) move the camera appropriately.
 void InputHandler::scroll_callback(GLFWwindow *window, double xoffset, double yoffset) {
     windowState.offset_x -= static_cast<float>(xoffset);
     windowState.offset_y -= static_cast<float>(yoffset);
@@ -65,6 +64,7 @@ void InputHandler::scroll_callback(GLFWwindow *window, double xoffset, double yo
     _c->strafe(xoffset);
 }
 
+// Handle Mouse position here. if the mouse moves anywhere within the window, callback is here.
 void InputHandler::cursor_pos_callback(GLFWwindow *window, double x, double y) {
     if (windowState.ml){
         _c->updateMouse(glm::vec2(x,y));

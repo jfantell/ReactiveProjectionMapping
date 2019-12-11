@@ -7,6 +7,7 @@
 
 Mesh::Mesh() {}
 
+// Take in a path to an obj file.
 void Mesh::loadOBJ(std::string pathtofile) {
 
   FILE * file = fopen(pathtofile.c_str(), "r");
@@ -78,7 +79,6 @@ void Mesh::loadOBJ(std::string pathtofile) {
 
       }
     }
-  //}
 
 unsigned int Mesh::vertexCount() {
   if (!_interlaced) return vertices.size();
@@ -277,7 +277,6 @@ void Mesh::interlaceAll() {
   delete newBuf;
   _interlaced = true;
 }
-
 
 void Mesh::printAttributes() {
   if (!_interlaced) {
