@@ -1,12 +1,9 @@
-//
-// Created by hayley on 11/20/19.
-//
-
 #ifndef SHADOWS_R_REALSENSE_H
 #define SHADOWS_R_REALSENSE_H
 
 #include "renderable.h"
 #include "pointlight.h"
+#include "GL/glew.h"
 #include <iostream>
 #include "camera.h"
 #include <mesh.h>

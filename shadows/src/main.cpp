@@ -21,20 +21,15 @@
 #include <math.h>
 
 #include "shader.h"
-#include "cubedata.h"
 #include "vertexbuffer.h"
 #include "indexbuffer.h"
 #include "mesh.h"
 #include "camera.h"
-#include "scene.h"
 #include "transform.h"
 #include "pointlight.h"
 
 #include "app_state.h"
 
-#include "r_floor.h"
-#include "r_rabbit.h"
-#include "r_lightmarker.h"
 #include "r_realsense.h"
 #include "inputhandler.h"
 

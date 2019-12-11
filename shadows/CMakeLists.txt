@@ -18,7 +18,9 @@ endif()
 
 if(LINUX)
 
-    set(NEW_SOURCES src/camera.cpp src/indexbuffer.cpp src/inputhandler.cpp src/loadstb_image.cpp src/main.cpp src/mesh.cpp src/pcl_wrapper.cpp src/r_realsense.cpp src/shader.cpp src/vertexbuffer.cpp)
+    file(GLOB SOURCES "src/*.cpp")
+    set(NEW_SOURCES src/camera.cpp src/indexbuffer.cpp src/inputhandler.cpp src/loadstb_image.cpp src/main.cpp src/mesh.cpp src/pcl_wrapper.cpp src/r_floor.cpp
+            src/r_lightmarker.cpp src/r_objmodel.cpp src/r_abbit.cpp src/r_realsense.cpp src/scene.cpp src/shader.cpp src/vertexbuffer.cpp)
     include_directories(include)
 
     message("LINUX")
@@ -60,7 +62,7 @@ else()
 
 #    file(GLOB SOURCES "src/*.cpp")
 #    message("SOURCES: ${SOURCES}")
-    set(NEW_SOURCES src/camera.cpp src/indexbuffer.cpp src/inputhandler.cpp src/loadstb_image.cpp src/main.cpp src/mesh.cpp src/pcl_wrapper.cpp src/r_floor.cpp src/r_realsense.cpp src/shader.cpp src/vertexbuffer.cpp)
+    set(NEW_SOURCES src/camera.cpp src/indexbuffer.cpp src/inputhandler.cpp src/loadstb_image.cpp src/main.cpp src/mesh.cpp src/pcl_wrapper.cpp src/r_realsense.cpp src/shader.cpp src/vertexbuffer.cpp)
     include_directories(include)
 
     # Listen here, kid. FINDGlew.cmake, the module that's supposed to do all this for pcl

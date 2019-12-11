@@ -1,7 +1,4 @@
-//
-// Created by hayley on 11/20/19.
-//
-
+#include <GL/glew.h>
 #include "r_realsense.h"
 #include "r_objmodel.h"
 #include "stb_image.h"
@@ -16,7 +13,6 @@
 #include "pcl_wrapper.h"
 #include <glm/gtc/type_ptr.hpp>
 #define GLM_ENABLE_EXPERIMENTAL
-#include <GL/glew.h>
 
 #define numVAOs 1
 #define numVBOs 5
