@@ -6,28 +6,26 @@
 #### Jacob Thomas
 
 Installation
-In order to develop OpenGL applications on Ubuntu 18.04 follow the instructions below:
+In order to run this code, please follow the instructions below.
 
-Open a terminal window
+1. Open a terminal window
 
-Install GLEW: sudo apt install sudo apt install libglew-dev
+2. Install GLEW: sudo apt install sudo apt install libglew-dev
 
-Install GLFW3: sudo apt install libglfw3-dev
+3. Install GLFW3: sudo apt install libglfw3-dev
 
-Install RealSense2 SDK: follow (well written) instructions at https://github.com/IntelRealSense/librealsense/blob/master/doc/distribution_linux.md
+4. Install RealSense2 SDK: follow (well written) instructions at https://github.com/IntelRealSense/librealsense/blob/master/doc/distribution_linux.md
 
-Install OpenCV: sudo apt install libopencv-dev
+5. Install OpenCV: sudo apt install libopencv-dev
 
-Install GLM: sudo apt install libglm-dev
+6. Install GLM: sudo apt install libglm-dev
 
-Install PCL
+7. Install PCL
 
-a. Clone git repo: https://github.com/PointCloudLibrary/pcl.git
+  a. Clone git repo: https://github.com/PointCloudLibrary/pcl.git
 
-b. Extract repository to folder of choosing and navigate to this repository in terminal.
+  b. Extract repository to folder of choosing and navigate to this repository in terminal.
 
-c. Install Eigen3: sudo apt install libeigen3-dev libflann-dev libvtk7-dev libboost-all-dev
+  c. Install PCL dependencies: sudo apt install libeigen3-dev libflann-dev libvtk7-dev libboost-all-dev
 
-c. Run mkdir build && cd build
-
-Install PDAL: sudo apt install libpdal-dev
+  d. Run mkdir build && cd build
