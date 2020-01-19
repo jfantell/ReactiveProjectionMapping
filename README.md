@@ -19,10 +19,10 @@ In order to run this code, please follow the instructions below.
 
 7. Install PCL
 
-    a. Clone git repo: https://github.com/PointCloudLibrary/pcl.git
+    a. Install PCL dependencies: sudo apt install libeigen3-dev libflann-dev libvtk7-dev libboost-all-dev
+    
+    b. Clone git repo: https://github.com/PointCloudLibrary/pcl.git
 
-    b. Extract repository to folder of choosing and navigate to this repository in terminal.
-
-    c. Install PCL dependencies: sudo apt install libeigen3-dev libflann-dev libvtk7-dev libboost-all-dev
+    c. Extract repository to folder of choosing and navigate to this repository in terminal.
 
     d. Run mkdir build && cd build
