@@ -1,11 +1,8 @@
-# RAR: Reactive Augmented Reality
-## is a dynamic projection mapping system developed at Rensselaer Polytechnic Institute.
-### Created By:
-#### Hayley Roy Gill
-#### John Fantell
-#### Jacob Thomas
+# RAR: Reactive Augmented Reality is a dynamic projection mapping system developed at Rensselaer Polytechnic Institute.
+## Created By: Hayley Roy Gill, John Fantell, Jacob Thomas
 
 Installation
+
 In order to run this code, please follow the instructions below.
 
 1. Open a terminal window
@@ -22,10 +19,10 @@ In order to run this code, please follow the instructions below.
 
 7. Install PCL
 
-  a. Clone git repo: https://github.com/PointCloudLibrary/pcl.git
+    a. Clone git repo: https://github.com/PointCloudLibrary/pcl.git
 
-  b. Extract repository to folder of choosing and navigate to this repository in terminal.
+    b. Extract repository to folder of choosing and navigate to this repository in terminal.
 
-  c. Install PCL dependencies: sudo apt install libeigen3-dev libflann-dev libvtk7-dev libboost-all-dev
+    c. Install PCL dependencies: sudo apt install libeigen3-dev libflann-dev libvtk7-dev libboost-all-dev
 
-  d. Run mkdir build && cd build
+    d. Run mkdir build && cd build
