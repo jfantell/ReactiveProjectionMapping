@@ -19,8 +19,6 @@ endif()
 if(LINUX)
 
     file(GLOB SOURCES "src/*.cpp")
-    set(NEW_SOURCES src/camera.cpp src/indexbuffer.cpp src/inputhandler.cpp src/loadstb_image.cpp src/main.cpp src/mesh.cpp src/pcl_wrapper.cpp src/r_floor.cpp
-            src/r_lightmarker.cpp src/r_objmodel.cpp src/r_abbit.cpp src/r_realsense.cpp src/scene.cpp src/shader.cpp src/vertexbuffer.cpp)
     include_directories(include)
 
     message("LINUX")
@@ -28,10 +26,10 @@ if(LINUX)
     find_library(GL libGL.so.1 HINTS /usr/lib/x86_64-linux-gnu REQUIRED)
     find_library(GLEW GLEW REQUIRED)
     find_library(GLFW libglfw.so.3 HINTS /usr/lib/x86_64-linux-gnu REQUIRED)
-    find_library(REALSENSE2 realsense2 REQUIRED)
+    find_library(REALSENSE2 librealsense2.so HINTS /usr/lib/x86_64-linux-gnu REQUIRED)
     find_library(SOIL2 soil2-debug HINTS /usr/lib)
     find_package(OpenCV REQUIRED)
-    find_package(PCL 1.3 REQUIRED)
+    find_package(PCL 1.8 REQUIRED)
 
     # Ensure all libraries are found
     MESSAGE("STATUS ${GL} ${GLEW} ${GLFW} ${REALSENSE2} ${SOIL2} ${OpenCV_LIBS} ${PCL_LIBRARIES}")
@@ -49,7 +47,7 @@ if(LINUX)
             ${OpenCV_LIBS}
             ${PCL_LIBRARIES}
             ${PDAL})
-    add_executable(shadows ${NEW_SOURCES})
+    add_executable(shadows ${SOURCES})
     target_link_libraries(shadows ${LIBRARIES})
 
 else()
@@ -62,7 +60,7 @@ else()
 
 #    file(GLOB SOURCES "src/*.cpp")
 #    message("SOURCES: ${SOURCES}")
-    set(NEW_SOURCES src/camera.cpp src/indexbuffer.cpp src/inputhandler.cpp src/loadstb_image.cpp src/main.cpp src/mesh.cpp src/pcl_wrapper.cpp src/r_realsense.cpp src/shader.cpp src/vertexbuffer.cpp)
+    set(NEW_SOURCES src/camera.cpp src/indexbuffer.cpp src/inputhandler.cpp src/loadstb_image.cpp src/main.cpp src/mesh.cpp src/pcl_wrapper.cpp src/r_realsense.cpp src/shader.cpp src/vertexbuffer.cpp src/main.cpp)
     include_directories(include)
 
     # Listen here, kid. FINDGlew.cmake, the module that's supposed to do all this for pcl
