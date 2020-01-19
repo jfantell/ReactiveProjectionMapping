@@ -1,6 +1,10 @@
 # RAR: Reactive Augmented Reality is a dynamic projection mapping system developed at Rensselaer Polytechnic Institute.
 ## Created By: Hayley Roy Gill, John Fantell, Jacob Thomas
 
+A description of the project and associated documentation can be found [here](https://docs.google.com/document/d/1wBSYk6mY-V3U5HuCtDWflDMBsRbJjLrnCX-JDJTwIB0/edit?usp=sharing).
+
+A video demonstration of the project can be found [here](https://youtu.be/G3er5F2yGaY).
+
 This codebase was developed and tested with the [Intel RealSense D435 camera](https://www.intelrealsense.com/depth-camera-d435/). 
 
 Ubuntu Linux Installation
