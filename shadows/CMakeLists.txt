@@ -13,29 +13,71 @@ if(UNIX AND NOT APPLE)
     set(LINUX TRUE)
 endif()
 
+
 if(LINUX)
     message("LINUX")
 
-    find_library(GL libGL.so.1 HINTS /usr/lib/x86_64-linux-gnu REQUIRED)
-    find_library(GLEW GLEW REQUIRED)
-    find_library(GLFW libglfw.so.3 HINTS /usr/lib/x86_64-linux-gnu REQUIRED)
-    find_library(REALSENSE2 librealsense2.so HINTS /usr/lib/x86_64-linux-gnu REQUIRED)
+    # OpenGL
+    set(OPENGL_FOUND 1)
+    set(OPENGL_LIBRARIES ${PROJECT_SOURCE_DIR}/lib/ubuntu/libGL.so.1.0.0)
+
+    if(OPENGL_FOUND)
+        message("OPENGL LIBRARIES: ${OPENGL_LIBRARIES}")
+    endif()
+
+    # GLEW
+    set(GLEW_FOUND 1)
+    set(GLEW_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/include/ubuntu/GL/)
+    set(GLEW_LIBRARIES ${PROJECT_SOURCE_DIR}/lib/ubuntu/libGLEW.so)
+
+    if(GLEW_FOUND)
+        include_directories(${GLEW_INCLUDE_DIRS})
+        message("GLEW LIBRARIES: ${GLEW_LIBRARIES}")
+    endif()
+
+    # GLFW
+    set(GLFW_FOUND 1)
+    set(GLFW_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/include/ubuntu/GLFW/)
+    set(GLFW_LIBRARIES ${PROJECT_SOURCE_DIR}/lib/ubuntu/libglfw.so.3.2)
+
+    if(GLFW_FOUND)
+        include_directories(${GLFW_INCLUDE_DIRS})
+        message("GLFW LIBRARIES: ${GLFW_LIBRARIES}")
+    endif()
+
+    # GLM
+    set(GLM_FOUND 1)
+    set(GLM_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/include/ubuntu/glm/)
+
+    if(GLM_FOUND)
+        include_directories(${GLM_INCLUDE_DIRS})
+        message("GLM INCLUDE_DIRS: ${GLM_INCLUDE_DIRS}")
+    endif()
+
+    # REALSENSE2
+    set(REALSENSE2_FOUND 1)
+    set(REALSENSE2_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/include/ubuntu/librealsense2)
+    set(REALSENSE2_LIBRARIES ${PROJECT_SOURCE_DIR}/lib/ubuntu/librealsense2.so.2.31.0)
+
+    if(REALSENSE2_FOUND)
+        include_directories(${REALSENSE2_INCLUDE_DIRS})
+        message("REALSENSE2 LIBRARIES: ${REALSENSE2_LIBRARIES}")
+    endif()
+
+    # OpenCV
     find_package(OpenCV REQUIRED)
-    find_package(PCL 1.8 REQUIRED)
 
-    # Ensure all libraries are found
-    MESSAGE("STATUS ${GL} ${GLEW} ${GLFW} ${REALSENSE2} ${SOIL2} ${OpenCV_LIBS} ${PCL_LIBRARIES}")
-
-    # Per PCL documentation
+    # PCL
+    find_package(PCL 1 REQUIRED)
     link_directories(${PCL_LIBRARY_DIRS})
     add_definitions(${PCL_DEFINITIONS})
     include_directories(${PCL_INCLUDE_DIRS})
 
     set(LIBRARIES
-            ${GLEW}
-            ${GLFW}
-            ${REALSENSE2}
-            ${GL}
+            ${OPENGL_LIBRARIES}
+            ${GLEW_LIBRARIES}
+            ${GLFW_LIBRARIES}
+            ${REALSENSE2_LIBRARIES}
             ${OpenCV_LIBS}
             ${PCL_LIBRARIES})
 
@@ -75,6 +117,7 @@ else()
     set(REALSENSE2_LIBRARIES ${PROJECT_SOURCE_DIR}/lib/macosx/librealsense2/librealsense2.dylib)
 
     if(REALSENSE2_FOUND)
+        include_directories(${REALSENSE2_INCLUDE_DIRS})
         message("REALSENSE2 LIBRARIES ${REALSENSE2_LIBRARIES}")
     endif()
 
