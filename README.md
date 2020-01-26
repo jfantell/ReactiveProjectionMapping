@@ -24,12 +24,8 @@ This codebase was developed and tested with the [Intel RealSense D435 camera](ht
 In order to run this code, please follow the instructions below.
 
 1. Open a terminal window
-2. Install GLEW: `sudo apt install libglew-dev`
-3. Install GLFW3: `sudo apt install libglfw3-dev`
-4. Install RealSense2 SDK: follow (well written) instructions at https://github.com/IntelRealSense/librealsense/blob/master/doc/distribution_linux.md
-5. Install OpenCV: `sudo apt install libopencv-dev`
-6. Install GLM: `sudo apt install libglm-dev`
-7. Install PCL
+2. Install OpenCV: `sudo apt install libopencv-dev`
+3. Install PCL
     1. Install PCL dependencies: `sudo apt install libeigen3-dev libflann-dev libvtk7-dev libboost-all-dev`
     2. Clone git repo: https://github.com/PointCloudLibrary/pcl.git
     3. Extract repository to folder of choosing and navigate to this repository in terminal.
