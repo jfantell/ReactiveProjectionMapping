@@ -1,5 +1,5 @@
 # RAR: Reactive Augmented Reality is a dynamic projection mapping system developed at Rensselaer Polytechnic Institute.
-## Created By: Hayley Roy Gill, John Fantell, Jacob Thomas
+### Created By: Hayley Roy Gill, John Fantell, Jacob Thomas
 
 A description of the project and associated documentation can be found [here](https://docs.google.com/document/d/1wBSYk6mY-V3U5HuCtDWflDMBsRbJjLrnCX-JDJTwIB0/edit?usp=sharing).
 
@@ -7,7 +7,19 @@ A video demonstration of the project can be found [here](https://youtu.be/G3er5F
 
 This codebase was developed and tested with the [Intel RealSense D435 camera](https://www.intelrealsense.com/depth-camera-d435/). You must have an Intel RealSense camera to run this codebase.
 
-Ubuntu Linux Installation (Instructions tested on Ubuntu 18.04.3)
+## Usage
+
+    1. Plug an Intel RealSense camera into your computer via USB-C.
+    2. Compile the source code (or use the executable already included in the repo, which can be found in the `build` folder)
+    2. Launch the program with one the following command line arguments:
+        a. `1` # this will enable color projection mapping
+        b. `2 /path/to/image_file/` # this will enable texture projection mapping
+    3. Press the `f` key on the keyboard to re-scan the scene
+    4. Press the `r` key on the keyboard to reset the OpenGL view
+        a. You can rotate the view by dragging the contents of the OpenGL window with your mouse/trackpad.
+        b. You can translate the view by using the arrow keys on your keyboard.
+
+## Ubuntu Linux Installation (Instructions tested on Ubuntu 18.04.3)
 
 In order to run this code, please follow the instructions below.
 
