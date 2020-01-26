@@ -37,3 +37,11 @@ In order to run this code, please follow the instructions below.
     5. Run `cmake ..`
     6. Run `make`
     7. Run `sudo make install`
+    
+## Mac OS Installation (Instructions tested on macOS Catalina 10.15)
+
+1. Open a terminal window
+2. Install OpenCV: `brew install opencv`
+3. Install PCL: `brew install pcl`
+
+All of the other required libraries and their respective header files have been included in the project repository.
