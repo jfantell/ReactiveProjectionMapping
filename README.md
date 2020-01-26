@@ -12,12 +12,12 @@ This codebase was developed and tested with the [Intel RealSense D435 camera](ht
 1. Plug an Intel RealSense camera into your computer via USB-C.
 2. Compile the source code (or use the executable already included in the repo, which can be found in the `build` folder)
 3. Launch the program with one the following command line arguments:
-	a.`1` # this will enable color projection mapping
-	b. `2 /path/to/image_file/` # this will enable texture projection mapping
+    - `1` # this will enable color projection mapping
+    - `2 /path/to/image_file/` # this will enable texture projection mapping
 4. Press the `f` key on the keyboard to re-scan the scene
 5. Press the `r` key on the keyboard to reset the OpenGL view:
-	a. You can rotate the view by dragging the contents of the OpenGL window with your mouse/trackpad.   
-	b. You can translate the view by using the arrow keys on your keyboard.
+    - You can rotate the view by dragging the contents of the OpenGL window with your mouse/trackpad.   
+    - You can translate the view by using the arrow keys on your keyboard.
 
 ## Ubuntu Linux Installation (Instructions tested on Ubuntu 18.04.3)
 
@@ -30,10 +30,10 @@ In order to run this code, please follow the instructions below.
 5. Install OpenCV: `sudo apt install libopencv-dev`
 6. Install GLM: `sudo apt install libglm-dev`
 7. Install PCL
-    a. Install PCL dependencies: `sudo apt install libeigen3-dev libflann-dev libvtk7-dev libboost-all-dev`
-    b. Clone git repo: https://github.com/PointCloudLibrary/pcl.git
-    c. Extract repository to folder of choosing and navigate to this repository in terminal.
-    d. Run `mkdir build && cd build`
-    e. Run `cmake ..`
-    f. Run `make`
-    g. Run `sudo make install`
+    1. Install PCL dependencies: `sudo apt install libeigen3-dev libflann-dev libvtk7-dev libboost-all-dev`
+    2. Clone git repo: https://github.com/PointCloudLibrary/pcl.git
+    3. Extract repository to folder of choosing and navigate to this repository in terminal.
+    4. Run `mkdir build && cd build`
+    5. Run `cmake ..`
+    6. Run `make`
+    7. Run `sudo make install`
