@@ -52,7 +52,7 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="shadows" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="SHADOWS" TARGET_NAME="shadows" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="SHADOWS" RUN_TARGET_NAME="shadows">
+    <configuration name="shadows" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="1" PASS_PARENT_ENVS_2="true" PROJECT_NAME="SHADOWS" TARGET_NAME="shadows" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="SHADOWS" RUN_TARGET_NAME="shadows">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -72,7 +72,8 @@
       <workItem from="1579065940061" duration="992000" />
       <workItem from="1579067292833" duration="3412000" />
       <workItem from="1579104326594" duration="661000" />
-      <workItem from="1579393593635" duration="3905000" />
+      <workItem from="1579393593635" duration="4840000" />
+      <workItem from="1580011832252" duration="2865000" />
     </task>
     <servers />
   </component>

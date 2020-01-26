@@ -20,10 +20,7 @@
 
 #include "shader.h"
 #include "vertexbuffer.h"
-#include "indexbuffer.h"
-#include "mesh.h"
 #include "camera.h"
-#include "transform.h"
 #include "pointlight.h"
 
 #include "app_state.h"
@@ -49,9 +46,8 @@ int main(int argc, const char *argv[]) {
     // start GL context and O/S window using the GLFW helper library
     // Ensure that the correct number of command line arguments have been entered
     if (argc < 2) {
-        cout
-                << "Please provide the following required input arguments: Mode [Texture Path] "
-                << endl;
+        cout << "Please provide the following required input arguments: Mode [Texture Path] " << endl;
+        cout << "Modes ==> Color: '1' OR Texture: '2 \"/path/to/image\"'" << endl;
         return 1;
     }
 
@@ -95,6 +91,7 @@ int main(int argc, const char *argv[]) {
     // Record with and height in global variable
     windowState.height = height;
     windowState.width = width;
+    glViewport(0,0,windowState.width,windowState.height);
 
     // start GLEW extension handler
     glewExperimental = GL_TRUE;

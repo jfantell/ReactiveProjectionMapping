@@ -43,6 +43,7 @@ void InputHandler::key_callback(GLFWwindow *window, int key, int sancode, int ac
 void InputHandler::window_size_callback(GLFWwindow *window, int newWidth, int newHeight) {
     windowState.width = newWidth;
     windowState.height = newHeight;
+    glViewport(0,0,windowState.width,windowState.height);
     _c->reset_aspect_ratio();
 }
 

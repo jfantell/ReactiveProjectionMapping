@@ -41,6 +41,15 @@ but this file does not exist.  Possible reasons include:
    "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
 but not all the files it references.
 
+-- The imported target "pvtk" references the file
+   "/usr/bin/pvtk"
+but this file does not exist.  Possible reasons include:
+* The file was deleted, renamed, or moved to another location.
+* An install or uninstall procedure did not complete successfully.
+* The installation package was faulty and contained
+   "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+but not all the files it references.
+
 ** WARNING ** io features related to pcap will be disabled
 ** WARNING ** io features related to png will be disabled
 -- LIBUSB_1_LIBRARY (missing: LIBUSB_1_INCLUDE_DIR) 
