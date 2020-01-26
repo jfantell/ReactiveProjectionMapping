@@ -1,3 +1,0 @@
-/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles/shadows.dir
