@@ -12,7 +12,7 @@ This codebase was developed and tested with the [Intel RealSense D435 camera](ht
    1. Plug an Intel RealSense camera into your computer via USB-C.
    2. Compile the source code (or use the executable already included in the repo, which can be found in the `build` folder)
    3. Launch the program with one the following command line arguments:
-       a. `1` # this will enable color projection mapping
+        a. `1` # this will enable color projection mapping
        b. `2 /path/to/image_file/` # this will enable texture projection mapping
    4. Press the `f` key on the keyboard to re-scan the scene
    5. Press the `r` key on the keyboard to reset the OpenGL view
