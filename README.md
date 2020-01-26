@@ -5,7 +5,7 @@ A description of the project and associated documentation can be found [here](ht
 
 A video demonstration of the project can be found [here](https://youtu.be/G3er5F2yGaY).
 
-This codebase was developed and tested with the [Intel RealSense D435 camera](https://www.intelrealsense.com/depth-camera-d435/). 
+This codebase was developed and tested with the [Intel RealSense D435 camera](https://www.intelrealsense.com/depth-camera-d435/). You must have an Intel RealSense camera to run this codebase.
 
 Ubuntu Linux Installation
 
