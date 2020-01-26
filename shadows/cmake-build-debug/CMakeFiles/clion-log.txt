@@ -1,28 +1,6 @@
 /opt/clion-2019.2.4/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /media/hayley/RealNVME/ComputerGraphicsProject/shadows
--- The C compiler identification is GNU 7.4.0
--- The CXX compiler identification is GNU 7.4.0
--- Check for working C compiler: /usr/bin/cc
--- Check for working C compiler: /usr/bin/cc -- works
--- Detecting C compiler ABI info
--- Detecting C compiler ABI info - done
--- Detecting C compile features
--- Detecting C compile features - done
--- Check for working CXX compiler: /usr/bin/c++
--- Check for working CXX compiler: /usr/bin/c++ -- works
--- Detecting CXX compiler ABI info
--- Detecting CXX compiler ABI info - done
--- Detecting CXX compile features
--- Detecting CXX compile features - done
 LINUX
--- Found OpenCV: /usr/local (found version "4.1.2") 
--- Checking for module 'eigen3'
---   Found eigen3, version 3.3.7
--- Found Eigen: /usr/local/include/eigen3 (Required is at least version "3.1") 
 -- Eigen found (include: /usr/local/include/eigen3, version: 3.3.7)
--- Found Boost: /usr/include (found suitable version "1.65.1", minimum required is "1.55.0") found components:  system filesystem date_time iostreams serialization regex 
--- Checking for module 'flann'
---   Found flann, version 1.9.1
--- Found FLANN: /usr/lib/x86_64-linux-gnu/libflann_cpp.so  
 -- The imported target "vtkRenderingPythonTkWidgets" references the file
    "/usr/lib/x86_64-linux-gnu/libvtkRenderingPythonTkWidgets.so"
 but this file does not exist.  Possible reasons include:
@@ -54,51 +32,28 @@ but not all the files it references.
 ** WARNING ** io features related to png will be disabled
 -- LIBUSB_1_LIBRARY (missing: LIBUSB_1_INCLUDE_DIR) 
 ** WARNING ** io features related to libusb-1.0 will be disabled
--- Found Qhull: optimized;/usr/lib/x86_64-linux-gnu/libqhull.so;debug;/usr/lib/x86_64-linux-gnu/libqhull.so  
 -- QHULL found (include: /usr/include, lib: optimized;/usr/lib/x86_64-linux-gnu/libqhull.so;debug;/usr/lib/x86_64-linux-gnu/libqhull.so)
 -- looking for PCL_COMMON
--- Found PCL_COMMON: /usr/local/lib/libpcl_common.so  
 -- looking for PCL_KDTREE
--- Found PCL_KDTREE: /usr/local/lib/libpcl_kdtree.so  
 -- looking for PCL_OCTREE
--- Found PCL_OCTREE: /usr/local/lib/libpcl_octree.so  
 -- looking for PCL_SEARCH
--- Found PCL_SEARCH: /usr/local/lib/libpcl_search.so  
 -- looking for PCL_SAMPLE_CONSENSUS
--- Found PCL_SAMPLE_CONSENSUS: /usr/local/lib/libpcl_sample_consensus.so  
 -- looking for PCL_FILTERS
--- Found PCL_FILTERS: /usr/local/lib/libpcl_filters.so  
 -- looking for PCL_2D
--- Found PCL_2D: /usr/local/include/pcl-1.9  
 -- looking for PCL_GEOMETRY
--- Found PCL_GEOMETRY: /usr/local/include/pcl-1.9  
 -- looking for PCL_IO
--- Found PCL_IO: /usr/local/lib/libpcl_io.so  
 -- looking for PCL_FEATURES
--- Found PCL_FEATURES: /usr/local/lib/libpcl_features.so  
 -- looking for PCL_ML
--- Found PCL_ML: /usr/local/lib/libpcl_ml.so  
 -- looking for PCL_SEGMENTATION
--- Found PCL_SEGMENTATION: /usr/local/lib/libpcl_segmentation.so  
 -- looking for PCL_VISUALIZATION
--- Found PCL_VISUALIZATION: /usr/local/lib/libpcl_visualization.so  
 -- looking for PCL_SURFACE
--- Found PCL_SURFACE: /usr/local/lib/libpcl_surface.so  
 -- looking for PCL_REGISTRATION
--- Found PCL_REGISTRATION: /usr/local/lib/libpcl_registration.so  
 -- looking for PCL_KEYPOINTS
--- Found PCL_KEYPOINTS: /usr/local/lib/libpcl_keypoints.so  
 -- looking for PCL_TRACKING
--- Found PCL_TRACKING: /usr/local/lib/libpcl_tracking.so  
 -- looking for PCL_RECOGNITION
--- Found PCL_RECOGNITION: /usr/local/lib/libpcl_recognition.so  
 -- looking for PCL_STEREO
--- Found PCL_STEREO: /usr/local/lib/libpcl_stereo.so  
 -- looking for PCL_OUTOFCORE
--- Found PCL_OUTOFCORE: /usr/local/lib/libpcl_outofcore.so  
 -- looking for PCL_PEOPLE
--- Found PCL_PEOPLE: /usr/local/lib/libpcl_people.so  
--- Found PCL: pcl_common;pcl_kdtree;pcl_octree;pcl_search;pcl_sample_consensus;pcl_filters;pcl_io;pcl_features;pcl_ml;pcl_segmentation;pcl_visualization;pcl_surface;pcl_registration;pcl_keypoints;pcl_tracking;pcl_recognition;pcl_stereo;pcl_outofcore;pcl_people;/usr/lib/x86_64-linux-gnu/libboost_system.so;/usr/lib/x86_64-linux-gnu/libboost_filesystem.so;/usr/lib/x86_64-linux-gnu/libboost_date_time.so;/usr/lib/x86_64-linux-gnu/libboost_iostreams.so;/usr/lib/x86_64-linux-gnu/libboost_serialization.so;/usr/lib/x86_64-linux-gnu/libboost_regex.so;optimized;/usr/lib/x86_64-linux-gnu/libqhull.so;debug;/usr/lib/x86_64-linux-gnu/libqhull.so;vtkChartsCore;vtkCommonColor;vtkCommonCore;vtksys;vtkCommonDataModel;vtkCommonMath;vtkCommonMisc;vtkCommonSystem;vtkCommonTransforms;vtkCommonExecutionModel;vtkFiltersGeneral;vtkCommonComputationalGeometry;vtkFiltersCore;vtkInfovisCore;vtkFiltersExtraction;vtkFiltersStatistics;vtkImagingFourier;vtkImagingCore;vtkalglib;vtkRenderingContext2D;vtkRenderingCore;vtkFiltersGeometry;vtkFiltersSources;vtkRenderingFreeType;/usr/lib/x86_64-linux-gnu/libfreetype.so;/usr/lib/x86_64-linux-gnu/libz.so;vtkFiltersModeling;vtkImagingSources;vtkInteractionStyle;vtkInteractionWidgets;vtkFiltersHybrid;vtkImagingColor;vtkImagingGeneral;vtkImagingHybrid;vtkIOImage;vtkDICOMParser;vtkmetaio;/usr/lib/x86_64-linux-gnu/libjpeg.so;/usr/lib/x86_64-linux-gnu/libpng.so;/usr/lib/x86_64-linux-gnu/libtiff.so;vtkRenderingAnnotation;vtkRenderingVolume;vtkIOXML;vtkIOCore;vtkIOXMLParser;/usr/lib/x86_64-linux-gnu/libexpat.so;vtkIOGeometry;vtkIOLegacy;vtkIOPLY;vtkRenderingLOD;vtkViewsContext2D;vtkViewsCore;vtkRenderingContextOpenGL2;vtkRenderingOpenGL2;FLANN::FLANN (Required is at least version "1.8") 
 STATUS /usr/lib/x86_64-linux-gnu/libGL.so.1 /usr/lib/x86_64-linux-gnu/libGLEW.so /usr/lib/x86_64-linux-gnu/libglfw.so.3 /usr/lib/x86_64-linux-gnu/librealsense2.so /usr/lib/libsoil2-debug.a opencv_calib3d;opencv_core;opencv_dnn;opencv_features2d;opencv_flann;opencv_gapi;opencv_highgui;opencv_imgcodecs;opencv_imgproc;opencv_ml;opencv_objdetect;opencv_photo;opencv_stitching;opencv_video;opencv_videoio;opencv_aruco;opencv_bgsegm;opencv_bioinspired;opencv_ccalib;opencv_datasets;opencv_dnn_objdetect;opencv_dnn_superres;opencv_dpm;opencv_face;opencv_freetype;opencv_fuzzy;opencv_hdf;opencv_hfs;opencv_img_hash;opencv_line_descriptor;opencv_optflow;opencv_phase_unwrapping;opencv_plot;opencv_quality;opencv_reg;opencv_rgbd;opencv_saliency;opencv_shape;opencv_stereo;opencv_structured_light;opencv_superres;opencv_surface_matching;opencv_text;opencv_tracking;opencv_videostab;opencv_viz;opencv_xfeatures2d;opencv_ximgproc;opencv_xobjdetect;opencv_xphoto pcl_common;pcl_kdtree;pcl_octree;pcl_search;pcl_sample_consensus;pcl_filters;pcl_io;pcl_features;pcl_ml;pcl_segmentation;pcl_visualization;pcl_surface;pcl_registration;pcl_keypoints;pcl_tracking;pcl_recognition;pcl_stereo;pcl_outofcore;pcl_people;/usr/lib/x86_64-linux-gnu/libboost_system.so;/usr/lib/x86_64-linux-gnu/libboost_filesystem.so;/usr/lib/x86_64-linux-gnu/libboost_date_time.so;/usr/lib/x86_64-linux-gnu/libboost_iostreams.so;/usr/lib/x86_64-linux-gnu/libboost_serialization.so;/usr/lib/x86_64-linux-gnu/libboost_regex.so;optimized;/usr/lib/x86_64-linux-gnu/libqhull.so;debug;/usr/lib/x86_64-linux-gnu/libqhull.so;vtkChartsCore;vtkCommonColor;vtkCommonCore;vtksys;vtkCommonDataModel;vtkCommonMath;vtkCommonMisc;vtkCommonSystem;vtkCommonTransforms;vtkCommonExecutionModel;vtkFiltersGeneral;vtkCommonComputationalGeometry;vtkFiltersCore;vtkInfovisCore;vtkFiltersExtraction;vtkFiltersStatistics;vtkImagingFourier;vtkImagingCore;vtkalglib;vtkRenderingContext2D;vtkRenderingCore;vtkFiltersGeometry;vtkFiltersSources;vtkRenderingFreeType;/usr/lib/x86_64-linux-gnu/libfreetype.so;/usr/lib/x86_64-linux-gnu/libz.so;vtkFiltersModeling;vtkImagingSources;vtkInteractionStyle;vtkInteractionWidgets;vtkFiltersHybrid;vtkImagingColor;vtkImagingGeneral;vtkImagingHybrid;vtkIOImage;vtkDICOMParser;vtkmetaio;/usr/lib/x86_64-linux-gnu/libjpeg.so;/usr/lib/x86_64-linux-gnu/libpng.so;/usr/lib/x86_64-linux-gnu/libtiff.so;vtkRenderingAnnotation;vtkRenderingVolume;vtkIOXML;vtkIOCore;vtkIOXMLParser;/usr/lib/x86_64-linux-gnu/libexpat.so;vtkIOGeometry;vtkIOLegacy;vtkIOPLY;vtkRenderingLOD;vtkViewsContext2D;vtkViewsCore;vtkRenderingContextOpenGL2;vtkRenderingOpenGL2;FLANN::FLANN
 -- Configuring done
 -- Generating done

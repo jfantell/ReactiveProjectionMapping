@@ -60,132 +60,132 @@ include CMakeFiles/shadows.dir/flags.make
 CMakeFiles/shadows.dir/src/camera.cpp.o: CMakeFiles/shadows.dir/flags.make
 CMakeFiles/shadows.dir/src/camera.cpp.o: ../src/camera.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/hayley/RealNVME/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/shadows.dir/src/camera.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/camera.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/camera.cpp
+	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/camera.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/camera.cpp
 
 CMakeFiles/shadows.dir/src/camera.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/shadows.dir/src/camera.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/camera.cpp > CMakeFiles/shadows.dir/src/camera.cpp.i
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/camera.cpp > CMakeFiles/shadows.dir/src/camera.cpp.i
 
 CMakeFiles/shadows.dir/src/camera.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/shadows.dir/src/camera.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/camera.cpp -o CMakeFiles/shadows.dir/src/camera.cpp.s
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/camera.cpp -o CMakeFiles/shadows.dir/src/camera.cpp.s
 
 CMakeFiles/shadows.dir/src/indexbuffer.cpp.o: CMakeFiles/shadows.dir/flags.make
 CMakeFiles/shadows.dir/src/indexbuffer.cpp.o: ../src/indexbuffer.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/hayley/RealNVME/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/shadows.dir/src/indexbuffer.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/indexbuffer.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/indexbuffer.cpp
+	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/indexbuffer.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/indexbuffer.cpp
 
 CMakeFiles/shadows.dir/src/indexbuffer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/shadows.dir/src/indexbuffer.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/indexbuffer.cpp > CMakeFiles/shadows.dir/src/indexbuffer.cpp.i
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/indexbuffer.cpp > CMakeFiles/shadows.dir/src/indexbuffer.cpp.i
 
 CMakeFiles/shadows.dir/src/indexbuffer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/shadows.dir/src/indexbuffer.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/indexbuffer.cpp -o CMakeFiles/shadows.dir/src/indexbuffer.cpp.s
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/indexbuffer.cpp -o CMakeFiles/shadows.dir/src/indexbuffer.cpp.s
 
 CMakeFiles/shadows.dir/src/inputhandler.cpp.o: CMakeFiles/shadows.dir/flags.make
 CMakeFiles/shadows.dir/src/inputhandler.cpp.o: ../src/inputhandler.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/hayley/RealNVME/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/shadows.dir/src/inputhandler.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/inputhandler.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/inputhandler.cpp
+	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/inputhandler.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/inputhandler.cpp
 
 CMakeFiles/shadows.dir/src/inputhandler.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/shadows.dir/src/inputhandler.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/inputhandler.cpp > CMakeFiles/shadows.dir/src/inputhandler.cpp.i
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/inputhandler.cpp > CMakeFiles/shadows.dir/src/inputhandler.cpp.i
 
 CMakeFiles/shadows.dir/src/inputhandler.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/shadows.dir/src/inputhandler.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/inputhandler.cpp -o CMakeFiles/shadows.dir/src/inputhandler.cpp.s
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/inputhandler.cpp -o CMakeFiles/shadows.dir/src/inputhandler.cpp.s
 
 CMakeFiles/shadows.dir/src/loadstb_image.cpp.o: CMakeFiles/shadows.dir/flags.make
 CMakeFiles/shadows.dir/src/loadstb_image.cpp.o: ../src/loadstb_image.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/hayley/RealNVME/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/shadows.dir/src/loadstb_image.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/loadstb_image.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/loadstb_image.cpp
+	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/loadstb_image.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/loadstb_image.cpp
 
 CMakeFiles/shadows.dir/src/loadstb_image.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/shadows.dir/src/loadstb_image.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/loadstb_image.cpp > CMakeFiles/shadows.dir/src/loadstb_image.cpp.i
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/loadstb_image.cpp > CMakeFiles/shadows.dir/src/loadstb_image.cpp.i
 
 CMakeFiles/shadows.dir/src/loadstb_image.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/shadows.dir/src/loadstb_image.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/loadstb_image.cpp -o CMakeFiles/shadows.dir/src/loadstb_image.cpp.s
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/loadstb_image.cpp -o CMakeFiles/shadows.dir/src/loadstb_image.cpp.s
 
 CMakeFiles/shadows.dir/src/main.cpp.o: CMakeFiles/shadows.dir/flags.make
 CMakeFiles/shadows.dir/src/main.cpp.o: ../src/main.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/hayley/RealNVME/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/shadows.dir/src/main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/main.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/main.cpp
+	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/main.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/main.cpp
 
 CMakeFiles/shadows.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/shadows.dir/src/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/main.cpp > CMakeFiles/shadows.dir/src/main.cpp.i
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/main.cpp > CMakeFiles/shadows.dir/src/main.cpp.i
 
 CMakeFiles/shadows.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/shadows.dir/src/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/main.cpp -o CMakeFiles/shadows.dir/src/main.cpp.s
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/main.cpp -o CMakeFiles/shadows.dir/src/main.cpp.s
 
 CMakeFiles/shadows.dir/src/mesh.cpp.o: CMakeFiles/shadows.dir/flags.make
 CMakeFiles/shadows.dir/src/mesh.cpp.o: ../src/mesh.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/hayley/RealNVME/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/shadows.dir/src/mesh.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/mesh.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/mesh.cpp
+	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/mesh.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/mesh.cpp
 
 CMakeFiles/shadows.dir/src/mesh.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/shadows.dir/src/mesh.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/mesh.cpp > CMakeFiles/shadows.dir/src/mesh.cpp.i
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/mesh.cpp > CMakeFiles/shadows.dir/src/mesh.cpp.i
 
 CMakeFiles/shadows.dir/src/mesh.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/shadows.dir/src/mesh.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/mesh.cpp -o CMakeFiles/shadows.dir/src/mesh.cpp.s
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/mesh.cpp -o CMakeFiles/shadows.dir/src/mesh.cpp.s
 
 CMakeFiles/shadows.dir/src/pcl_wrapper.cpp.o: CMakeFiles/shadows.dir/flags.make
 CMakeFiles/shadows.dir/src/pcl_wrapper.cpp.o: ../src/pcl_wrapper.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/hayley/RealNVME/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/shadows.dir/src/pcl_wrapper.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/pcl_wrapper.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/pcl_wrapper.cpp
+	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/pcl_wrapper.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/pcl_wrapper.cpp
 
 CMakeFiles/shadows.dir/src/pcl_wrapper.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/shadows.dir/src/pcl_wrapper.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/pcl_wrapper.cpp > CMakeFiles/shadows.dir/src/pcl_wrapper.cpp.i
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/pcl_wrapper.cpp > CMakeFiles/shadows.dir/src/pcl_wrapper.cpp.i
 
 CMakeFiles/shadows.dir/src/pcl_wrapper.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/shadows.dir/src/pcl_wrapper.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/pcl_wrapper.cpp -o CMakeFiles/shadows.dir/src/pcl_wrapper.cpp.s
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/pcl_wrapper.cpp -o CMakeFiles/shadows.dir/src/pcl_wrapper.cpp.s
 
 CMakeFiles/shadows.dir/src/r_realsense.cpp.o: CMakeFiles/shadows.dir/flags.make
 CMakeFiles/shadows.dir/src/r_realsense.cpp.o: ../src/r_realsense.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/hayley/RealNVME/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/shadows.dir/src/r_realsense.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/r_realsense.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/r_realsense.cpp
+	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/r_realsense.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/r_realsense.cpp
 
 CMakeFiles/shadows.dir/src/r_realsense.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/shadows.dir/src/r_realsense.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/r_realsense.cpp > CMakeFiles/shadows.dir/src/r_realsense.cpp.i
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/r_realsense.cpp > CMakeFiles/shadows.dir/src/r_realsense.cpp.i
 
 CMakeFiles/shadows.dir/src/r_realsense.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/shadows.dir/src/r_realsense.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/r_realsense.cpp -o CMakeFiles/shadows.dir/src/r_realsense.cpp.s
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/r_realsense.cpp -o CMakeFiles/shadows.dir/src/r_realsense.cpp.s
 
 CMakeFiles/shadows.dir/src/shader.cpp.o: CMakeFiles/shadows.dir/flags.make
 CMakeFiles/shadows.dir/src/shader.cpp.o: ../src/shader.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/hayley/RealNVME/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/shadows.dir/src/shader.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/shader.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/shader.cpp
+	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/shader.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/shader.cpp
 
 CMakeFiles/shadows.dir/src/shader.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/shadows.dir/src/shader.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/shader.cpp > CMakeFiles/shadows.dir/src/shader.cpp.i
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/shader.cpp > CMakeFiles/shadows.dir/src/shader.cpp.i
 
 CMakeFiles/shadows.dir/src/shader.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/shadows.dir/src/shader.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/shader.cpp -o CMakeFiles/shadows.dir/src/shader.cpp.s
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/shader.cpp -o CMakeFiles/shadows.dir/src/shader.cpp.s
 
 CMakeFiles/shadows.dir/src/vertexbuffer.cpp.o: CMakeFiles/shadows.dir/flags.make
 CMakeFiles/shadows.dir/src/vertexbuffer.cpp.o: ../src/vertexbuffer.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/hayley/RealNVME/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/shadows.dir/src/vertexbuffer.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/vertexbuffer.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/vertexbuffer.cpp
+	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/vertexbuffer.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/vertexbuffer.cpp
 
 CMakeFiles/shadows.dir/src/vertexbuffer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/shadows.dir/src/vertexbuffer.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/vertexbuffer.cpp > CMakeFiles/shadows.dir/src/vertexbuffer.cpp.i
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/vertexbuffer.cpp > CMakeFiles/shadows.dir/src/vertexbuffer.cpp.i
 
 CMakeFiles/shadows.dir/src/vertexbuffer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/shadows.dir/src/vertexbuffer.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/vertexbuffer.cpp -o CMakeFiles/shadows.dir/src/vertexbuffer.cpp.s
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/vertexbuffer.cpp -o CMakeFiles/shadows.dir/src/vertexbuffer.cpp.s
 
 # Object files for target shadows
 shadows_OBJECTS = \
