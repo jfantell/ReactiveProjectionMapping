@@ -4,13 +4,11 @@
 #include <pcl/kdtree/kdtree_flann.h>
 #include <pcl/surface/gp3.h>
 #include <pcl/io/vtk_io.h>
-#include <pcl/filters/voxel_grid.h>
 #include <pcl/filters/passthrough.h>
 #include <pcl/features/normal_3d_omp.h>
 #include <pcl/filters/statistical_outlier_removal.h>
 #include <iostream>
 #include <pcl/common/common.h>
-#include <pcl/surface/poisson.h>
 #include <pcl/octree/octree_pointcloud_voxelcentroid.h>
 
 PCL_wrapper::PCL_wrapper() {}
@@ -133,7 +131,7 @@ pcl::PolygonMesh PCL_wrapper::create_mesh(pcl::PointCloud<pcl::PointXYZ>::Ptr &c
 
     //Statistical Outlier
     pcl::PointCloud<pcl::PointXYZ>::Ptr sor = statistical_outlier_filter(pass_through);
-    save_cloud("cloud_sor.vtk",sor);
+    save_cloud("cloud_outlier_removal_test.vtk",sor);
 
     // Estimate normals
     pcl::PointCloud<pcl::PointNormal>::Ptr cloud_with_normals = estimate_normals(sor);
@@ -142,7 +140,7 @@ pcl::PolygonMesh PCL_wrapper::create_mesh(pcl::PointCloud<pcl::PointXYZ>::Ptr &c
     pcl::PolygonMesh triangles = greedy_projection_mesh_reconstruction(cloud_with_normals);
 
     // Save result to file
-    pcl::io::saveVTKFile ("mesh2.vtk", triangles);
+    pcl::io::saveVTKFile ("mesh_test.vtk", triangles);
 
     return triangles;
 }
