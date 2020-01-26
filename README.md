@@ -7,7 +7,7 @@ A video demonstration of the project can be found [here](https://youtu.be/G3er5F
 
 This codebase was developed and tested with the [Intel RealSense D435 camera](https://www.intelrealsense.com/depth-camera-d435/). You must have an Intel RealSense camera to run this codebase.
 
-Ubuntu Linux Installation
+Ubuntu Linux Installation (Instructions tested on Ubuntu 18.04.3)
 
 In order to run this code, please follow the instructions below.
 
