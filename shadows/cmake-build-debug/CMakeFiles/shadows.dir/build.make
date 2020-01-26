@@ -34,19 +34,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /opt/clion-2019.2.4/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake
 
 # The command to remove a file.
-RM = /opt/clion-2019.2.4/bin/cmake/linux/bin/cmake -E remove -f
+RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /media/hayley/RealNVME/ComputerGraphicsProject/shadows
+CMAKE_SOURCE_DIR = "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /media/hayley/RealNVME/ComputerGraphicsProject/shadows/cmake-build-debug
+CMAKE_BINARY_DIR = "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/cmake-build-debug"
 
 # Include any dependencies generated for this target.
 include CMakeFiles/shadows.dir/depend.make
@@ -59,133 +59,133 @@ include CMakeFiles/shadows.dir/flags.make
 
 CMakeFiles/shadows.dir/src/camera.cpp.o: CMakeFiles/shadows.dir/flags.make
 CMakeFiles/shadows.dir/src/camera.cpp.o: ../src/camera.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/hayley/RealNVME/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/shadows.dir/src/camera.cpp.o"
-	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/camera.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/camera.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/shadows.dir/src/camera.cpp.o"
+	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/camera.cpp.o -c "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/src/camera.cpp"
 
 CMakeFiles/shadows.dir/src/camera.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/shadows.dir/src/camera.cpp.i"
-	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/camera.cpp > CMakeFiles/shadows.dir/src/camera.cpp.i
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/src/camera.cpp" > CMakeFiles/shadows.dir/src/camera.cpp.i
 
 CMakeFiles/shadows.dir/src/camera.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/shadows.dir/src/camera.cpp.s"
-	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/camera.cpp -o CMakeFiles/shadows.dir/src/camera.cpp.s
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/src/camera.cpp" -o CMakeFiles/shadows.dir/src/camera.cpp.s
 
 CMakeFiles/shadows.dir/src/indexbuffer.cpp.o: CMakeFiles/shadows.dir/flags.make
 CMakeFiles/shadows.dir/src/indexbuffer.cpp.o: ../src/indexbuffer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/hayley/RealNVME/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/shadows.dir/src/indexbuffer.cpp.o"
-	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/indexbuffer.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/indexbuffer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/shadows.dir/src/indexbuffer.cpp.o"
+	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/indexbuffer.cpp.o -c "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/src/indexbuffer.cpp"
 
 CMakeFiles/shadows.dir/src/indexbuffer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/shadows.dir/src/indexbuffer.cpp.i"
-	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/indexbuffer.cpp > CMakeFiles/shadows.dir/src/indexbuffer.cpp.i
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/src/indexbuffer.cpp" > CMakeFiles/shadows.dir/src/indexbuffer.cpp.i
 
 CMakeFiles/shadows.dir/src/indexbuffer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/shadows.dir/src/indexbuffer.cpp.s"
-	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/indexbuffer.cpp -o CMakeFiles/shadows.dir/src/indexbuffer.cpp.s
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/src/indexbuffer.cpp" -o CMakeFiles/shadows.dir/src/indexbuffer.cpp.s
 
 CMakeFiles/shadows.dir/src/inputhandler.cpp.o: CMakeFiles/shadows.dir/flags.make
 CMakeFiles/shadows.dir/src/inputhandler.cpp.o: ../src/inputhandler.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/hayley/RealNVME/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/shadows.dir/src/inputhandler.cpp.o"
-	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/inputhandler.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/inputhandler.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/shadows.dir/src/inputhandler.cpp.o"
+	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/inputhandler.cpp.o -c "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/src/inputhandler.cpp"
 
 CMakeFiles/shadows.dir/src/inputhandler.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/shadows.dir/src/inputhandler.cpp.i"
-	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/inputhandler.cpp > CMakeFiles/shadows.dir/src/inputhandler.cpp.i
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/src/inputhandler.cpp" > CMakeFiles/shadows.dir/src/inputhandler.cpp.i
 
 CMakeFiles/shadows.dir/src/inputhandler.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/shadows.dir/src/inputhandler.cpp.s"
-	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/inputhandler.cpp -o CMakeFiles/shadows.dir/src/inputhandler.cpp.s
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/src/inputhandler.cpp" -o CMakeFiles/shadows.dir/src/inputhandler.cpp.s
 
 CMakeFiles/shadows.dir/src/loadstb_image.cpp.o: CMakeFiles/shadows.dir/flags.make
 CMakeFiles/shadows.dir/src/loadstb_image.cpp.o: ../src/loadstb_image.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/hayley/RealNVME/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/shadows.dir/src/loadstb_image.cpp.o"
-	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/loadstb_image.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/loadstb_image.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/shadows.dir/src/loadstb_image.cpp.o"
+	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/loadstb_image.cpp.o -c "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/src/loadstb_image.cpp"
 
 CMakeFiles/shadows.dir/src/loadstb_image.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/shadows.dir/src/loadstb_image.cpp.i"
-	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/loadstb_image.cpp > CMakeFiles/shadows.dir/src/loadstb_image.cpp.i
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/src/loadstb_image.cpp" > CMakeFiles/shadows.dir/src/loadstb_image.cpp.i
 
 CMakeFiles/shadows.dir/src/loadstb_image.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/shadows.dir/src/loadstb_image.cpp.s"
-	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/loadstb_image.cpp -o CMakeFiles/shadows.dir/src/loadstb_image.cpp.s
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/src/loadstb_image.cpp" -o CMakeFiles/shadows.dir/src/loadstb_image.cpp.s
 
 CMakeFiles/shadows.dir/src/main.cpp.o: CMakeFiles/shadows.dir/flags.make
 CMakeFiles/shadows.dir/src/main.cpp.o: ../src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/hayley/RealNVME/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/shadows.dir/src/main.cpp.o"
-	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/main.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/shadows.dir/src/main.cpp.o"
+	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/main.cpp.o -c "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/src/main.cpp"
 
 CMakeFiles/shadows.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/shadows.dir/src/main.cpp.i"
-	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/main.cpp > CMakeFiles/shadows.dir/src/main.cpp.i
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/src/main.cpp" > CMakeFiles/shadows.dir/src/main.cpp.i
 
 CMakeFiles/shadows.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/shadows.dir/src/main.cpp.s"
-	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/main.cpp -o CMakeFiles/shadows.dir/src/main.cpp.s
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/src/main.cpp" -o CMakeFiles/shadows.dir/src/main.cpp.s
 
 CMakeFiles/shadows.dir/src/mesh.cpp.o: CMakeFiles/shadows.dir/flags.make
 CMakeFiles/shadows.dir/src/mesh.cpp.o: ../src/mesh.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/hayley/RealNVME/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/shadows.dir/src/mesh.cpp.o"
-	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/mesh.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/mesh.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/shadows.dir/src/mesh.cpp.o"
+	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/mesh.cpp.o -c "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/src/mesh.cpp"
 
 CMakeFiles/shadows.dir/src/mesh.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/shadows.dir/src/mesh.cpp.i"
-	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/mesh.cpp > CMakeFiles/shadows.dir/src/mesh.cpp.i
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/src/mesh.cpp" > CMakeFiles/shadows.dir/src/mesh.cpp.i
 
 CMakeFiles/shadows.dir/src/mesh.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/shadows.dir/src/mesh.cpp.s"
-	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/mesh.cpp -o CMakeFiles/shadows.dir/src/mesh.cpp.s
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/src/mesh.cpp" -o CMakeFiles/shadows.dir/src/mesh.cpp.s
 
 CMakeFiles/shadows.dir/src/pcl_wrapper.cpp.o: CMakeFiles/shadows.dir/flags.make
 CMakeFiles/shadows.dir/src/pcl_wrapper.cpp.o: ../src/pcl_wrapper.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/hayley/RealNVME/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/shadows.dir/src/pcl_wrapper.cpp.o"
-	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/pcl_wrapper.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/pcl_wrapper.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/shadows.dir/src/pcl_wrapper.cpp.o"
+	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/pcl_wrapper.cpp.o -c "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/src/pcl_wrapper.cpp"
 
 CMakeFiles/shadows.dir/src/pcl_wrapper.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/shadows.dir/src/pcl_wrapper.cpp.i"
-	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/pcl_wrapper.cpp > CMakeFiles/shadows.dir/src/pcl_wrapper.cpp.i
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/src/pcl_wrapper.cpp" > CMakeFiles/shadows.dir/src/pcl_wrapper.cpp.i
 
 CMakeFiles/shadows.dir/src/pcl_wrapper.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/shadows.dir/src/pcl_wrapper.cpp.s"
-	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/pcl_wrapper.cpp -o CMakeFiles/shadows.dir/src/pcl_wrapper.cpp.s
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/src/pcl_wrapper.cpp" -o CMakeFiles/shadows.dir/src/pcl_wrapper.cpp.s
 
 CMakeFiles/shadows.dir/src/r_realsense.cpp.o: CMakeFiles/shadows.dir/flags.make
 CMakeFiles/shadows.dir/src/r_realsense.cpp.o: ../src/r_realsense.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/hayley/RealNVME/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/shadows.dir/src/r_realsense.cpp.o"
-	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/r_realsense.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/r_realsense.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/shadows.dir/src/r_realsense.cpp.o"
+	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/r_realsense.cpp.o -c "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/src/r_realsense.cpp"
 
 CMakeFiles/shadows.dir/src/r_realsense.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/shadows.dir/src/r_realsense.cpp.i"
-	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/r_realsense.cpp > CMakeFiles/shadows.dir/src/r_realsense.cpp.i
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/src/r_realsense.cpp" > CMakeFiles/shadows.dir/src/r_realsense.cpp.i
 
 CMakeFiles/shadows.dir/src/r_realsense.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/shadows.dir/src/r_realsense.cpp.s"
-	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/r_realsense.cpp -o CMakeFiles/shadows.dir/src/r_realsense.cpp.s
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/src/r_realsense.cpp" -o CMakeFiles/shadows.dir/src/r_realsense.cpp.s
 
 CMakeFiles/shadows.dir/src/shader.cpp.o: CMakeFiles/shadows.dir/flags.make
 CMakeFiles/shadows.dir/src/shader.cpp.o: ../src/shader.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/hayley/RealNVME/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/shadows.dir/src/shader.cpp.o"
-	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/shader.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/shader.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/shadows.dir/src/shader.cpp.o"
+	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/shader.cpp.o -c "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/src/shader.cpp"
 
 CMakeFiles/shadows.dir/src/shader.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/shadows.dir/src/shader.cpp.i"
-	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/shader.cpp > CMakeFiles/shadows.dir/src/shader.cpp.i
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/src/shader.cpp" > CMakeFiles/shadows.dir/src/shader.cpp.i
 
 CMakeFiles/shadows.dir/src/shader.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/shadows.dir/src/shader.cpp.s"
-	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/shader.cpp -o CMakeFiles/shadows.dir/src/shader.cpp.s
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/src/shader.cpp" -o CMakeFiles/shadows.dir/src/shader.cpp.s
 
 CMakeFiles/shadows.dir/src/vertexbuffer.cpp.o: CMakeFiles/shadows.dir/flags.make
 CMakeFiles/shadows.dir/src/vertexbuffer.cpp.o: ../src/vertexbuffer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/hayley/RealNVME/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/shadows.dir/src/vertexbuffer.cpp.o"
-	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/vertexbuffer.cpp.o -c /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/vertexbuffer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/shadows.dir/src/vertexbuffer.cpp.o"
+	g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shadows.dir/src/vertexbuffer.cpp.o -c "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/src/vertexbuffer.cpp"
 
 CMakeFiles/shadows.dir/src/vertexbuffer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/shadows.dir/src/vertexbuffer.cpp.i"
-	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/vertexbuffer.cpp > CMakeFiles/shadows.dir/src/vertexbuffer.cpp.i
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/src/vertexbuffer.cpp" > CMakeFiles/shadows.dir/src/vertexbuffer.cpp.i
 
 CMakeFiles/shadows.dir/src/vertexbuffer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/shadows.dir/src/vertexbuffer.cpp.s"
-	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/hayley/RealNVME/ComputerGraphicsProject/shadows/src/vertexbuffer.cpp -o CMakeFiles/shadows.dir/src/vertexbuffer.cpp.s
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/src/vertexbuffer.cpp" -o CMakeFiles/shadows.dir/src/vertexbuffer.cpp.s
 
 # Object files for target shadows
 shadows_OBJECTS = \
@@ -214,152 +214,194 @@ shadows_EXTERNAL_OBJECTS =
 ../build/shadows: CMakeFiles/shadows.dir/src/shader.cpp.o
 ../build/shadows: CMakeFiles/shadows.dir/src/vertexbuffer.cpp.o
 ../build/shadows: CMakeFiles/shadows.dir/build.make
-../build/shadows: /usr/lib/libsoil2-debug.a
-../build/shadows: /usr/lib/x86_64-linux-gnu/libGLEW.so
-../build/shadows: /usr/lib/x86_64-linux-gnu/libglfw.so.3
-../build/shadows: /usr/lib/x86_64-linux-gnu/librealsense2.so
-../build/shadows: /usr/lib/x86_64-linux-gnu/libGL.so.1
-../build/shadows: /usr/local/lib/libopencv_gapi.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_stitching.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_aruco.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_bgsegm.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_bioinspired.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_ccalib.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_dnn_objdetect.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_dnn_superres.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_dpm.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_face.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_freetype.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_fuzzy.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_hdf.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_hfs.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_img_hash.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_line_descriptor.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_quality.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_reg.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_rgbd.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_saliency.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_stereo.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_structured_light.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_superres.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_surface_matching.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_tracking.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_videostab.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_viz.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_xfeatures2d.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_xobjdetect.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_xphoto.so.4.1.2
-../build/shadows: /usr/local/lib/libpcl_surface.so
-../build/shadows: /usr/local/lib/libpcl_keypoints.so
-../build/shadows: /usr/local/lib/libpcl_tracking.so
-../build/shadows: /usr/local/lib/libpcl_recognition.so
-../build/shadows: /usr/local/lib/libpcl_stereo.so
-../build/shadows: /usr/local/lib/libpcl_outofcore.so
-../build/shadows: /usr/local/lib/libpcl_people.so
-../build/shadows: /usr/lib/x86_64-linux-gnu/libboost_system.so
-../build/shadows: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so
-../build/shadows: /usr/lib/x86_64-linux-gnu/libboost_date_time.so
-../build/shadows: /usr/lib/x86_64-linux-gnu/libboost_iostreams.so
-../build/shadows: /usr/lib/x86_64-linux-gnu/libboost_serialization.so
-../build/shadows: /usr/lib/x86_64-linux-gnu/libboost_regex.so
-../build/shadows: /usr/lib/x86_64-linux-gnu/libqhull.so
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkChartsCore-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkInfovisCore-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libfreetype.so
-../build/shadows: /usr/lib/x86_64-linux-gnu/libz.so
-../build/shadows: /usr/lib/x86_64-linux-gnu/libjpeg.so
-../build/shadows: /usr/lib/x86_64-linux-gnu/libpng.so
-../build/shadows: /usr/lib/x86_64-linux-gnu/libtiff.so
-../build/shadows: /usr/lib/x86_64-linux-gnu/libexpat.so
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkIOGeometry-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkIOLegacy-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkIOPLY-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkRenderingLOD-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkViewsContext2D-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkViewsCore-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkRenderingContextOpenGL2-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libflann_cpp.so
-../build/shadows: /usr/local/lib/libopencv_shape.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_highgui.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_datasets.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_plot.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_text.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_dnn.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_ml.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_phase_unwrapping.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_optflow.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_ximgproc.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_video.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_videoio.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_imgcodecs.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_objdetect.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_calib3d.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_features2d.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_flann.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_photo.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_imgproc.so.4.1.2
-../build/shadows: /usr/local/lib/libopencv_core.so.4.1.2
-../build/shadows: /usr/local/lib/libpcl_registration.so
-../build/shadows: /usr/local/lib/libpcl_segmentation.so
-../build/shadows: /usr/local/lib/libpcl_features.so
-../build/shadows: /usr/local/lib/libpcl_filters.so
-../build/shadows: /usr/local/lib/libpcl_sample_consensus.so
-../build/shadows: /usr/local/lib/libpcl_ml.so
-../build/shadows: /usr/local/lib/libpcl_visualization.so
-../build/shadows: /usr/local/lib/libpcl_search.so
-../build/shadows: /usr/local/lib/libpcl_kdtree.so
-../build/shadows: /usr/local/lib/libpcl_io.so
-../build/shadows: /usr/local/lib/libpcl_octree.so
-../build/shadows: /usr/local/lib/libpcl_common.so
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkInteractionWidgets-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkFiltersModeling-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkInteractionStyle-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkFiltersExtraction-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkFiltersStatistics-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkImagingFourier-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkalglib-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkFiltersHybrid-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkImagingGeneral-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkImagingSources-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkImagingHybrid-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkRenderingAnnotation-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkImagingColor-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkRenderingVolume-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkIOXML-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkIOXMLParser-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkIOCore-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkRenderingContext2D-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkRenderingFreeType-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libfreetype.so
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkRenderingOpenGL2-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libGLEW.so
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkImagingCore-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkRenderingCore-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkCommonColor-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkFiltersGeometry-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkFiltersSources-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkFiltersGeneral-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkCommonComputationalGeometry-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkFiltersCore-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkIOImage-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkCommonExecutionModel-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkCommonDataModel-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkCommonTransforms-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkCommonMisc-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkCommonMath-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkCommonSystem-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkCommonCore-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtksys-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkDICOMParser-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libvtkmetaio-7.1.so.7.1.1
-../build/shadows: /usr/lib/x86_64-linux-gnu/libz.so
-../build/shadows: /usr/lib/x86_64-linux-gnu/libSM.so
-../build/shadows: /usr/lib/x86_64-linux-gnu/libICE.so
-../build/shadows: /usr/lib/x86_64-linux-gnu/libX11.so
-../build/shadows: /usr/lib/x86_64-linux-gnu/libXext.so
-../build/shadows: /usr/lib/x86_64-linux-gnu/libXt.so
+../build/shadows: ../lib/macosx/glfw3/libglfw.dylib
+../build/shadows: /usr/local/lib/libpcl_apps.dylib
+../build/shadows: /usr/local/lib/libpcl_outofcore.dylib
+../build/shadows: /usr/local/lib/libpcl_people.dylib
+../build/shadows: /usr/local/lib/libpcl_simulation.dylib
+../build/shadows: /usr/local/lib/libboost_system-mt.dylib
+../build/shadows: /usr/local/lib/libboost_filesystem-mt.dylib
+../build/shadows: /usr/local/lib/libboost_thread-mt.dylib
+../build/shadows: /usr/local/lib/libboost_date_time-mt.dylib
+../build/shadows: /usr/local/lib/libboost_iostreams-mt.dylib
+../build/shadows: /usr/local/lib/libboost_chrono-mt.dylib
+../build/shadows: /usr/local/lib/libboost_atomic-mt.dylib
+../build/shadows: /usr/local/lib/libboost_regex-mt.dylib
+../build/shadows: /usr/local/lib/libqhull_p.dylib
+../build/shadows: /usr/lib/libz.dylib
+../build/shadows: /usr/lib/libexpat.dylib
+../build/shadows: /usr/local/opt/python/Frameworks/Python.framework/Versions/3.7/lib/libpython3.7.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkWrappingTools-8.2.a
+../build/shadows: /usr/local/lib/libjpeg.dylib
+../build/shadows: /usr/local/lib/libpng.dylib
+../build/shadows: /usr/local/lib/libtiff.dylib
+../build/shadows: /usr/local/lib/libhdf5.dylib
+../build/shadows: /usr/local/lib/libsz.dylib
+../build/shadows: /usr/lib/libdl.dylib
+../build/shadows: /usr/lib/libm.dylib
+../build/shadows: /usr/local/lib/libhdf5_hl.dylib
+../build/shadows: /usr/local/lib/libnetcdf.dylib
+../build/shadows: /usr/lib/libxml2.dylib
+../build/shadows: ../lib/macosx/librealsense2/librealsense2.dylib
+../build/shadows: /usr/local/lib/libpcl_keypoints.dylib
+../build/shadows: /usr/local/lib/libpcl_tracking.dylib
+../build/shadows: /usr/local/lib/libpcl_recognition.dylib
+../build/shadows: /usr/local/lib/libpcl_registration.dylib
+../build/shadows: /usr/local/lib/libpcl_stereo.dylib
+../build/shadows: /usr/local/lib/libpcl_segmentation.dylib
+../build/shadows: /usr/local/lib/libpcl_ml.dylib
+../build/shadows: /usr/local/lib/libpcl_features.dylib
+../build/shadows: /usr/local/lib/libpcl_filters.dylib
+../build/shadows: /usr/local/lib/libpcl_sample_consensus.dylib
+../build/shadows: /usr/lib/libexpat.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkDomainsChemistryOpenGL2-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkDomainsChemistry-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkFiltersFlowPaths-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkFiltersGeneric-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkFiltersHyperTree-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkFiltersParallelImaging-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkFiltersPoints-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkFiltersProgrammable-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkPythonInterpreter-8.2.1.dylib
+../build/shadows: /usr/local/opt/python/Frameworks/Python.framework/Versions/3.7/lib/libpython3.7.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkWrappingTools-8.2.a
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkFiltersPython-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkFiltersSMP-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkFiltersSelection-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkFiltersTopology-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkFiltersVerdict-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkverdict-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkGUISupportQtSQL-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkIOSQL-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtksqlite-8.2.1.dylib
+../build/shadows: /usr/local/opt/qt/lib/QtSql.framework/QtSql
+../build/shadows: /usr/local/lib/libjpeg.dylib
+../build/shadows: /usr/local/lib/libtiff.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkGeovisCore-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkproj-8.2.1.dylib
+../build/shadows: /usr/local/lib/libhdf5.dylib
+../build/shadows: /usr/local/lib/libsz.dylib
+../build/shadows: /usr/lib/libdl.dylib
+../build/shadows: /usr/lib/libm.dylib
+../build/shadows: /usr/local/lib/libhdf5_hl.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkIOAMR-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkFiltersAMR-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkIOAsynchronous-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkIOCityGML-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkpugixml-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkIOEnSight-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkIOExodus-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkIOExportOpenGL2-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkIOExportPDF-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkIOExport-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkRenderingGL2PSOpenGL2-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkgl2ps-8.2.1.dylib
+../build/shadows: /usr/local/lib/libpng.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtklibharu-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkIOImport-8.2.1.dylib
+../build/shadows: /usr/lib/libxml2.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkIOInfovis-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkIOLSDyna-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkIOMINC-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkIOMovie-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtktheora-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkogg-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkIOPLY-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkIOParallel-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkFiltersParallel-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkexodusII-8.2.1.dylib
+../build/shadows: /usr/local/lib/libnetcdf.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkIOGeometry-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkIONetCDF-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkjsoncpp-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkIOParallelXML-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkParallelCore-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkIOLegacy-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkIOSegY-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkIOTecplotTable-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkIOVeraOut-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkIOVideo-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkImagingMorphological-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkImagingStatistics-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkImagingStencil-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkInfovisBoostGraphAlgorithms-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkInteractionImage-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkPythonContext2D-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkWrappingPython37Core-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkRenderingContextOpenGL2-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkRenderingFreeTypeFontConfig-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkRenderingImage-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkRenderingLOD-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkRenderingQt-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkFiltersTexture-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkRenderingVolumeOpenGL2-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkImagingMath-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkViewsContext2D-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkViewsQt-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkGUISupportQt-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkRenderingOpenGL2-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkglew-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkViewsInfovis-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkChartsCore-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkRenderingContext2D-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkFiltersImaging-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkInfovisLayout-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkInfovisCore-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkViewsCore-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkInteractionWidgets-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkFiltersHybrid-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkImagingGeneral-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkImagingSources-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkFiltersModeling-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkInteractionStyle-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkFiltersExtraction-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkFiltersStatistics-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkImagingFourier-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkImagingHybrid-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkIOImage-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkDICOMParser-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkmetaio-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkRenderingAnnotation-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkImagingColor-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkRenderingVolume-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkImagingCore-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkIOXML-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkIOXMLParser-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkIOCore-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkdoubleconversion-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtklz4-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtklzma-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkRenderingLabel-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkRenderingFreeType-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkRenderingCore-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkCommonColor-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkFiltersGeometry-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkFiltersSources-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkFiltersGeneral-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkCommonComputationalGeometry-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkFiltersCore-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkCommonExecutionModel-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkCommonDataModel-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkCommonMisc-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkCommonSystem-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtksys-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkCommonTransforms-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkCommonMath-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkCommonCore-8.2.1.dylib
+../build/shadows: /usr/local/Cellar/vtk/8.2.0_3/lib/libvtkfreetype-8.2.1.dylib
+../build/shadows: /usr/lib/libz.dylib
+../build/shadows: /usr/local/opt/qt/lib/QtWidgets.framework/QtWidgets
+../build/shadows: /usr/local/opt/qt/lib/QtGui.framework/QtGui
+../build/shadows: /usr/local/opt/qt/lib/QtCore.framework/QtCore
+../build/shadows: /usr/local/lib/libpcl_visualization.dylib
+../build/shadows: /usr/local/lib/libpcl_io.dylib
+../build/shadows: /usr/local/lib/libpcl_surface.dylib
+../build/shadows: /usr/local/lib/libpcl_search.dylib
+../build/shadows: /usr/local/lib/libpcl_kdtree.dylib
+../build/shadows: /usr/local/lib/libpcl_octree.dylib
+../build/shadows: /usr/local/lib/libpcl_common.dylib
 ../build/shadows: CMakeFiles/shadows.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/media/hayley/RealNVME/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable ../build/shadows"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable ../build/shadows"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/shadows.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -372,6 +414,6 @@ CMakeFiles/shadows.dir/clean:
 .PHONY : CMakeFiles/shadows.dir/clean
 
 CMakeFiles/shadows.dir/depend:
-	cd /media/hayley/RealNVME/ComputerGraphicsProject/shadows/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /media/hayley/RealNVME/ComputerGraphicsProject/shadows /media/hayley/RealNVME/ComputerGraphicsProject/shadows /media/hayley/RealNVME/ComputerGraphicsProject/shadows/cmake-build-debug /media/hayley/RealNVME/ComputerGraphicsProject/shadows/cmake-build-debug /media/hayley/RealNVME/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles/shadows.dir/DependInfo.cmake --color=$(COLOR)
+	cd "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/cmake-build-debug" && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows" "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows" "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/cmake-build-debug" "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/cmake-build-debug" "/Volumes/2nd Storage/Development/ComputerGraphicsProject/shadows/cmake-build-debug/CMakeFiles/shadows.dir/DependInfo.cmake" --color=$(COLOR)
 .PHONY : CMakeFiles/shadows.dir/depend
 
