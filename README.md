@@ -1,4 +1,4 @@
-# Reactive Projection Mapping is a reactive projection mapping system developed at Rensselaer Polytechnic Institute.
+# Reactive Projection Mapping 
 ### Created By: Hayley Roy Gill, John Fantell, Jacob Thomas
 
 A description of the project and associated documentation can be found [here](https://docs.google.com/document/d/1wBSYk6mY-V3U5HuCtDWflDMBsRbJjLrnCX-JDJTwIB0/edit?usp=sharing).
