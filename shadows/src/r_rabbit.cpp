@@ -16,10 +16,11 @@ r_Rabbit::r_Rabbit(GLuint shaderProgramId, Camera *camera) {
 void r_Rabbit::setup() {
   _shaderMVPId = glGetUniformLocation(_shaderId, "MVP");
   _shaderModelId = glGetUniformLocation(_shaderId, "Model");
+  _shaderUseTexId = glGetUniformLocation(_shaderId, "USE_TEX");
 
 
   int width, height, nrChannels;
-  unsigned char *data = stbi_load("treetex.jpg", &width, &height, &nrChannels, 0);
+  unsigned char *data = stbi_load("../shaders_and_textures/blanktex.png", &width, &height, &nrChannels, 0);
   glGenTextures(1, &_texId);
   glBindTexture(GL_TEXTURE_2D, _texId);
   // set the texture wrapping/filtering options (on the currently bound texture object)
@@ -60,7 +61,6 @@ void r_Rabbit::setup() {
 
   glBufferData(GL_ARRAY_BUFFER, _mesh.vertexCount() * sizeof(float) * 8, _vb.getBufferPtr(), GL_STATIC_DRAW);
 
-
   // Create vertex array, the vehicle from cpu land to graphics land
   glGenVertexArrays(1, &_vaoId);
   glBindVertexArray(_vaoId);
@@ -93,13 +93,13 @@ void r_Rabbit::setup() {
                         8*sizeof(float), // stride is size of one whole vertex.
                         (GLvoid*) (6 * sizeof(float)) // offset into the buffer by 3 floats.
   );
-
 }
 
 void r_Rabbit::draw() {
   glm::mat4 mvp = _camera->getProjection() * _camera->getView() * _transform.getModelMatrix();
   glUniformMatrix4fv(_shaderMVPId, 1, GL_FALSE, &mvp[0][0]);
   glUniformMatrix4fv(_shaderModelId, 1, GL_FALSE, &_transform.getModelMatrix()[0][0]);
+  glUniform1i(_shaderUseTexId, 1);
 
   glBindTexture(GL_TEXTURE_2D, _texId);
   glBindVertexArray(_vaoId);

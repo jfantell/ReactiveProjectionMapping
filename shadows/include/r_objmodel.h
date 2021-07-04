@@ -18,6 +18,7 @@ class r_ObjModel : public Renderable {
  private:
   GLuint _shaderMVPId = 0;
   GLuint _shaderModelId = 0;
+  GLuint _shaderUseTexId = 0;
   GLuint _vaoId = 0;
   GLuint _texId = 0;
   std::string _objpath = "";

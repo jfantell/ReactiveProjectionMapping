@@ -17,6 +17,7 @@ class r_Rabbit : public Renderable {
  private:
   GLuint _shaderMVPId = 0;
   GLuint _shaderModelId = 0;
+  GLuint _shaderUseTexId = 0;
   GLuint _vaoId = 0;
   GLuint _texId = 0;
   Mesh _mesh;

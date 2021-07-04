@@ -4,25 +4,26 @@
 
 #include "inputhandler.h"
 #include "app_state.h"
+#include <iostream>
 
 //Define static variable in cpp file
 Camera* InputHandler:: _c;
 
-void InputHandler::set_camera(Camera *c) {
+void InputHandler::set_camera(Camera *c ) {
     _c = c;
 }
 
 void InputHandler::key_callback(GLFWwindow *window, int key, int sancode, int action, int mods) {
-    if (key == GLFW_KEY_UP && action == GLFW_PRESS) {
+    if (key == GLFW_KEY_UP) {
         _c->inputMoveUp();
     }
-    if (key == GLFW_KEY_DOWN && action == GLFW_PRESS) {
+    if (key == GLFW_KEY_DOWN) {
         _c->inputMoveDown();
     }
-    if (key == GLFW_KEY_LEFT && action == GLFW_PRESS) {
+    if (key == GLFW_KEY_LEFT) {
         _c->inputMoveLeft();
     }
-    if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS) {
+    if (key == GLFW_KEY_RIGHT) {
         _c->inputMoveRight();
     }
     if (key == GLFW_KEY_R && action == GLFW_PRESS) {
@@ -33,7 +34,10 @@ void InputHandler::key_callback(GLFWwindow *window, int key, int sancode, int ac
         windowState.offset_y = 1;
         windowState.last_x = 0;
         windowState.last_y = 0;
-        _c->restoreDefaultWorldLocation();
+        _c->restoreDefaultEyeLocation();
+    }
+    if (key == GLFW_KEY_F && action == GLFW_PRESS) {
+      windowState.update_realsense = true;
     }
 }
 
@@ -57,22 +61,16 @@ void InputHandler::scroll_callback(GLFWwindow *window, double xoffset, double yo
     windowState.offset_x -= static_cast<float>(xoffset);
     windowState.offset_y -= static_cast<float>(yoffset);
     std::cout << "Zoom" << windowState.offset_y << std::endl;
-    _c->moveWorldLocation();
+    _c->zoom(yoffset);
+    _c->strafe(xoffset);
 }
 
 void InputHandler::cursor_pos_callback(GLFWwindow *window, double x, double y) {
-    if (windowState.ml) {
-        windowState.yaw -= (x - windowState.last_x);
-        windowState.pitch += (y - windowState.last_y);
-        std::cout << "Rotate - Yaw: " << windowState.yaw <<  " Pitch:  " << windowState.pitch <<std::endl;
-        _c->moveWorldLocation();
+    if (windowState.ml){
+        _c->updateMouse(glm::vec2(x,y));
     }
-    windowState.last_x = x;
-    windowState.last_y = y;
-    if (fabs(windowState.yaw) > 360) {
-        windowState.yaw = windowState.yaw = 0;
-    }
-    if (fabs(windowState.pitch) > 360) {
-        windowState.pitch = windowState.pitch = 0;
+    else {
+        windowState.last_x = x;
+        windowState.last_y = y;
     }
 }

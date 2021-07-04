@@ -42,7 +42,7 @@ class PointLight {
  private:
 
 
-  glm::vec3 _location = glm::vec3(0.0,0.0,0.0);
+  glm::vec3 _location = glm::vec3(1.0,1.0,0.0);
   float _ambientStrength = 0.5f;
   float _diffuseStrength = 2.0f;
   float _specularStrength = 0.3f;
